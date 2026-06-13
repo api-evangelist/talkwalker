@@ -1,0 +1,73 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Talkwalker",
+  "url": "https://www.talkwalker.com/",
+  "description": "Talkwalker is a social media analytics and listening platform that provides REST APIs for tracking brand mentions, analyzing sentiment, measuring campaign performance, and monitoring competitors across 150 million websites and 10+ social networks.",
+  "sameAs": [
+    "https://www.linkedin.com/company/talkwalker",
+    "https://x.com/Talkwalker",
+    "https://github.com/talkwalker"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Talkwalker API Suite",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "Talkwalker Search API",
+        "description": "Search and export a subset of documents from a Talkwalker project, including brand mentions and social data across supported channels.",
+        "url": "https://developer.talkwalker.com/docs/overview/search-api/search-results-project-api",
+        "category": "Social Listening"
+      },
+      {
+        "@type": "Offer",
+        "name": "Talkwalker Streaming API",
+        "description": "Real-time streaming API (v3) for monitoring keyword-based streams and project or topic-level data feeds.",
+        "url": "https://developer.talkwalker.com/docs/overview/streaming-api-v3",
+        "category": "Real-Time Monitoring"
+      },
+      {
+        "@type": "Offer",
+        "name": "Talkwalker Histogram API",
+        "description": "Reproduce Talkwalker dashboard widgets programmatically by fetching histogram data.",
+        "url": "https://developer.talkwalker.com/docs/overview",
+        "category": "Analytics"
+      },
+      {
+        "@type": "Offer",
+        "name": "Talkwalker Resources API",
+        "description": "Manage and retrieve project resources including topics, filters, pages, events, panels, and datasets.",
+        "url": "https://developer.talkwalker.com/docs/overview/resources-api",
+        "category": "Resource Management"
+      },
+      {
+        "@type": "Offer",
+        "name": "Talkwalker Document API",
+        "description": "Import custom documents and modify existing documents within Talkwalker projects.",
+        "url": "https://developer.talkwalker.com/docs/overview",
+        "category": "Document Management"
+      },
+      {
+        "@type": "Offer",
+        "name": "Talkwalker Image API",
+        "description": "Detect features and entities within images using Talkwalker's image detection capabilities, enabling logo detection and visual content analytics.",
+        "url": "https://developer.talkwalker.com/docs/overview",
+        "category": "Image Detection"
+      }
+    ]
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "url": "https://developer.talkwalker.com/docs/"
+  },
+  "keywords": [
+    "social media analytics",
+    "social listening",
+    "brand monitoring",
+    "sentiment analysis",
+    "media monitoring",
+    "campaign analytics",
+    "API"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "url": "https://www.talkwalker.com/blog",
+  "fetched": "2026-06-13",
+  "posts": [
+    {
+      "title": "How to use social listening for consumer insights in 2026",
+      "url": "https://www.talkwalker.com/blog/track-consumer-insights",
+      "date": "2026-04-28",
+      "description": "This article explores how social listening delivers real-time consumer insights that traditional surveys often miss, demonstrating methods to track sentiment, emerging trends, and demographic data through the Talkwalker platform for actionable business intelligence."
+    },
+    {
+      "title": "How to track brand mentions in AI search with Talkwalker",
+      "url": "https://www.talkwalker.com/blog/track-brand-mentions-in-ai-search",
+      "date": "2026-03-10",
+      "description": "This guide explains how companies can monitor their brand visibility within AI-generated search responses using Talkwalker's LLM Insights tool, focusing on understanding how AI systems describe and position brands in their summaries."
+    },
+    {
+      "title": "What Super Bowl LX audiences actually talked about (Social listening data)",
+      "url": "https://www.talkwalker.com/blog/super-bowl-lx-insights",
+      "date": "2026-02-11",
+      "description": "This report analyzes social media conversations surrounding Super Bowl LX, revealing that the halftime show dominated discussion despite teamwork narratives generating the most positive sentiment, demonstrating how major events function as layered experiences across multiple platforms."
+    },
+    {
+      "title": "How to use social search to build visibility and protect your brand",
+      "url": "https://www.talkwalker.com/blog/social-media-search",
+      "date": "2026-02-06",
+      "description": "This article explains how social media platforms function as discovery engines for brand research and outlines advanced tactics marketers can employ to improve visibility in social searches while monitoring and protecting brand reputation through social listening tools."
+    },
+    {
+      "title": "How to track and forecast social media trends in 2026",
+      "url": "https://www.talkwalker.com/blog/track-social-media-trends",
+      "date": "2026-01-19",
+      "description": "This article explains how brands can identify and respond to social media trends in real-time by spotting early signals, monitoring trend velocity, and using predictive analytics to stay ahead of cultural moments before they peak."
+    },
+    {
+      "title": "What is SOCMINT? Definitions, tools, and tips",
+      "url": "https://www.talkwalker.com/blog/socmint",
+      "date": null,
+      "description": "An overview of Social Media Intelligence (SOCMINT), covering its definition, the tools used to gather and analyze social media data, and practical tips for applying intelligence techniques in brand monitoring and security contexts."
+    },
+    {
+      "title": "The state of agentic AI in marketing (2026)",
+      "url": "https://www.talkwalker.com/blog/agentic-ai-in-marketing",
+      "date": null,
+      "description": "An examination of how agentic AI systems are reshaping marketing workflows, covering the current state of autonomous AI agents that can plan and execute multi-step marketing tasks with minimal human intervention."
+    },
+    {
+      "title": "How to use AI agents to uncover marketing insights in 2026",
+      "url": "https://www.talkwalker.com/blog/ai-agents",
+      "date": null,
+      "description": "A guide to leveraging AI agents for marketing intelligence, exploring how autonomous AI systems can continuously monitor social data, surface insights, and help marketers make faster and more informed decisions."
+    },
+    {
+      "title": "7 social media crisis examples (and tips for speedy mitigation)",
+      "url": "https://www.talkwalker.com/blog/social-media-crisis-examples",
+      "date": null,
+      "description": "An analysis of seven real-world social media crisis case studies demonstrating how brands responded to reputational challenges, with actionable tips for rapid crisis detection and mitigation using social listening."
+    },
+    {
+      "title": "Why The Life of a Showgirl is a cultural moment",
+      "url": "https://www.talkwalker.com/blog/trend-analysis-life-of-a-showgirl",
+      "date": null,
+      "description": "A trend analysis using Talkwalker social listening data to examine the cultural resonance of The Life of a Showgirl, exploring why the topic generated significant online conversation and engagement."
+    }
+  ]
+}
