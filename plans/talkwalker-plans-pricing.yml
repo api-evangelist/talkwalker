@@ -1,0 +1,50 @@
+name: Talkwalker Plans and Pricing
+description: Talkwalker offers three subscription tiers for social media listening and analytics. All plans include unlimited users and require a custom quote — no public per-seat pricing is listed.
+url: https://www.talkwalker.com/pricing
+plans:
+  - name: Core
+    description: Foundational real-time brand, audience, and market understanding with social listening and media monitoring.
+    features:
+      - Social listening and media monitoring
+      - Topic and channel analytics
+      - Custom dashboards, reports, and alerts
+      - TalkwalkerAI with peak detection and forecasting
+      - AI Agent for instant insights
+      - LLM Insights monitoring
+      - Pre-built IQ Apps dashboards
+      - Non-sampled results (standard volume)
+      - Unlimited users
+      - Professional onboarding
+      - Training and regional customer support
+      - Strategy reviews with experts
+    pricing: Custom quote required
+    billing: Annual subscription
+
+  - name: Analyze
+    description: Expanded intelligence for tracking multiple brands and markets, doubling the data volume of Core.
+    features:
+      - All Core features
+      - 2x non-sampled results volume
+      - 25 additional topics, filters, and channels
+      - Multi-brand and multi-audience tracking
+    pricing: Custom quote required
+    billing: Annual subscription
+    popular: true
+
+  - name: Business
+    description: Enterprise-grade deployment with maximum data volume, historical depth, and governance controls.
+    features:
+      - All Analyze features
+      - 6x non-sampled results volume
+      - 3x more topics, filters, and channels
+      - Extended historical data access
+      - Additional AI agent questions
+      - Additional LLM Insights channels
+      - More workspaces and enterprise governance features
+    pricing: Custom quote required
+    billing: Annual subscription
+
+notes:
+  - Pricing is not publicly listed; all plans require contacting Talkwalker for a quote.
+  - Third-party sources estimate entry-level annual costs starting around USD 9,000 per year.
+  - Talkwalker was acquired by Hootsuite; some plans may be bundled with Hootsuite offerings.

@@ -1,0 +1,59 @@
+name: Talkwalker API Rate Limits
+description: Per-endpoint call rate limits enforced by the Talkwalker REST API. Limits vary by endpoint type and whether the call is scoped inside a project or performed outside a project (e.g., quicksearch context).
+url: https://developer.talkwalker.com/docs/getting-started/api-restrictions
+
+limits:
+  - endpoint: Search API (outside project / quicksearch)
+    limit: 240
+    unit: calls per minute
+
+  - endpoint: Search API (inside project)
+    limit: 60
+    unit: calls per minute
+
+  - endpoint: Histogram API (outside project / quicksearch)
+    limit: 60
+    unit: calls per minute
+
+  - endpoint: Histogram API (inside project)
+    limit: 30
+    unit: calls per minute
+
+  - endpoint: Document Import API
+    limit: 120
+    unit: calls per minute
+
+  - endpoint: Resources endpoint
+    limit: 20
+    unit: calls per minute
+    note: Results should be cached rather than re-fetched repeatedly.
+
+  - endpoint: Tags endpoint
+    limit: 40
+    unit: calls per minute
+    note: Results should be cached rather than re-fetched repeatedly.
+
+  - endpoint: Views endpoint (dashboards, reports, alerts)
+    limit: 20
+    unit: calls per minute
+    note: Results should be cached rather than re-fetched repeatedly.
+
+  - endpoint: Remaining Credits endpoint
+    limit: 10
+    unit: calls per minute
+    note: Talkwalker recommends storing the result rather than polling frequently.
+
+export_restrictions:
+  - source: Facebook and Instagram
+    restriction: Content cannot be exported via API; only aggregated metrics are available.
+  - source: X (Twitter)
+    restriction: Only tweet ID, author ID, and sentiment scores are exportable. Capped at 1.5 million documents per month per account.
+  - source: News content
+    restriction: Full articles are truncated due to copyright; only snippets with highlighted keywords are provided.
+  - source: LinkedIn
+    restriction: Export not supported.
+  - source: Chinese platforms (Weibo), Disqus, certain review sites, raw Reddit and TikTok data
+    restriction: Export not supported or severely limited.
+
+import_restrictions:
+  - Social media documents cannot be imported via the API.

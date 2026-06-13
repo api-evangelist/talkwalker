@@ -1,0 +1,130 @@
+aid: talkwalker
+name: Talkwalker
+description: Talkwalker is a social media analytics and listening platform that provides REST APIs for tracking brand mentions, analyzing sentiment, measuring campaign performance, and monitoring competitors across 150 million websites and 10+ social networks. The API suite covers search, streaming, histograms, document management, image detection, topic management, and custom metrics.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/talkwalker/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+tags:
+  - Social Media Analytics
+  - Social Listening
+  - Brand Monitoring
+  - Sentiment Analysis
+  - Media Monitoring
+  - Campaign Analytics
+
+apis:
+  - aid: talkwalker:search-api
+    name: Talkwalker Search API
+    description: Search and export a subset of documents from a Talkwalker project, including brand mentions and social data across supported channels. Results are metered at 1 credit per result plus a minimum of 10 credits per call.
+    humanURL: https://developer.talkwalker.com/docs/overview/search-api/search-results-project-api
+    baseURL: https://api.talkwalker.com/api/v2
+    tags:
+      - Search
+      - Social Listening
+      - Brand Mentions
+    properties:
+      - type: Documentation
+        url: https://developer.talkwalker.com/docs/overview
+
+  - aid: talkwalker:streaming-api
+    name: Talkwalker Streaming API
+    description: Real-time streaming API (v3) for monitoring keyword-based streams and project or topic-level data feeds. Charged at 1 credit per streamed result with no per-call minimum.
+    humanURL: https://developer.talkwalker.com/docs/overview/streaming-api-v3
+    baseURL: https://api.talkwalker.com/api/v2
+    tags:
+      - Streaming
+      - Real-Time
+      - Social Monitoring
+    properties:
+      - type: Documentation
+        url: https://developer.talkwalker.com/docs/overview/streaming-api-v3
+
+  - aid: talkwalker:histogram-api
+    name: Talkwalker Histogram API
+    description: Reproduce Talkwalker dashboard widgets programmatically by fetching histogram data. Charged at 10 credits per call.
+    humanURL: https://developer.talkwalker.com/docs/overview
+    baseURL: https://api.talkwalker.com/api/v2
+    tags:
+      - Analytics
+      - Dashboards
+      - Histograms
+    properties:
+      - type: Documentation
+        url: https://developer.talkwalker.com/docs/overview
+
+  - aid: talkwalker:resources-api
+    name: Talkwalker Resources API
+    description: Manage and retrieve project resources including topics, filters, pages, events, panels, and datasets. Also exposes tag and view (dashboard, report, alert) management endpoints. Free to call — no credit cost.
+    humanURL: https://developer.talkwalker.com/docs/overview/resources-api
+    baseURL: https://api.talkwalker.com/api/v2
+    tags:
+      - Resources
+      - Topics
+      - Tags
+      - Dashboards
+    properties:
+      - type: Documentation
+        url: https://developer.talkwalker.com/docs/overview/resources-api
+
+  - aid: talkwalker:document-api
+    name: Talkwalker Document API
+    description: Import custom documents and modify existing documents within Talkwalker projects. Supports custom metrics creation for imported content. Document imports are free — no credit cost.
+    humanURL: https://developer.talkwalker.com/docs/overview
+    baseURL: https://api.talkwalker.com/api/v2
+    tags:
+      - Documents
+      - Import
+      - Custom Metrics
+    properties:
+      - type: Documentation
+        url: https://developer.talkwalker.com/docs/overview
+
+  - aid: talkwalker:image-api
+    name: Talkwalker Image API
+    description: Detect features and entities within images using Talkwalker's image detection capabilities, enabling logo detection and visual content analytics.
+    humanURL: https://developer.talkwalker.com/docs/overview
+    baseURL: https://api.talkwalker.com/api/v2
+    tags:
+      - Image Detection
+      - AI
+      - Visual Analytics
+    properties:
+      - type: Documentation
+        url: https://developer.talkwalker.com/docs/overview
+
+common:
+  - type: Website
+    url: https://www.talkwalker.com/
+
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/
+
+  - type: GitHubOrg
+    url: https://github.com/talkwalker
+
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/talkwalker
+
+  - type: Blog
+    url: https://www.talkwalker.com/blog
+
+  - type: Pricing
+    url: https://www.talkwalker.com/pricing
+
+  - type: X
+    url: https://x.com/Talkwalker
+
+  - type: Plans
+    url: plans/talkwalker-plans-pricing.yml
+
+  - type: RateLimits
+    url: rate-limits/talkwalker-rate-limits.yml
+
+  - type: FinOps
+    url: finops/talkwalker-finops.yml
+
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

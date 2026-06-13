@@ -1,0 +1,46 @@
+name: Talkwalker FinOps
+description: Financial operations guide for managing API credit consumption and cost optimization when using the Talkwalker REST API. The API uses a credit-based billing model layered on top of the annual subscription tier.
+url: https://developer.talkwalker.com/docs/getting-started/credits-pricing
+
+credit_model:
+  description: API usage is metered in credits. Credits are included with each subscription plan and reset monthly on the subscription anniversary at 03:00 UTC. One-time credit pools are tracked separately from monthly rolling credits.
+  billing_reset: Monthly, at 03:00 UTC on the subscription anniversary date.
+
+api_credit_costs:
+  - api: Search API
+    cost: 1 credit per result returned, plus a minimum of 10 credits per API call
+    note: Even calls returning zero results consume the 10-credit minimum per call.
+
+  - api: Streaming API
+    cost: 1 credit per result
+    note: Streaming results are metered individually; no per-call minimum is documented.
+
+  - api: Histogram API
+    cost: 10 credits per call
+    note: Fixed per-call charge regardless of result count.
+
+  - api: Document Import API
+    cost: 0 credits
+    note: Importing documents incurs no credit cost.
+
+  - api: Resources API (resources, tags, views endpoints)
+    cost: 0 credits
+    note: Retrieving resource lists does not consume credits.
+
+cost_optimization:
+  - recommendation: Cache resources, tags, and views responses locally. These endpoints are free but rate-limited; unnecessary repeated calls waste rate-limit quota without saving credits.
+  - recommendation: Minimize the number of Search API calls by batching queries where possible. The 10-credit minimum per call means many small queries cost more than fewer larger ones.
+  - recommendation: Monitor remaining credits via the Remaining Credits endpoint (max 10 calls/min). Store the response and poll infrequently to stay within rate limits.
+  - recommendation: Prefer the Streaming API for continuous monitoring use cases rather than repeatedly calling the Search API, as Streaming charges 1 credit per result with no per-call minimum.
+  - recommendation: Limit Histogram API usage to dashboard reproduction tasks. At 10 credits per call, frequent polling of histogram data is expensive.
+
+monitoring:
+  - endpoint: Remaining Credits
+    description: Returns current monthly credit balance, one-time credit balance, next reset date, and a 6-month historical usage breakdown.
+    rate_limit: 10 calls per minute
+    cost: 0 credits
+
+subscription_notes:
+  - All plans require a custom annual quote; no public per-seat or per-credit pricing is listed.
+  - Third-party estimates place entry-level plans at approximately USD 9,000 per year.
+  - X (Twitter) data export is capped at 1.5 million documents per month per account regardless of credit balance.
