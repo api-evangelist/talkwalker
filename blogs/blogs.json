@@ -1,6 +1,6 @@
 {
   "url": "https://www.talkwalker.com/blog",
-  "fetched": "2026-06-13",
+  "fetched": "2026-06-14T20:42:17Z",
   "posts": [
     {
       "title": "How to use social listening for consumer insights in 2026",
@@ -62,5 +62,13 @@
       "date": null,
       "description": "A trend analysis using Talkwalker social listening data to examine the cultural resonance of The Life of a Showgirl, exploring why the topic generated significant online conversation and engagement."
     }
-  ]
+  ],
+  "repo": "talkwalker",
+  "feeds": [
+    {
+      "source": "https://www.linkedin.com/company/talkwalker",
+      "error": "HTTPError"
+    }
+  ],
+  "post_count": 0
 }
