@@ -1,6 +1,6 @@
 {
   "url": "https://www.talkwalker.com/blog",
-  "fetched": "2026-06-14T20:42:17Z",
+  "fetched": "2026-06-27T13:15:06Z",
   "posts": [
     {
       "title": "How to use social listening for consumer insights in 2026",
@@ -66,9 +66,12 @@
   "repo": "talkwalker",
   "feeds": [
     {
-      "source": "https://www.linkedin.com/company/talkwalker",
-      "error": "HTTPError"
+      "source": "https://www.talkwalker.com/blog",
+      "feed_url": "",
+      "saved": 0,
+      "method": "agent-scrape"
     }
   ],
-  "post_count": 0
+  "post_count": 0,
+  "agent_pulled": "2026-06-27"
 }
