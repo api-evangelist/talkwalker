@@ -95,6 +95,8 @@ apis:
         url: https://developer.talkwalker.com/docs/overview
 
 common:
+  - type: DomainSecurity
+    url: security/talkwalker-domain-security.yml
   - type: Website
     url: https://www.talkwalker.com/
 
