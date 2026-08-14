@@ -16,7 +16,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/talkwalker.png
 url: https://raw.githubusercontent.com/api-evangelist/talkwalker/refs/heads/main/apis.yml
 created: '2026-06-13'
-modified: '2026-06-13'
+modified: '2026-08-13'
 specificationVersion: '0.19'
 tags:
   - Social Media Analytics
@@ -31,7 +31,7 @@ apis:
     name: Talkwalker Search API
     description: Search and export a subset of documents from a Talkwalker project, including brand mentions and social data across supported channels. Results are metered at 1 credit per result plus a minimum of 10 credits per call.
     humanURL: https://developer.talkwalker.com/docs/overview/search-api/search-results-project-api
-    baseURL: https://api.talkwalker.com/api/v2
+    baseURL: https://api.talkwalker.com
     tags:
       - Search
       - Social Listening
@@ -39,12 +39,20 @@ apis:
     properties:
       - type: Documentation
         url: https://developer.talkwalker.com/docs/overview
+      - type: OpenAPI
+        url: openapi/talkwalker-search-openapi.yml
+      - type: Overlay
+        url: overlays/talkwalker-search-overlay.yaml
+      - type: AgentSkill
+        url: skills/talkwalker-export-project-mentions.md
+      - type: APIReference
+        url: https://developer.talkwalker.com/api/search-api
 
   - aid: talkwalker:streaming-api
     name: Talkwalker Streaming API
     description: Real-time streaming API (v3) for monitoring keyword-based streams and project or topic-level data feeds. Charged at 1 credit per streamed result with no per-call minimum.
     humanURL: https://developer.talkwalker.com/docs/overview/streaming-api-v3
-    baseURL: https://api.talkwalker.com/api/v2
+    baseURL: https://api.talkwalker.com
     tags:
       - Streaming
       - Real-Time
@@ -52,12 +60,20 @@ apis:
     properties:
       - type: Documentation
         url: https://developer.talkwalker.com/docs/overview/streaming-api-v3
+      - type: OpenAPI
+        url: openapi/talkwalker-streaming-openapi.yml
+      - type: Overlay
+        url: overlays/talkwalker-streaming-overlay.yaml
+      - type: AgentSkill
+        url: skills/talkwalker-stream-and-resume.md
+      - type: APIReference
+        url: https://developer.talkwalker.com/api/streaming-api
 
   - aid: talkwalker:histogram-api
     name: Talkwalker Histogram API
     description: Reproduce Talkwalker dashboard widgets programmatically by fetching histogram data. Charged at 10 credits per call.
     humanURL: https://developer.talkwalker.com/docs/overview
-    baseURL: https://api.talkwalker.com/api/v2
+    baseURL: https://api.talkwalker.com
     tags:
       - Analytics
       - Dashboards
@@ -65,12 +81,20 @@ apis:
     properties:
       - type: Documentation
         url: https://developer.talkwalker.com/docs/overview
+      - type: OpenAPI
+        url: openapi/talkwalker-histogram-openapi.yml
+      - type: Overlay
+        url: overlays/talkwalker-histogram-overlay.yaml
+      - type: AgentSkill
+        url: skills/talkwalker-reproduce-dashboard-widgets.md
+      - type: APIReference
+        url: https://developer.talkwalker.com/api/search-api-histogram-api
 
   - aid: talkwalker:resources-api
     name: Talkwalker Resources API
     description: Manage and retrieve project resources including topics, filters, pages, events, panels, and datasets. Also exposes tag and view (dashboard, report, alert) management endpoints. Free to call — no credit cost.
     humanURL: https://developer.talkwalker.com/docs/overview/resources-api
-    baseURL: https://api.talkwalker.com/api/v2
+    baseURL: https://api.talkwalker.com
     tags:
       - Resources
       - Topics
@@ -79,12 +103,18 @@ apis:
     properties:
       - type: Documentation
         url: https://developer.talkwalker.com/docs/overview/resources-api
+      - type: OpenAPI
+        url: openapi/talkwalker-resources-openapi.yml
+      - type: Overlay
+        url: overlays/talkwalker-resources-overlay.yaml
+      - type: APIReference
+        url: https://developer.talkwalker.com/api/resources-api
 
   - aid: talkwalker:document-api
     name: Talkwalker Document API
     description: Import custom documents and modify existing documents within Talkwalker projects. Supports custom metrics creation for imported content. Document imports are free — no credit cost.
     humanURL: https://developer.talkwalker.com/docs/overview
-    baseURL: https://api.talkwalker.com/api/v2
+    baseURL: https://api.talkwalker.com
     tags:
       - Documents
       - Import
@@ -92,12 +122,20 @@ apis:
     properties:
       - type: Documentation
         url: https://developer.talkwalker.com/docs/overview
+      - type: OpenAPI
+        url: openapi/talkwalker-documents-openapi.yml
+      - type: Overlay
+        url: overlays/talkwalker-documents-overlay.yaml
+      - type: AgentSkill
+        url: skills/talkwalker-import-documents.md
+      - type: APIReference
+        url: https://developer.talkwalker.com/api/modify-documents-api
 
   - aid: talkwalker:image-api
     name: Talkwalker Image API
     description: Detect features and entities within images using Talkwalker's image detection capabilities, enabling logo detection and visual content analytics.
     humanURL: https://developer.talkwalker.com/docs/overview
-    baseURL: https://api.talkwalker.com/api/v2
+    baseURL: https://api.talkwalker.com
     tags:
       - Image Detection
       - AI
@@ -105,8 +143,16 @@ apis:
     properties:
       - type: Documentation
         url: https://developer.talkwalker.com/docs/overview
+      - type: OpenAPI
+        url: openapi/talkwalker-image-openapi.yml
+      - type: Overlay
+        url: overlays/talkwalker-image-overlay.yaml
+      - type: APIReference
+        url: https://developer.talkwalker.com/api/image-api
 
 common:
+  - type: Authentication
+    url: authentication/talkwalker-authentication.yml
   - type: DomainSecurity
     url: security/talkwalker-domain-security.yml
   - type: Website
@@ -138,7 +184,47 @@ common:
 
   - type: FinOps
     url: finops/talkwalker-finops.yml
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/
+  - type: DeveloperPortal
+    url: https://developer.talkwalker.com/
+  - type: GettingStarted
+    url: https://developer.talkwalker.com/docs/getting-started/access-token
+  - type: Support
+    url: https://www.talkwalker.com/contact-us
+  - type: TermsOfService
+    url: https://www.talkwalker.com/terms-of-service
+  - type: PrivacyPolicy
+    url: https://www.talkwalker.com/privacy-policy
+  - type: StatusPage
+    url: https://status.talkwalker.com/
+  - type: Conventions
+    url: conventions/talkwalker-conventions.yml
+  - type: ErrorCatalog
+    url: errors/talkwalker-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/talkwalker-lifecycle.yml
+  - type: Conformance
+    url: conformance/talkwalker-conformance.yml
+  - type: DataModel
+    url: data-model/talkwalker-data-model.yml
+  - type: Sandbox
+    url: sandbox/talkwalker-sandbox.yml
+  - type: Packages
+    url: packages/talkwalker-packages.yml
+  - type: MCPServer
+    url: mcp/talkwalker-mcp.yml
+  - type: LLMsTxt
+    url: llms/talkwalker-llms.txt
+  - type: AgentSkill
+    url: skills/_index.yml
 
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+
+x-enrichment:
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 31
+  pass: local-v1
