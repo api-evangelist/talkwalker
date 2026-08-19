@@ -1,0 +1,23 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/talkwalker-documents-openapi.yml, openapi/talkwalker-histogram-openapi.yml,
+  openapi/talkwalker-image-openapi.yml, openapi/talkwalker-resources-openapi.yml, openapi/talkwalker-search-openapi.yml,
+  openapi/talkwalker-status-openapi.yml, openapi/talkwalker-streaming-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: apikeyAuth
+  type: apiKey
+  in: query
+  parameter: access_token
+  sources:
+  - openapi/talkwalker-documents-openapi.yml
+  - openapi/talkwalker-histogram-openapi.yml
+  - openapi/talkwalker-image-openapi.yml
+  - openapi/talkwalker-resources-openapi.yml
+  - openapi/talkwalker-search-openapi.yml
+  - openapi/talkwalker-status-openapi.yml
+  - openapi/talkwalker-streaming-openapi.yml

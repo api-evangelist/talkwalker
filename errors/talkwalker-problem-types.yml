@@ -1,0 +1,219 @@
+generated: '2026-08-13'
+method: searched
+source: https://developer.talkwalker.com/docs/troubleshooting/error-codes
+docs:
+  error_codes: https://developer.talkwalker.com/docs/troubleshooting/error-codes
+  error_handling: https://developer.talkwalker.com/docs/troubleshooting/error-handling
+format: vendor-envelope
+note: >-
+  Talkwalker does NOT use RFC 9457 application/problem+json. Every response — success and failure —
+  carries the same flat JSON envelope with a vendor `status_code` string that is independent of the
+  HTTP status. The 42-path published OpenAPI (openapi/_original/talkwalker-openapi.yaml) documents
+  only a 200 response on 50 of 50 operations and a single 404, so the catalog below is SEARCHED from
+  the docs error reference rather than derived from the spec — the spec's error coverage is empty.
+envelope:
+  media_type: application/json
+  fields:
+    - name: status_code
+      type: string
+      description: Talkwalker's own numeric error code as a string. "0" means OK.
+    - name: status_message
+      type: string
+      description: Human-readable message for the status_code.
+    - name: request
+      type: string
+      description: The method and path of the request that produced the response.
+    - name: request_id
+      type: string
+      description: Opaque per-request trace identifier, e.g. "#tjq2m87iipry#". Quote this to support.
+  conditional_fields:
+    - name: params
+      applies_to: ['3']
+      description: Lists the required parameters that were missing.
+    - name: param
+      applies_to: ['5']
+      description: Names the parameter whose value was unacceptable.
+    - name: details
+      applies_to: ['4', '5', '16', '18']
+      description: Free-text detail about the parse failure or rejected operation.
+    - name: reason
+      applies_to: ['16', '18', '25']
+      description: Machine-oriented reason for a rejected document/stream operation or disconnect.
+    - name: appId
+      applies_to: ['10']
+      description: The ID of the inactive API account.
+    - name: rights_req
+      applies_to: ['13']
+      description: The access rights the endpoint required.
+    - name: rights_got
+      applies_to: ['13']
+      description: The access rights the presented token actually carries.
+    - name: number_max
+      applies_to: ['19', '20', '22']
+      description: The account's configured maximum for rules, streams or sources.
+    - name: number_available
+      applies_to: ['19', '22']
+      description: How many more can still be saved.
+    - name: number_saving
+      applies_to: ['19', '22']
+      description: How many the request tried to save.
+    - name: stream_id
+      applies_to: ['21', '24']
+      description: The stream identifier involved in the conflict or disconnect.
+example_error: |
+  {"status_code":"26","status_message":"Endpoint or action not found","request":"GET /api/","request_id":"#tjq2m87iipry#"}
+example_error_observed:
+  url: https://api.talkwalker.com/
+  http_status: 404
+  fetched: '2026-08-13'
+problems:
+  - status: 200
+    code: '0'
+    title: OK
+    description: Default answer.
+  - status: 500
+    code: '1'
+    title: Internal Server Error
+    description: An unexpected exception was encountered.
+    remediation: Retry with backoff; if it persists, contact client-api@talkwalker.com with the request_id.
+  - status: 500
+    code: '2'
+    title: Search Execution Exception
+    description: An unexpected exception was encountered, related to the search.
+    remediation: Simplify or re-check the query, then retry with backoff.
+  - status: 400
+    code: '3'
+    title: Parameter Missing
+    description: Required parameters are missing. The missing parameters are provided in key 'params'.
+    remediation: Read `params` and supply the named parameters.
+  - status: 400
+    code: '4'
+    title: Error in query
+    description: Could not parse query. The details can be found under 'details'.
+    remediation: Validate against the query syntax reference at https://developer.talkwalker.com/docs/query-syntax.
+  - status: 400
+    code: '5'
+    title: Invalid parameter value
+    description: A parameter has an unacceptable value. The parameter is listed under 'param' and the details under 'details'.
+    remediation: Correct the value named in `param`.
+  - status: 401
+    code: '7'
+    title: Invalid, missing or inactive access token
+    description: The access token is either missing or the provided value is invalid.
+    remediation: Supply a valid access_token query parameter. See authentication/talkwalker-authentication.yml.
+  - status: 401
+    code: '8'
+    title: Call limit exceeded for this endpoint
+    description: The called endpoint has a limited call frequency, the values should be cached by the client.
+    remediation: Cache the response and back off. Published per-endpoint limits are in rate-limits/talkwalker-rate-limits.yml.
+    note: Talkwalker returns 401 (not 429) for per-endpoint call-rate exhaustion.
+  - status: 401
+    code: '9'
+    title: No credits left
+    description: The account ran out of credits.
+    remediation: Check GET /api/v1/status/credits and top up or wait for the monthly reset.
+  - status: 403
+    code: '10'
+    title: API application is inactive
+    description: The API account is inactive. 'appId' gives the ID of that account.
+  - status: 403
+    code: '11'
+    title: No such application linked
+    description: The provided ID is not linked in the API to any project or application.
+  - status: 403
+    code: '12'
+    title: Linked application inactive or deleted
+    description: The linked application is inactive or deleted.
+  - status: 403
+    code: '13'
+    title: 'Access denied: Insufficient access rights'
+    description: >-
+      The used access token does not have enough access rights. 'rights_req' lists the required access
+      rights, 'rights_got' lists the access rights provided by that access token.
+    remediation: Use a read_write token for write operations; read_only tokens can only search.
+  - status: 404
+    code: '15'
+    title: Wrong stream id. No such stream defined
+    description: A non-existing stream was accessed.
+  - status: 400
+    code: '16'
+    title: Invalid operation on document
+    description: >-
+      The search document modification operation is not supported. 'reason' and 'details' will provide
+      more information.
+  - status: 400
+    code: '17'
+    title: Could not parse json
+    description: The JSON that was passed via POST could not be properly interpreted.
+  - status: 400
+    code: '18'
+    title: Invalid operation on stream
+    description: Modifying a stream failed. See 'reason' for details.
+  - status: 403
+    code: '19'
+    title: Number of rules to set exceeds maximum number of rules
+    description: >-
+      Exceeded the maximum allowed rules for this API account. 'number_max' is the limit,
+      'number_available' how many can still be saved and 'number_saving' the number attempted.
+  - status: 403
+    code: '20'
+    title: Cannot create any more streams
+    description: Exceeded maximum amount of streams ('number_max').
+  - status: 403
+    code: '21'
+    title: A stream with this name already exists
+    description: The stream 'stream_id' is already defined.
+  - status: 403
+    code: '22'
+    title: Number of sources to set exceeds maximum number of sources
+    description: >-
+      Exceeded the maximum allowed sources (whitelist or blacklist) for this API account.
+  - status: 403
+    code: '23'
+    title: Stream has no rules defined
+    description: Exception when trying to stream with a stream that has no rule defined.
+  - status: 403
+    code: '24'
+    title: Stream got disconnected because newer stream running
+    description: A new stream (same 'stream_id') is connected, so the old stream will be disconnected.
+    remediation: Run one connection per stream_id.
+  - status: 403
+    code: '25'
+    title: Stream got disconnected
+    description: The stream was disconnected due to the given reason.
+    remediation: >-
+      Resume from the resume_offset of the last CT_CONTROL chunk. See
+      https://developer.talkwalker.com/docs/troubleshooting/error-handling
+  - status: 404
+    code: '26'
+    title: Endpoint or action not found
+    description: The called endpoint was not found.
+  - status: 403
+    code: '27'
+    title: Connection is not secure, must use HTTPS
+    description: Authentication API endpoints need to be called using HTTPS.
+  - status: 404
+    code: '28'
+    title: User was not found in this application
+    description: This user ID does not exist or is not linked to this project.
+  - status: 403
+    code: '29'
+    title: Access to this project is forbidden
+    description: This project cannot be accessed with the given access_token.
+  - status: 429
+    code: '30'
+    title: Limit of maximum concurrent streams reached
+    description: Too many streams running in parallel for this account.
+    remediation: Close an existing stream connection before opening another.
+streaming_errors:
+  transport: chunked JSON over HTTP
+  chunk_types:
+    - name: CT_RESULT
+      description: Contains a result document.
+    - name: CT_CONTROL
+      description: >-
+        Connection information plus the resume_offset needed to resume an interrupted stream, and the
+        connection_id / collector_id.
+    - name: CT_ERROR
+      description: Carries an error message in-band on the stream rather than as an HTTP status.
+  source: https://developer.talkwalker.com/docs/troubleshooting/error-handling

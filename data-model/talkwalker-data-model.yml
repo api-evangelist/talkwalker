@@ -1,0 +1,206 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/_original/talkwalker-openapi.yaml
+docs: https://developer.talkwalker.com/docs/talkwalker-documents
+note: >-
+  DERIVED FROM PATH STRUCTURE, NOT FROM SCHEMAS. Talkwalker's published OpenAPI declares
+  `components: {securitySchemes: …}` and ZERO reusable schemas — all 50 operations inline their
+  response shapes or leave them undescribed, so there is no $ref graph to walk. The entity graph
+  below is therefore derived from the path hierarchy (every resource path is
+  /api/vN/<surface>/p/{project_id}/<entity>) plus the documented document-field reference. Attribute
+  lists are deliberately omitted rather than guessed.
+root_entity: project
+entities:
+  - name: project
+    id_field: project_id
+    id_in: path
+    description: >-
+      The tenant-scoped workspace that owns topics, documents, datasets, tags, views, custom metrics
+      and source panels. Almost every write operation and most project-scoped reads are nested under
+      /p/{project_id}.
+    operations:
+      - GET /api/v1/search/info
+    note: >-
+      GET /api/v1/search/info ("List of allowed projects") is the entry point that tells a caller
+      which project_ids the presented access_token may use.
+  - name: document
+    id_field: null
+    description: >-
+      A single indexed mention — a blog post, forum post, news article, review or social post — and
+      the unit both the Search and Streaming APIs return, and the unit the Documents API imports and
+      modifies. Field reference: https://developer.talkwalker.com/docs/talkwalker-documents/fields
+    operations:
+      - GET /api/v1/search/results
+      - GET /api/v1/search/p/{project_id}/results
+      - POST /api/v2/docs/p/{project_id}
+      - POST /api/v2/docs/p/{project_id}/{action}
+  - name: dataset
+    id_field: dataset_id
+    id_in: path
+    description: >-
+      A named collection inside a project that reviews are imported into and modified against.
+    operations:
+      - POST /api/v2/docs/p/{project_id}/d/{dataset_id}
+      - POST /api/v2/docs/p/{project_id}/d/{dataset_id}/{action}
+  - name: topic
+    id_field: topic_id
+    id_in: path
+    description: >-
+      A saved boolean query line inside a project. Documents only enter a project if they match at
+      least one topic query plus the project's language/country/source settings.
+    operations:
+      - GET /api/v2/talkwalker/p/{project_id}/topics/list
+      - GET /api/v2/talkwalker/p/{project_id}/topics/list/{topic_id}
+      - POST /api/v2/talkwalker/p/{project_id}/topics/import
+      - POST /api/v2/talkwalker/p/{project_id}/topics/delete
+  - name: custom_metric
+    id_field: metric_name
+    id_in: path
+    description: Caller-defined metric attached to imported documents in a project.
+    operations:
+      - GET /api/v2/talkwalker/p/{project_id}/custom_metrics/list
+      - POST /api/v2/talkwalker/p/{project_id}/custom_metrics/add
+      - POST /api/v2/talkwalker/p/{project_id}/custom_metrics/update
+      - POST /api/v2/talkwalker/p/{project_id}/custom_metrics/delete
+      - DELETE /api/v2/talkwalker/p/{project_id}/custom_metrics/m/{metric_name}
+  - name: tag
+    id_field: null
+    description: Custom tag defined on a project and applied to documents.
+    operations:
+      - GET /api/v2/talkwalker/p/{project_id}/tags
+  - name: view
+    id_field: null
+    description: A dashboard, report or alert defined on a project.
+    operations:
+      - GET /api/v2/talkwalker/p/{project_id}/views
+  - name: source_panel
+    id_field: null
+    description: A curated set of sources (accounts/sites) used to scope analysis within a project.
+    operations:
+      - GET /api/v2/talkwalker/p/{project_id}/source_panels/list
+      - POST /api/v2/talkwalker/p/{project_id}/source_panels/add
+  - name: panel_group
+    id_field: null
+    description: A grouping of source panels.
+    operations:
+      - POST /api/v2/talkwalker/p/{project_id}/source_panels/groups/add
+  - name: stream
+    id_field: stream_id
+    id_in: path
+    description: >-
+      A keyword-rule-driven real-time subscription. Created or replaced with PUT; consumed by reading
+      its /results endpoint as a chunked JSON stream.
+    operations:
+      - GET /api/v3/stream/info
+      - GET /api/v3/stream/s/{stream_id}
+      - PUT /api/v3/stream/s/{stream_id}
+      - DELETE /api/v3/stream/s/{stream_id}
+      - GET /api/v3/stream/s/{stream_id}/results
+      - POST /api/v3/stream/s/{stream_id}/results
+    id_rules: lowercase letters, digits, "-" and "_"; must start with a lowercase letter.
+  - name: collector
+    id_field: collector_id
+    id_in: path
+    description: >-
+      A durable, pausable/resumable consumer of a stream. Unlike a raw stream read, a collector
+      buffers so a disconnected client can resume from a resume_offset.
+    operations:
+      - GET /api/v3/stream/c/{collector_id}
+      - PUT /api/v3/stream/c/{collector_id}
+      - DELETE /api/v3/stream/c/{collector_id}
+      - GET /api/v3/stream/c/{collector_id}/results
+      - POST /api/v3/stream/c/{collector_id}/pause
+      - POST /api/v3/stream/c/{collector_id}/resume
+  - name: export_task
+    id_field: task_id
+    id_in: path
+    description: >-
+      An asynchronous bulk export job over past data, created from a stream definition, a project or
+      an ad-hoc definition, then polled to completion.
+    operations:
+      - POST /api/v3/stream/export
+      - POST /api/v3/stream/p/{project_id}/export
+      - POST /api/v3/stream/s/{stream_id}/export
+      - GET /api/v3/tasks/export
+      - GET /api/v3/tasks/export/{task_id}
+      - DELETE /api/v3/tasks/export/{task_id}
+  - name: credit_account
+    id_field: null
+    description: >-
+      The billing envelope the access_token draws against. Exposes used/remaining monthly and
+      one-time credits, a six-month history, the next billing period and a separate
+      twitter_resyndication budget.
+    operations:
+      - GET /api/v1/status/credits
+  - name: image
+    id_field: null
+    description: >-
+      An image submitted by URL or by file upload for model-based detection (logo, object, scene).
+    operations:
+      - GET /api/v2/detect/images/{model}
+      - POST /api/v2/detect/images/{model}
+relationships:
+  - from: project
+    to: topic
+    type: has_many
+    via: project_id
+  - from: project
+    to: document
+    type: has_many
+    via: project_id
+  - from: project
+    to: dataset
+    type: has_many
+    via: project_id
+  - from: project
+    to: custom_metric
+    type: has_many
+    via: project_id
+  - from: project
+    to: tag
+    type: has_many
+    via: project_id
+  - from: project
+    to: view
+    type: has_many
+    via: project_id
+  - from: project
+    to: source_panel
+    type: has_many
+    via: project_id
+  - from: source_panel
+    to: panel_group
+    type: belongs_to
+    via: groups
+  - from: dataset
+    to: document
+    type: has_many
+    via: dataset_id
+  - from: document
+    to: topic
+    type: belongs_to
+    via: >-
+      query match — a document is only accepted into a project if it matches at least one topic query
+      plus the project's language/country/source-type settings (documented as the cause of the
+      "Does not match any xyz" import error).
+  - from: collector
+    to: stream
+    type: belongs_to
+    via: stream definition
+  - from: export_task
+    to: stream
+    type: belongs_to
+    via: stream_id
+  - from: export_task
+    to: project
+    type: belongs_to
+    via: project_id
+  - from: credit_account
+    to: project
+    type: has_many
+    via: access_token application linkage
+id_prefixes: []
+id_prefix_note: >-
+  Talkwalker does not publish typed id prefixes (no cus_/inv_ style scheme). Identifiers are
+  caller-chosen slugs for streams/collectors and opaque numeric/string ids for projects and topics.
+render: null

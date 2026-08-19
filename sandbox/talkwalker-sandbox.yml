@@ -1,0 +1,54 @@
+generated: '2026-08-13'
+method: searched
+source: https://developer.talkwalker.com/docs/getting-started/access-token
+name: Talkwalker demo access token
+model: shared-demo-token
+detail: >-
+  Talkwalker does not run a separate sandbox host or a test/live key-pair scheme. It publishes ONE
+  shared demo credential that works against the production host and returns a deliberately narrowed
+  slice of production data. There is no test-mode/live-mode toggle, no per-developer test key, and no
+  fixture or time-simulation tooling.
+test_credential:
+  parameter: access_token
+  value: demo
+  usage: https://api.talkwalker.com/api/v1/search/results?q=cats&access_token=demo
+  verbatim: 'To try the Talkwalker API, you can use the access token demo (access_token=demo).'
+allowed_surfaces:
+  - Search API (results)
+  - Search API > Histogram API
+  - Streaming API
+constraints:
+  allowed_queries:
+    - cats
+    - dogs
+    - cats AND dogs
+  allowed_queries_note: >-
+    The demo token accepts only these three pre-defined queries; any other query is rejected.
+  data_coverage: >-
+    No social media results are returned with the demo token — only blogs, forums and news.
+  scope: Testing only. Project-scoped endpoints, imports, streams and resources require a real token.
+production_credential:
+  process: Contact Talkwalker to apply for an access token; there is no self-service issuance.
+  rights_levels:
+    - name: read_only
+      grants: search
+    - name: read_write
+      grants: >-
+        search, updating and deleting documents in a project, creating and deleting streams,
+        setting panels and setting rules
+  contact: client-api@talkwalker.com
+developer_sandbox_page:
+  url: https://developer.talkwalker.com/sandbox
+  http_status: 200
+  verdict: empty
+  note: >-
+    The portal ships a page titled "Developer sandbox" that renders no content — the only text in the
+    document is the heading. Recorded as probed-and-empty rather than as a sandbox surface.
+test_clocks: null
+fixtures: null
+trigger_tooling: null
+evidence:
+  - url: https://developer.talkwalker.com/docs/getting-started/access-token
+    status: 200
+  - url: https://developer.talkwalker.com/sandbox
+    status: 200

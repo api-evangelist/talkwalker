@@ -1,0 +1,89 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Talkwalker Streaming API
+  version: 1.0.0
+extends: openapi/talkwalker-streaming-openapi.yml
+x-generated: '2026-08-13'
+x-method: generated
+x-note: Talkwalker's published OpenAPI carries NO operationId on any operation, so no tool, SDK generator, Arazzo workflow
+  or MCP binding can address its operations by name. These actions add a deterministic operationId derived from method +
+  path, plus provenance and auth-semantics annotations. Applying this overlay does not change any request or response contract.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-slug: talkwalker
+    x-apievangelist-source: https://developer.talkwalker.com/talkwalker-api.yaml
+    x-apievangelist-harvested: '2026-08-13'
+    x-apievangelist-error-catalog: errors/talkwalker-problem-types.yml
+    x-apievangelist-conventions: conventions/talkwalker-conventions.yml
+    x-apievangelist-rate-limits: rate-limits/talkwalker-rate-limits.yml
+    x-apievangelist-sandbox-token: access_token=demo (search + histogram + streaming only; queries limited to cats, dogs,
+      cats AND dogs)
+- target: $.components.securitySchemes.apikeyAuth
+  update:
+    description: 'Talkwalker access token, passed as the access_token QUERY parameter (not a header). Two rights levels
+      exist: read_only (search) and read_write (search plus document, stream, panel and rule writes). Because the credential
+      travels in the URL it is recorded in intermediary access logs.'
+    x-apievangelist-rights-levels:
+    - read_only
+    - read_write
+- target: $.paths['/api/v3/stream/c/{collector_id}'].delete
+  update:
+    operationId: delete_v3_stream_c_collector_id
+- target: $.paths['/api/v3/stream/c/{collector_id}'].get
+  update:
+    operationId: get_v3_stream_c_collector_id
+- target: $.paths['/api/v3/stream/c/{collector_id}'].put
+  update:
+    operationId: put_v3_stream_c_collector_id
+- target: $.paths['/api/v3/stream/c/{collector_id}/pause'].post
+  update:
+    operationId: post_v3_stream_c_collector_id_pause
+- target: $.paths['/api/v3/stream/c/{collector_id}/results'].get
+  update:
+    operationId: get_v3_stream_c_collector_id_results
+- target: $.paths['/api/v3/stream/c/{collector_id}/resume'].post
+  update:
+    operationId: post_v3_stream_c_collector_id_resume
+- target: $.paths['/api/v3/stream/export'].post
+  update:
+    operationId: post_v3_stream_export
+- target: $.paths['/api/v3/stream/info'].get
+  update:
+    operationId: get_v3_stream_info
+- target: $.paths['/api/v3/stream/p/{project_id}/export'].post
+  update:
+    operationId: post_v3_stream_p_project_id_export
+- target: $.paths['/api/v3/stream/p/{project_id}/results'].get
+  update:
+    operationId: get_v3_stream_p_project_id_results
+- target: $.paths['/api/v3/stream/p/{project_id}/results'].post
+  update:
+    operationId: post_v3_stream_p_project_id_results
+- target: $.paths['/api/v3/stream/s/{stream_id}'].delete
+  update:
+    operationId: delete_v3_stream_s_stream_id
+- target: $.paths['/api/v3/stream/s/{stream_id}'].get
+  update:
+    operationId: get_v3_stream_s_stream_id
+- target: $.paths['/api/v3/stream/s/{stream_id}'].put
+  update:
+    operationId: put_v3_stream_s_stream_id
+- target: $.paths['/api/v3/stream/s/{stream_id}/export'].post
+  update:
+    operationId: post_v3_stream_s_stream_id_export
+- target: $.paths['/api/v3/stream/s/{stream_id}/results'].get
+  update:
+    operationId: get_v3_stream_s_stream_id_results
+- target: $.paths['/api/v3/stream/s/{stream_id}/results'].post
+  update:
+    operationId: post_v3_stream_s_stream_id_results
+- target: $.paths['/api/v3/tasks/export'].get
+  update:
+    operationId: get_v3_tasks_export
+- target: $.paths['/api/v3/tasks/export/{task_id}'].delete
+  update:
+    operationId: delete_v3_tasks_export_task_id
+- target: $.paths['/api/v3/tasks/export/{task_id}'].get
+  update:
+    operationId: get_v3_tasks_export_task_id

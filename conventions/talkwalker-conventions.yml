@@ -1,0 +1,143 @@
+generated: '2026-08-13'
+method: searched
+source: https://developer.talkwalker.com/docs/
+derived_from:
+  - openapi/_original/talkwalker-openapi.yaml
+docs:
+  getting_started: https://developer.talkwalker.com/docs/
+  access_token: https://developer.talkwalker.com/docs/getting-started/access-token
+  api_restrictions: https://developer.talkwalker.com/docs/getting-started/api-restrictions
+  credits_pricing: https://developer.talkwalker.com/docs/getting-started/credits-pricing
+  query_syntax: https://developer.talkwalker.com/docs/query-syntax
+  error_codes: https://developer.talkwalker.com/docs/troubleshooting/error-codes
+  api_reference: https://developer.talkwalker.com/api/
+
+base_url: https://api.talkwalker.com
+media_type: application/json
+
+authentication:
+  style: api-key-in-query
+  parameter: access_token
+  transport: query string
+  detail: >-
+    Every operation in the published OpenAPI carries the single global security requirement
+    `apikeyAuth` — an apiKey scheme with `in: query`, `name: access_token`. The token is therefore
+    carried in the URL, not an Authorization header, which means it lands in proxy and server access
+    logs. Talkwalker documents two token rights levels: read_only (search) and read_write (search,
+    document create/update/delete, stream create/delete, panels, rules).
+  https_required: true
+  https_note: Error code 27 ("Connection is not secure, must use HTTPS") is returned on non-HTTPS auth calls.
+  see: authentication/talkwalker-authentication.yml
+
+idempotency:
+  idempotency_key_header: null
+  supported: false
+  detail: >-
+    Talkwalker publishes NO idempotency-key mechanism — there is no Idempotency-Key header or
+    parameter in the docs or in any of the 50 operations in the published OpenAPI. Replace-style
+    writes are idempotent only by HTTP verb semantics: PUT /api/v3/stream/s/{stream_id} and
+    PUT /api/v3/stream/c/{collector_id} are documented as "create or replace", and
+    POST /api/v2/talkwalker/p/{project_id}/topics/import as "create or update a batch of topics".
+    A retried POST document-import is NOT deduplicated by the API.
+  idempotent_operations:
+    - PUT /api/v3/stream/s/{stream_id}
+    - PUT /api/v3/stream/c/{collector_id}
+    - POST /api/v2/talkwalker/p/{project_id}/topics/import
+  note: >-
+    No `type: Idempotency` pointer is wired in apis.yml, because there is no idempotency contract to
+    point at. Recording the absence is the finding.
+
+pagination:
+  style: offset-limit
+  detail: >-
+    Search and histogram result endpoints page with numeric offset/limit style query parameters on the
+    GET operations; the streaming surface does not paginate, it resumes.
+  streaming_resume:
+    mechanism: resume_offset
+    detail: >-
+      A disconnected stream is resumed by passing `resume_offset` set to the resume_offset carried on
+      the last CT_CONTROL chunk, e.g.
+      GET /api/v3/stream/c/{collector_id}/results?access_token=…&resume_offset=…
+    source: https://developer.talkwalker.com/docs/troubleshooting/error-handling
+
+field_selection:
+  supported: true
+  detail: >-
+    Result documents are shaped by the project/topic configuration and by the documented field set
+    (https://developer.talkwalker.com/docs/talkwalker-documents/fields). Export is additionally
+    constrained per source — see the export restrictions in rate-limits/talkwalker-rate-limits.yml.
+
+response_formatting:
+  parameter: pretty
+  type: boolean
+  default: false
+  description: Returns a prettified JSON response when true. Common to all Streaming API endpoints.
+  source: https://developer.talkwalker.com/docs/overview/streaming-api-v3/introduction
+
+request_tracing:
+  request_id_header: null
+  request_id_field: request_id
+  detail: >-
+    Tracing is in the BODY, not a header. Every response carries `request_id` (observed form
+    "#tjq2m87iipry#") and `request` (the method + path). There is no X-Request-Id response header.
+
+versioning:
+  scheme: uri-path
+  detail: >-
+    Three major versions are live simultaneously under one host, and they are not a migration ladder —
+    each carries a different product surface. /api/v1 = search, histogram, summary, status/credits;
+    /api/v2 = document modification, resources, topics, source panels, custom metrics, image
+    detection; /api/v3 = streaming, collectors, export tasks.
+  versions_live: [v1, v2, v3]
+  current: v3
+  see: lifecycle/talkwalker-lifecycle.yml
+
+error_envelope:
+  format: vendor-envelope
+  rfc9457: false
+  detail: >-
+    A flat JSON object with `status_code` (a numeric STRING that is independent of the HTTP status),
+    `status_message`, `request` and `request_id`. Success carries status_code "0". Streaming errors
+    arrive in-band as CT_ERROR chunks instead of an HTTP status.
+  see: errors/talkwalker-problem-types.yml
+
+rate_limit_signaling:
+  response_headers: []
+  detail: >-
+    NO rate-limit response headers are published — no X-RateLimit-*, no RateLimit-*, no Retry-After.
+    An agent cannot read remaining budget from a response. Exhaustion is signalled by HTTP 401 with
+    body status_code "8" (per-endpoint call limit) — not 429 — and concurrency exhaustion by HTTP 429
+    with status_code "30". Remaining spend is only readable by polling
+    GET /api/v1/status/credits, which is itself limited to 10 calls/min.
+  see: rate-limits/talkwalker-rate-limits.yml
+
+metering:
+  unit: credits
+  model: >-
+    1 credit per exported result plus a per-call floor. Search API: 1 credit/result + minimum 10
+    credits/call. Streaming API: 1 credit/result, no call floor. Histogram API: 10 credits/call.
+    Document import is free. Credits reset monthly on the subscription day at 03:00 UTC.
+  balance_endpoint: GET /api/v1/status/credits
+  source: https://developer.talkwalker.com/docs/getting-started/credits-pricing
+
+identifier_rules:
+  detail: >-
+    Stream IDs, rule IDs and collector IDs may contain only lowercase letters, digits, "-" and "_",
+    and must start with a lowercase letter.
+  source: https://developer.talkwalker.com/docs/overview/streaming-api-v3/introduction
+
+event_surface:
+  webhooks: false
+  asyncapi: false
+  detail: >-
+    Talkwalker's real-time surface is a client-pulled HTTP stream (chunked JSON: CT_RESULT /
+    CT_CONTROL / CT_ERROR), not provider-pushed webhooks and not an AsyncAPI-described broker. No
+    AsyncAPI document is published and no callback URL is registered anywhere in the API, so no
+    AsyncAPI or Webhooks pointer is wired.
+
+cross_links:
+  authentication: authentication/talkwalker-authentication.yml
+  errors: errors/talkwalker-problem-types.yml
+  lifecycle: lifecycle/talkwalker-lifecycle.yml
+  rate_limits: rate-limits/talkwalker-rate-limits.yml
+  sandbox: sandbox/talkwalker-sandbox.yml

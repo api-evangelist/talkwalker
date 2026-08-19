@@ -1,0 +1,78 @@
+generated: '2026-08-13'
+method: probed
+source: live GET of the /.well-known/ surface on every Talkwalker host in apis.yml and the OpenAPI servers[]
+note: >-
+  Every /.well-known/ path probed returned 404 on every host. No pointer of type WellKnown or
+  SecurityTxt is wired in apis.yml — this file records a measured ABSENCE, not a served surface.
+  api.talkwalker.com answers unknown paths with the API's own JSON error envelope
+  ({"status_code":"26","status_message":"Endpoint or action not found"}), which is an honest 404;
+  www.talkwalker.com returns its Next.js 404 HTML shell; developer.talkwalker.com returns the
+  Docusaurus 404 HTML shell. None of them is a document.
+hosts:
+  - host: https://api.talkwalker.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+  - host: https://www.talkwalker.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+  - host: https://developer.talkwalker.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+adjacent_probes:
+  - url: https://www.talkwalker.com/llms.txt
+    status: 200
+    verdict: not-a-document
+    note: >-
+      Returns the 18-byte placeholder string "No llmsTxt content" rather than an llms.txt.
+      Treated as a miss; a generated llms.txt is written to llms/talkwalker-llms.txt instead.
+  - url: https://www.talkwalker.com/robots.txt
+    status: 200
+    verdict: served
+  - url: https://developer.talkwalker.com/robots.txt
+    status: 200
+    verdict: served

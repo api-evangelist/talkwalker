@@ -1,0 +1,1523 @@
+# Refined from the Talkwalker-published OpenAPI at
+# https://developer.talkwalker.com/talkwalker-api.yaml (harvested 2026-08-13)
+# Split by tag group; operations carried verbatim. Verbatim source: openapi/_original/talkwalker-openapi.yaml
+openapi: 3.0.0
+info:
+  title: Talkwalker Search API
+  description: Talkwalker Advanced API
+  version: 0.0.1
+  contact:
+    email: client-api@talkwalker.com
+    name: Client-API
+externalDocs:
+  description: Find more info here or there
+  url: https://apidocs.talkwalker.com/
+servers:
+- description: Production environment server
+  url: https://api.talkwalker.com
+security:
+- apikeyAuth: []
+tags:
+- name: Search API
+- name: Summary API
+paths:
+  /api/v1/search/info:
+    get:
+      description: Get a list of all projects linked to the API subscription
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                request: GET /api/v1/search/info?access_token=abcd-1234-abcd
+                request_id: '#r8tv9rr3rcmo#'
+                result_accinfo:
+                  projects:
+                  - account_id: abcd-1153541-abcd
+                    account_name: Api Talkwalker
+                    id: 12324-abcd-1234
+                    name: Pascal's Project
+                status_code: '0'
+                status_message: OK
+              schema:
+                type: object
+          description: OK
+      summary: List of allowed projects
+      tags:
+      - Search API
+  /api/v1/search/p/{project_id}/results:
+    get:
+      description: Retrieve up to 10.000 sorted results. the full history of Talkwalker projects is available in the search
+        API, **when used in combination with a Talkwalker project**.
+      parameters:
+      - description: The query to search for.
+        example: cats AND dogs
+        in: query
+        name: q
+        schema:
+          type: string
+      - description: 'Timezone for the time_range (e.g. Europe/Luxembourg).
+
+          Allowed values are timezone names.
+
+          Default value: UTC'
+        example: CET
+        in: query
+        name: timezone
+        schema:
+          type: string
+      - description: 'Time range filter.
+
+          Format `number` + a time unit character (e.g. `30d` for 30 days.).'
+        example: 30d
+        in: query
+        name: time_range
+        schema:
+          type: string
+      - description: 'Number of results to skip (for paging).
+
+          Vaule is between 0 and must respect the rule that hpp+offset is less than 10.000.
+
+          Default value: 0.'
+        example: '0'
+        in: query
+        name: offset
+        schema:
+          type: integer
+      - description: "Number of hits per page (for paging). \nValue is between 0 and 500 (between 100 and 500 if summarize\
+          \ is on).\nDefault value: 10 (100 if summarize is on)."
+        example: '10'
+        in: query
+        name: hpp
+        schema:
+          type: integer
+      - description: "Criteria for sorting the results. \nAllowed values: engagement, published, reach, facebook_shares, facebook_likes,\
+          \ twitter_shares, twitter_retweets, twitter_followers, youtube_likes, youtube_dislikes, youtube_views, cluster_size,\
+          \ comment_count, published, search_indexed, trending_score. \nDefault value: engagement."
+        example: engagement
+        in: query
+        name: sort_by
+        schema:
+          type: string
+      - description: Sorting order (ascending or descending). Default value is desc.
+        example: desc
+        in: query
+        name: sort_order
+        schema:
+          type: string
+      - description: "Turns highlighting on or off. \nAllowed values: true or false.\nDefault value: true."
+        example: 'true'
+        in: query
+        name: hl
+        schema:
+          type: boolean
+      - description: 'Formatted json for testing.
+
+          Possible values are true or false.
+
+          Default value: false.'
+        example: 'false'
+        in: query
+        name: pretty
+        schema:
+          type: boolean
+      - description: One or more topics that are defined in the Talkwalker project
+        in: query
+        name: topic
+        schema:
+          type: string
+      - description: One or more filters that are defined in the Talkwalker project.
+        in: query
+        name: filter
+        schema:
+          type: string
+      - description: One or more channels that are defined in the Talkwalker project.
+        in: query
+        name: channel
+        schema:
+          type: string
+      - description: One or more source panels that are defined in the Talkwalker project.
+        in: query
+        name: panel
+        schema:
+          type: string
+      - description: One or more datasets ID that are defined in the Talkwalker Customer Intelligence project
+        in: query
+        name: dataset
+        schema:
+          type: string
+      - example: a1ab1abc-a123-123a-123a-abcd12ab1a12
+        in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+      - description: 'To get the AI Summaries for a Search API call.
+
+          Allowed values: true (on) or false (off).
+
+          Default value: false.'
+        example: 'on'
+        in: query
+        name: summarize
+        schema:
+          type: boolean
+      - description: Topic on which summary should focus
+        example: food
+        in: query
+        name: custom_focus
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                pagination:
+                  next: GET /api/v1/search/p/a1ab1abc-a123-123a-123a-abcd12ab1a12/results?q=cats%20AND%20dogs&offset=2&hpp=2&sort_by=engagement&sort_order=desc&hl=true&pretty=false&topic&filter&channel&panel&dataset&access_token=abcd_1234_abcd
+                  total: 1529
+                request: GET /api/v1/search/p/a1ab1abc-a123-123a-123a-abcd12ab1a12/results?q=cats%20AND%20dogs&offset=0&hpp=2&sort_by=engagement&sort_order=desc&hl=true&pretty=false&topic&filter&channel&panel&dataset&access_token=abcd_1234_abcd
+                request_id: '#r8vn2rtxny0t#'
+                result_content:
+                  data:
+                  - data:
+                      DEPRECATED_spam_level: 0
+                      article_extended_attributes:
+                        twitter_shares: 474
+                      cluster_id: http://geographicdiversityofindi71335.onesmablog.com/what-is-adventure-tourism-in-india-Options-44178301
+                      content: 'What if bad news isn’t the only news there is?
+
+
+                        Image credit: David WimbleIf you were asked to list the top global news stories of 2021, off the top
+                        of your head, what would they be? Chances are you’d come up with some combination of COVID-19, economic
+                        woes, political conflict, Afghanistan, natural disasters, and maybe some space billionaires and Free
+                        Britney thrown in for good measure. Oh… and don’t forget the drama in the Suez Canal!
+
+
+                        What’s probably missing from your list is any good news, which seems pretty strange. Even in the midst
+                        of a global pandemic, surely a few positive things happened this year? Researchers would say it’s
+                        all down to negativity bias — we’re wired, apparently, to notice and then remember things that are
+                        shocking or scary. What if there’s a simpler explanation though? What if the reason we can’t remember
+                        any good news, is because nobody reported it in the first place?
+
+
+                        For the past several years, we’ve been putting that idea to the test, seeing whether it’s possible
+                        to carve out a tiny little corner of the internet dedicated exclusively to stories of progress. Not
+                        fluffy, feel good stories, but big stories of real, lasting change for people and the planet. Over
+                        time, we’ve gotten better at digging them up and this year, managed to find hundreds. Boiling them
+                        down to just 99 was a struggle, but we got there in the end, with only a tiny bit of cheating.
+
+
+                        All of these originally went out in our free email newsletter, which you can subscribe to below. We
+                        hope you enjoy the list, and while you’re reading perhaps ask yourself — why is it that so many of
+                        these stories come as a surprise? The answer, we think you’ll find, is pretty simple. They never appeared
+                        on your screen or in your newspaper at all.
+
+
+                        <a href="https://medium.com/media/f7242be104e8af2a703576c54384cf5a/href">https://medium.com/media/f7242be104e8af2a703576c54384cf5a/href</a>
+                        1. Let’s kick off with by far the biggest good news story of the year: the COVID-19 vaccines. Nine
+                        billion doses were administered across 184 countries, and and almost 60% of the planet has received
+                        at least one dose (in four months it’ll be 75%). This is by far the most successful global health
+                        initiative ever undertaken. In less than two years not only did we come up with a way to overcome
+                        a brand new disease, but rolled it out to more than half of humanity.
+
+
+                        The vaccines have been incredibly effective, even against the new variants, with the global death
+                        rate falling by more than half from earlier this year. Naturally, the media has focused on all the
+                        problems — hesitancy, unequal access, ‘pandemics of the unvaccinated’, resistance to mandates etc.
+                        Lost in all the noise is the simple fact that by far the majority of the world’s population has enthusiastically
+                        embraced the vaccines, and as a result, for the first time ever we have the chance to end a global
+                        pandemic on our own terms.
+
+
+                        Don’t take it from us though, take it from an old man who just got his booster:
+
+
+                        “The vaccine is one of the greatest achievements of mankind.” Donald J Trump22nd December 20212. It
+                        wasn’t just COVID-19. The WHO approved a long awaited malaria vaccine, revitalizing the fight against
+                        one of humanity’s oldest foes, as well as a new polio vaccine, which was rolled out to over 80 million
+                        children in Africa. Other achievements included the introduction of a licensed Ebola vaccine and the
+                        launch of a landmark new global plan to tackle meningitis. Liberia became the first African country
+                        to introduce the typhoid conjugate vaccine, which was given to over two million children in just weeks,
+                        and a new study revealed that the HPV vaccine has reduced cases of cervical cancer in England by nearly
+                        90% since 2008, with over 100 countries now using it as part of a global plan to eliminate the disease.
+                        Oh, and this didn’t get a single mention in the news, but back in January, a report in The Lancet
+                        looking at ten different diseases estimated that vaccines saved the lives of 37 million kids between
+                        2000 and 2019. Surely that’s worth at least one headline?
+
+
+                        3. China successfully eliminated malaria this year (it used to have 30 million cases a year in the
+                        1940s), as did El Salvador, the first country in Central America. Globally, 40 countries have now
+                        achieved this milestone. Côte d’Ivoire became the second African country to eliminate sleeping sickness,
+                        and the Gambia became the third African country to eliminate trachoma, an amazing achievement given
+                        that in the 1980s it was responsible for almost 1 in 5 of the country’s cases of blindness.
+
+
+                        4. One of the four major flu viruses that circulate in humans looks like it might have gone extinct
+                        this year thanks to the COVID-19 pandemic. The Yamagata virus has not been detected since April 2020
+                        anywhere in the world. Together with the Victoria flu virus, it used to be responsible for somewhere
+                        between 290,000 and 650,000 deaths every year.
+
+
+                        5. The latest data on AIDS (you remember, the other global pandemic) revealed there were1.5 million
+                        new HIV infections last year, a decline of 30% since 2010, and the lowest total number since 1990.
+
+
+                        6. The same report said that 9.4 million people around the world are now receiving treatment for Hepatitis
+                        C, reversing the global trend of increasing mortality from the disease for the first time ever. Egypt
+                        has been the standout here — six years ago it had one of the highest Hepatitis C burdens in the world,
+                        at 7.6%, or 40,000 deaths a year. Thanks to a huge public health effort, by 2021 the burden had fallen
+                        to 2%, and public health officials are saying they are now on track to eliminate it altogether.
+
+
+                        7. Lots of good news on cancer this year. The American Cancer Society said there was a 2.4% decline
+                        between 2017 to 2018 — the largest one-year drop ever — and that between 1991 and 2018, cancer mortality
+                        has fallen by 31%. Similar declines have happened in Europe. A new study showed that 4.9 million cancer
+                        deaths have been averted on the continent in the last three decades.
+
+
+                        6. A lot of that is down to less smoking. In November, the WHO released its Global Tobacco Trends
+                        report, showing that at the turn of the century, around a third of the world’s adults were tobacco
+                        users. By 2020, this had declined to under a quarter, and is projected to fall even further to one
+                        fifth by 2025. Also, both Japan and New Zealand announced this year they would be completely smoke-free
+                        within the next decade.
+
+
+                        9. It’s been two years since Canada legalized recreational cannabis, and one of the many positive
+                        benefits has been a drastic decrease in opioid prescriptions. This year, a study compared prescriptions
+                        before and after legalization and found that average doses of opioids per person have fallen to less
+                        than 20% of their former levels.
+
+
+                        10. India has the largest public health insurance scheme in the world, providing 500 million people
+                        with free healthcare. In its 2021 budget, spending on the program was doubled, from 1% to 2% of GDP,
+                        the largest single public investment in the country’s history. Imagine the kind of headlines this
+                        would have received if it happened in the United States or Europe?
+
+
+                        11. Haiti announced that it had successfully controlled the largest cholera epidemic ever recorded
+                        in a single country, while simultaneously improving maternal and child healthcare. There have been
+                        no confirmed cases of cholera there since January 2019, and the quality of maternal and child health
+                        has improved significantly in the last decade.
+
+
+                        12. A new paper in The Lancet showed that de-worming initiatives in sub-Saharan Africa in the last
+                        two decades have resulted in a significant decline in cases among children, from 44% in 2000 to 13%
+                        in 2019. This is a huge win for one of the world’s most underrated public health problems, improving
+                        the lives of millions of people and driving economic development.
+
+
+                        13. Stroke is a hidden killer — the second-leading cause of death worldwide, and the third-leading
+                        cause of death and disability combined. New research released in September this year revealed that
+                        quietly and largely uncelebrated, we’ve made amazing progress, with the age-standardised number of
+                        cases decreasing by 17%, and deaths by 36% in the last two decades.
+
+
+                        14. Two conservation stories in particular should really have received more coverage this year. September
+                        saw the creation of the North-Atlantic Current and Evlanov Sea Basin, a vast, protected area off the
+                        south west coast of Ireland, and then in October we got news of the new Eastern Tropical Pacific Marine
+                        Corridor, a mega-MPA linking the waters of Ecuador, Colombia, Panama and Costa Rica, and containing
+                        some of the richest pockets of ocean biodiversity on the planet, including the Galapagos Islands.
+                        Together, these two protected areas cover more than a million km² of ocean.
+
+
+                        15. In 2021 the US government trebled the size of the Gulf of Mexico’s largest coral sanctuary, created
+                        the country’s 63rd national park: New River Gorge, in West Virginia, finally banned the use of the
+                        pesticide chlorpyrifos on food crops, suspended all drilling leases in the Arctic National Wildlife
+                        Refuge, and restored full protections for Alaska’s Tongass National Forest.
+
+
+                        16. The Biden Administration also reversed a Trump era ruling that allowed sand mining on protected
+                        beaches, reinstated environmental protections for two major national monuments in Utah and one off
+                        the coast of New England, and reintroduced protections for waterways and wetlands across the United
+                        States, reversing another Trump era ruling, and ensuring clean drinking water for millions of Americans
+                        and safe habitat for thousands of wildlife species.
+
+
+                        17. 2021 was a landmark year for conservation in China, with the establishment of a network of five
+                        national parks, covering a total of 230,000 km² and containing nearly 30% of the country’s key wildlife
+                        species. The national park system, which has been in the works since 2015, will be the world’s most
+                        extensive, covering 18% of the world’s second-largest country by land area.
+
+
+                        18. After nearly 20 years of negotiations, the Peruvian government established the 2.5 million acre
+                        Yavarí Tapiche Reserve for uncontacted peoples deep in the Amazon rainforest, the Naso people of Panama
+                        secured their ancestral claim to 400,000 acres of some of the most pristine forests in Central America,
+                        and a team of conservationists banded together to save a 234,000 acre biodiversity hotspot and wildlife
+                        corridor at the intersection of Mexico, Belize and Guatemala.
+
+
+                        19. Some of Australia’s most beautiful natural sites, including the Daintree, the oldest tropical
+                        rainforest in the world, were returned to their traditional owners this year: four parks, covering
+                        more than 160,000 hectares, will now be managed by the Eastern Kuku Yalanji people.
+
+
+                        <a href="https://medium.com/media/a58042b3ab0869dc10bab54cef8b464a/href">https://medium.com/media/a58042b3ab0869dc10bab54cef8b464a/href</a>
+                        20. In Montana, 18,000 acres of wildlife reserve, known as the National Bison Range, was formally
+                        handed back to the Confederated Salish and Kootenai Tribes, and in Maine, the Passamaquoddy tribe
+                        bought back their ancestral land of Pine Island.
+
+
+                        21. Ecologists reported that the Mississippi River is the cleanest it’s been in more than a century,
+                        with pollution down to 1% of what it was in the 1980s, while the most comprehensive survey of the
+                        Thames in 60 years found that the river, once declared biologically dead, is now “home to myriad wildlife
+                        as diverse as London itself.” The biggest river success story however, came from China, which passed
+                        a landmark environmental law protecting the Yangtze, one of the country’s two ‘mother rivers,’ banning
+                        all industrial projects, sand mining and all fishing, including in tributaries and the estuary (more
+                        than 400 million people live in the Yangtze basin).
+
+
+                        22. Glasgow gave the green light to create a massive urban forest consisting of 18 million trees,
+                        a rewilding project in England that’s reclaimed 128,000 acres of industrial wasteland was reported
+                        to have created 5,000 new jobs plus a new national forest, and half a million acres of the Scottish
+                        Highlands were committed to being rewilded over the next 30 years, becoming Europe’s tenth official
+                        rewilding area.
+
+
+                        23. Indonesia reported that it has restored more than two million hectares of damaged, carbon-rich
+                        peatlands in the six years since the toxic haze crisis of 2015, and last year, the country achieved
+                        its fourth consecutive year of decline in deforestation. India announced a 25% increase in mangrove
+                        cover since the 1980s thanks to restoration efforts, and China revealed that its coastal wetlands
+                        have experienced a significant recovery in the last decade, thanks to several conservation projects
+                        started back in the 1990s.
+
+
+                        24. Africa’s largest tropical rainforest, Salonga National Park, was removed from UNESCO’s list of
+                        threatened sites, following 20 years of sustained conservation work, and a new reserve dubbed the
+                        ‘ Amazon of Europe’, spanning Austria, Slovenia, Croatia, Hungary, and Serbia, received official UNESCO
+                        heritage status, the first biosphere to cover five different countries.
+
+
+                        25. Three years ago, Pakistan launched the Ten Billion Tree Tsunami, a plan to reforest vast swathes
+                        of one of the most deforested countries in the world. Critics scoffed, but they’re being forced to
+                        eat their words: the country has now planted 1.5 billion trees, and is also conducting one of the
+                        biggest mangrove restoration projects in the world.
+
+
+                        26. Three different sites — an Alaskan archipelago dubbed the ‘Rat Islands’, Lehua Island in Hawaii
+                        and Redonda Isle in the Caribbean, were all declared rodent free this year after decades of conservation
+                        efforts. In all three locations, the pace of ecosystem recovery and increase of native wildlife populations
+                        has shocked even the most cynical of conservationists, shining examples of how quickly nature can
+                        bounce back if given a chance.
+
+
+                        27. A comprehensive plastic ban went into effect in China in January, including items like straws,
+                        utensils, nondegradable bags and postal or courier packages, and in July, the EU banned single-use
+                        plastic plates, cutlery, straws, balloon sticks and cotton buds. India announced a ban on a long list
+                        of single plastics effective July 2022, the Maldives kicked off the first phase of a plan to completely
+                        eliminate single plastics by 2023, and New Zealand announced that single-use plastics would be phased
+                        out by 2025, with bans on cotton buds, packaging, cutlery, straws, and fruit labels beginning next
+                        year. ABC
+
+
+                        28. Barcelona announced a new scheme to give citizens free, unlimited public transport for three years
+                        in return for giving up their private vehicles, Paris took back space from cars, opening linear parks
+                        on old highways along the Seine, phasing out diesel cars, opening bus lanes, raising parking meter
+                        prices and plowing bike lanes down hundreds of streets, and the UK’s second largest city, Birmingham
+                        finalized a plan to divert car traffic out of the city and introducing zero-emissions cross-city buses,
+                        cycle ways and pedestrian lanes.
+
+
+                        29. Abortion rights were consistently in the news this year, for good reason: American women’s right
+                        to a safe and legal abortion is in imminent danger of being taken away; Polish women have already
+                        lost theirs. Amidst the legitimate alarm however, you might have missed the ‘green wave’ that swept
+                        through Latin America in 2021. Argentina formally adopted a new law legalizing abortion during the
+                        first 14 weeks of pregnancy, both Mexico and Ecuador decriminalized abortion, and Chile took its first
+                        step towards legalization by expanding legislation that currently restricts the procedure to special
+                        circumstances. Across Latin America it is now legal for women to choose what happens to their bodies
+                        in Argentina, Ecuador, Uruguay, Cuba, Guyana, and three Mexican states.
+
+
+                        30. Egypt’s cabinet toughened its laws on female genital mutilation, imposing jail terms of up to
+                        20 years, and Somalia’s Puntland region outlawed the barbaric procedure. Pakistan abolished the outdated
+                        practice of virginity tests on rape victims, Iran passed a new law protecting women against domestic
+                        and other forms of gender-based violence, and Lebanon criminalized sexual harassment with a new landmark
+                        law that drastically expanded its definition.
+
+
+                        31. The Dominican Republic definitively banned child marriage this year. Previously, girls from the
+                        age of 15 were allowed to marry, and 36% of Dominican girls married before the age of 18.
+
+
+                        32. In the Philippines the minimum age of sexual consent was raised in September from 12 to 16 years
+                        old, overturning a century-old law on statutory rape, a historic win for child rights advocates who
+                        fought for this for years. France also took a major step forward in protecting children against sexual
+                        abuse this year by setting the minimum age of sexual consent at 15, and made birth control free for
+                        all women aged 25 and under.
+
+
+                        33. New Zealand passed world-first legislation for paid bereavement for miscarriage, giving women
+                        and their partners time off to grieve before returning to work, New York announced it would no longer
+                        prosecute prostitution, and in Mexico the law was amended to give women with disabilities equal access
+                        to protection from domestic violence.
+
+
+                        34. In July, four women in South Africa successfully overturned a set of apartheid-era marriage laws,
+                        giving around 400,000 elderly black women equal access to matrimonial property, and Uttarakhand became
+                        the first state in India to grant women co-ownership of land, in a landmark amendment that affected
+                        350,000 girls and women overnight.
+
+
+                        35. Tanzania said it will allow pregnant girls and teen mothers to resume secondary education, overturning
+                        a four year ban, women in Malaysia finally won the right to pass citizenship onto their children born
+                        overseas, Saudi Arabia officially allowed single, divorced or widowed women to live independently
+                        without permission from a male guardian, and a new law in the United Arab Emirates allowed non-Muslims
+                        to marry, divorce and get joint child custody, making it the first Gulf country to reform marriage
+                        laws formerly based on religious principles.
+
+
+                        36. Same-sex relations were decriminalized in Angola, overturning a 134 year old colonial statute,
+                        and in September, Switzerland became the 30th country to legalize gay marriage, followed by the 31st,
+                        Chile, in December. Across Catholic Latin America, same-sex marriage is now legal in Costa Rica, Ecuador,
+                        Colombia, Brazil, Uruguay, Argentina, and 23 of Mexico’s 32 states. Love is love.
+
+
+                        That balloon by the way, says Gleiche Liebe, Gleiche Rechte… “Same love, same rights.” <a href="https://medium.com/media/f7242be104e8af2a703576c54384cf5a/href">https://medium.com/media/f7242be104e8af2a703576c54384cf5a/href</a>
+                        37. Attitudes to sexuality can and do change, sometimes in the space of a single generation. Support
+                        for same-sex marriage in the United States in 2021 reached an all time high of 70%, up from 60% in
+                        2015 when it was legalized, and from 27% in 1996, when Gallup first started asking the question.
+
+
+                        38. Attitudes to race can change too. In one of the largest shifts of public opinion ever recorded,
+                        Gallup said this year that 94% of American adults now approve of interracial marriage, a huge leap
+                        from 4% when the poll began in 1958. People over the age of 50 reported the biggest shift, increasing
+                        their approval by 64% in the past 30 years.
+
+
+                        39. Kazakhstan abolished the death penalty, making permanent a nearly two-decade freeze on capital
+                        punishment in the authoritarian Central Asian country. More than two-thirds of the countries in the
+                        world have now abolished the death penalty in law or practice, according to Amnesty International.
+                        EJI
+
+
+                        40. Kazakhastan also announced that it is officially nuclear free, after scientists ground down the
+                        last 2.9 kilograms of highly enriched uranium, rendering it useless for bomb-making. The historic
+                        moment comes after 30 years of denuclearization, and represents one of the least celebrated, yet most
+                        successful examples of post-Cold War diplomacy.
+
+
+                        41. The United Nations ratified the Treaty on the Prohibition of Nuclear Weapons this year, the first
+                        ever global treaty to ban nuclear weapons and all activities related to them. It’s not the end of
+                        nuclear weapons — none of the nuclear-capable countries signed on — but it is a historic milestone
+                        in the decades long campaign by civil society groups for disarmament.
+
+
+                        42. A new report on cluster munitions revealed that more than 110,000 landmines covering 135 km² were
+                        destroyed globally last year, a new annual record, and that over a million landmines have been cleared
+                        in the last decade.
+
+
+                        Members of all-female landmines clearance team search for unexploded ordnances on a field in Quang
+                        Tri province, Vietnam March 4, 2020. Picture taken March 4, 2020. Image credit: Reuters43. Worldwide,
+                        democracy appears to be under threat, but remember — bad news travels, good news doesn’t. When Afghanistan’s
+                        government collapsed, the whole world watched. But when Indonesia, the most world’s most populous
+                        Muslim country, produces the planet’s most effective democratically elected leader — Joko Widodo —
+                        almost no one hears the story.
+
+
+                        44. In a mountainous, desert nation of 35 million people known for its mosques, mausoleums and ancient
+                        Silk Road sites, 80% of eligible voters cast votes this year, showing the strength of emerging democratic
+                        norms in Uzbekistan, Afghanistan’s neighbour. There was also a welcome win for democracy in Zambia,
+                        with voters peacefully electing a new president for the third time in the country’s history.
+
+
+                        45. The European Parliament voted in support this year of banning biometric mass surveillance, stating
+                        that individuals should only be monitored if they have been suspected of a crime. The landmark resolution
+                        should put an end to the automated recognition of people in public spaces through biometrics, and
+                        also prohibit predictive policing which increases the risk of discrimination.
+
+
+                        46. Incarceration rates in the United States fell to a 24 year low in 2019, plummeted a further 14%
+                        in 2020, to 1.81 million people, and then fell again in 2021, to 1.77 million. There are now half
+                        a million fewer people in prison in America compared to 13 years ago, and empty prisons are being
+                        repurposed into homeless shelters, educational farms, and even movie studios. These changes are due
+                        to incredible, uncelebrated activism, and largely unheralded changes in criminal laws, sentencing
+                        patterns and a decline in violent crimes.
+
+
+                        47. New Jersey became the 14th US state to legalize marijuana this year, dismissing 362,000 related
+                        cases and releasing 1,200 people from probation. New York legalized it in April, as well as New Mexico,
+                        and both states also immediately started expunging the criminal records of individuals with past marijuana-related
+                        convictions. A new poll showed that more than two in three Americans now support legalizing marijuana
+                        (a decade ago less than half of the country was in favour). This might just be one of the most successful
+                        rebrands of all time. It’s not weed or pot any more, it’s medicine.
+
+
+                        48. A significant majority of people in wealthy countries now believe that having people of different
+                        ethnic, religious, and racial backgrounds improves society. In the US, Canada, UK, Australia, New
+                        Zealand and Taiwan, 8 out of 10 people believe greater diversity is a benefit, and even in relatively
+                        culturally homogenous countries like Japan and Greece, the share has increased by double digits in
+                        the last four years.
+
+
+                        49. Bangladesh, home to 160 million people, celebrated a ‘ development miracle’ in 2021, its 50th
+                        year of independence. In the last three decades, GDP per capita has increased seven fold, 24 million
+                        people have been lifted out of poverty, life expectancy has risen to 73 years, infant and maternal
+                        mortality rates have fallen by a factor of five, the literacy rate has increase from 35% to 74%, and
+                        more than 97% of the population now has access to electricity, up from 62% in 2014.
+
+
+                        50. Infant mortality rates in the Philippines were reported to have dropped by 25% in the last decade,
+                        and in Cameroon, the country’s latest demographic and health survey rerevealed that pregnancy related
+                        mortalities had fallen by 40% since 2011.
+
+
+                        51. The UN released its latest data on family planning. The total number of women and girls around
+                        the world using modern contraception now stands at 320 million, with 60 million new users in the last
+                        seven years, and nine million in the past year alone. Progress has been particularly strong in Africa,
+                        where the number of modern contraceptive users has grown by 66% since 2012.
+
+
+                        52. Air pollution is falling across a vast swathe of 15 countries in Africa, from Senegal in the west
+                        to South Sudan in the east. It’s the result of rapid urbanization and economic development, leading
+                        to a significant decrease in fires traditionally used for land management. “As middle and low-income
+                        countries grow you often see more emissions. It’s nice to see a decline occurring when you’d expect
+                        to see pollution increasing.”
+
+
+                        53. A massive, bipartisan clean water bill was approved 89–2 by the US Senate. The legislation will
+                        improve water quality, remove lead pipes from schools, and update infrastructure for the impacts of
+                        extreme weather and climate change. 40% of the funds will target underserved, rural, and tribal communities.
+
+
+                        54. In India, millions of people have gained access to clean water in the last two years. About 11.2
+                        million, or 38% of all households in disease-vulnerable regions now have access to clean water, up
+                        from 2.9% in 2019, and another 11.8 million, 35% of the total, now have running tap water, up from
+                        7.9% in 2019.
+
+
+                        55. In the past two decades, almost every country in sub-Saharan Africa has made gains in female literacy.
+                        In 2000, the proportion of women who could read and write was around 46%; today, it’s close to 60%.
+                        Even more encouragingly, the literacy rate for young women (15–24) has soared to 72%, and is now just
+                        below their male peers.
+
+
+                        In the Democratic Republic of the Congo tens of thousands of former child miners are now attending
+                        school, two years after the government made primary education free for all. Thanks to those reforms
+                        an additional 2.5 million children have been able to go to school there since 2019. 56. US poverty
+                        was reported to have fallen to 9.1%, the lowest level ever recorded, and childhood poverty experienced
+                        its largest ever one year decrease, dropping from 15.8% to 11.9%. The US government also launched
+                        the most ambitious food assistance program in its history to help the 25 million Americans who still
+                        don’t have enough to eat.
+
+
+                        57. Further north, Canada revealed that the number of children below the poverty line had plummeted
+                        from 1.1 million to 680,000 since 2015, and said it was on track to halve domestic poverty by 2030.
+
+
+                        58. 100 of the world’s biggest companies will now pay a minimum tax rate of 15% after the first global
+                        revamp of corporate tax rules in over a decade. 136 countries signed the new global tax agreement
+                        this year, which will raise an additional $150 billion for governments per year.
+
+
+                        59. A study in The Lancet of 21 low, medium and high income countries found that there had been no
+                        increase in suicide rates during the pandemic and that 12 countries (including the United States)
+                        actually recorded a decrease.
+
+
+                        60. There was an update on Sustainable Development Goal Number 7 (access to electricity). Naturally,
+                        not a single media outlet reported on it. Good news: the number of people without access to electricity
+                        has declined from 1.2 billion to 759 million in the past decade, access to clean cooking solutions
+                        has grown by 1% annually, and 420 million people now get their electricity from off-grid solar systems.
+
+
+                        61. The Social Progress Index measures health, safety, education, technology, and human rights across
+                        the world’s population. This year’s edition said that 147 nations recorded a better score than they
+                        did a decade ago, with just four countries (the US, Brazil, Syria and South Sudan) doing worse. “Progress
+                        is advancing across the world, but it remains slow and uneven.”
+
+
+                        On the surface, it felt like we went backwards on climate this year. Catastrophic heat waves, floods
+                        and hurricanes, rebounding emissions from a global economic recovery and the fuel crisis, a sobering
+                        IPCC report and a much-anticipated meeting in Glasgow that ended up being disappointingly light on
+                        action. Doom and gloom however, is never the full story. Underneath all of that, the tectonic shifts
+                        of the energy transition continued, driven by a simple piece of economic logic: it is now cheaper
+                        to save the world than it is to ruin it.
+
+
+                        62. 2021 was a record-breaker for renewables globally, with 227 GW of new capacity installed, a 4.7%
+                        increase over 2020 levels. Storage grew three-fold, while offshore wind installations doubled compared
+                        to 2020. Solar additions of 180 GW meant more solar was added this year than the combined record for
+                        coal and gas capacity additions this century. 245 GW of global giga-scale green hydrogen was announced
+                        worldwide in 2021 too, six times the levels seen in 2020.
+
+
+                        63. Early-stage investment in climate tech companies skyrocketed, tipping over $50 billion in 2021,
+                        and the proportion of venture capital dollars going into climate tech soared, from around 6% to 14%.
+                        On the flipside, finance continued to flee fossil fuels. Swiss Re closed a major loophole in the reinsurance
+                        market, Citigroup become the first major US bank to rule out coal plant expansions, the Asian Development
+                        Bank ended all financing for coal mining and plants, and the Federal Bank of India said it would not
+                        finance any new coal, a first for an Indian financial institution.
+
+
+                        61. Norway’s sovereign wealth fund, the world’s largest, sold its entire portfolio of companies focused
+                        on oil exploration and production, the Dutch ABP, the world’s fifth largest pension fund, said it
+                        was divesting from all fossil fuel companies, South Korea’s National Pension Service, the world’s
+                        third largest pension fund, ceased all coal investments, as did FirstRand, Africa’s biggest bank,
+                        and the AIA Group, Asia’s largest Asian insurance company.
+
+
+                        62. Following the COP meeting in Glasgow, 90% of the global economy is now covered by national net-zero
+                        emissions targets, up from 68% in 2020. “We now have almost universal acceptance of the 1.5C target
+                        — that’s a big step forward.” More than 450 firms with $120 trillion in assets also joined former
+                        Bank of England Governor, Mark Carney’s Glasgow Financial Alliance for Net Zero,committing to steer
+                        the global economy towards net-zero emissions and a 1.5° C limit.
+
+
+                        63. This might have been our favourite (and most wonky) energy news this year: Goldman Sachs, the
+                        notorious tree hugging, left-leaning woke investment bank, said that financial markets have starting
+                        pricing in climate risk, effectively creating their own carbon price. It’s pretty much impossible
+                        to now finance new coal, and the cost of capital is more than 20% for offshore oil, 12% for LNG and
+                        just 4% for renewables. Like we said: it’s cheaper to save the world than it is to ruin it.
+
+
+                        64. A new report showed that in the six years since the Paris Agreement was signed, more than three
+                        quarters of planned coal projects have been shelved, 44 governments have committed to ending coal,
+                        and a further 33 have cancelled their pipelines. The remaining pipeline is now spread across just
+                        37 countries, 16 of which have only one project.
+
+
+                        65. According to the latest estimates from the Financial Times, almost no new coal-power plants will
+                        make back their upfront costs. Specificially, 92% of facilities proposed or under construction globally
+                        would cost more to build than the future cash flow they would generate. Pipelines? More like pipe
+                        dreams.
+
+
+                        66. The biggest energy story you didn’t hear was that Guangdong, China’s most populous province and
+                        one of its most industrialized, banned the construction of coal plants in the Pearl River Delta, the
+                        first ever crackdown on coal by a major Chinese province. Then there was the one you did hear about
+                        — Xi Jinping announced that China would not finance or build any new coal-fired power projects abroad,
+                        a huge deal for the world’s biggest coal financier.
+
+
+                        67. Things then got even worse for coal at COP26. Thanks to Glasgow, 90 new coal power projects will
+                        be cancelled, another 130 are looking highly questionable, and 750 coal-fired power plants around
+                        the world now have phase-out dates, up from 380 before. A further 1,600 coal plants are now covered
+                        by carbon neutrality targets, 95% of the world’s total. Not bad for two weeks right?
+
+
+                        68. But wait… there’s more. Hungary and Greece said they would close their last coal plants in 2025,
+                        Portugal shut down its last coal plant nine years ahead of schedule, Romania said it would close all
+                        coal mines by 2032, Canada said it would no longer approve coal mining projects, Sri Lanka stopped
+                        building new coal plants, North Macedonia and Montenegro became the first countries in the Western
+                        Balkans to announce coal exits, Spain said it would stop coal consumption completely by 2030, Germany’s
+                        newly formed coalition government announced a plan to quit coal by 2030 too, eight years ahead of
+                        schedule and at the end of the year, India announced it was considering a proposal to halt all new
+                        coal plants.
+
+
+                        <a href="https://medium.com/media/f7242be104e8af2a703576c54384cf5a/href">https://medium.com/media/f7242be104e8af2a703576c54384cf5a/href</a>
+                        69. Climate activists had a great year, finally forcing Harvard, the richest university on earth,
+                        to divest from fossil fuels, Chubb, the world’s largest property and casualty insurer, to walk away
+                        from Canada’s tar sands expansion. Endowments, portfolios and pension funds worth $40 trillion have
+                        now partially or fully divested from coal, gas and oil stocks.
+
+
+                        70. The Keystone XL pipeline has been officially terminated, cementing one of the biggest environmental
+                        victories of all time. Activists managed to delay the $9 billion, 830,000 barrel per day, Alberta
+                        oil sands ‘dirty climate bomb’ for 12 years, and in the process, give birth to much of the modern
+                        climate movement.
+
+
+                        71. While climate politics at the federal level in the US was disappointing, 28 different states passed
+                        either comprehensive climate or clean energy legislation, stopped fossil fuel industry backed efforts,
+                        or made major advancements through statewide boards. Thanks to policies passed in 2021, nearly 40%
+                        of people in the United States now live in a place dedicated to 100% clean electricity.
+
+
+                        72. The US EPA issued its first major regulation directly limiting greenhouse gases, requiring an
+                        85% reduction of HFCs by 2036. This will eliminate the equivalent of 4.5 billion tons of carbon dioxide,
+                        three years’ worth of emissions from the electricity sector. Fridge and air conditioning lobbyists,
+                        it seems, don’t have quite the same clout with Joe Manchin. China also agreed to limit emissions of
+                        HFCs, as the country began enforcing its obligations under the Kigali Amendment to the Montreal Protocol,
+                        which took effect in September.
+
+
+                        Solving climate change isn’t just about decarbonizing electricity, industry and agriculture, but also
+                        transport, which accounts for a third of global carbon emissions. On that front, it’s been a standout
+                        year. So good in fact, that for the first time ever we’re giving EVs their own section (we usually
+                        include them with clean energy).
+
+
+                        73. 2021 was the year that the world’s carmakers finally seemed to accept the inevitability of an
+                        all-electric future. General Motors said it would eliminate the sale of all fossil fuel powered cars
+                        and SUVs by 2035, Jaguar said it would stop selling them within the next five years, and Hyundai said
+                        no more after 2040.
+
+
+                        74. Ford said it would sell only EVs in Europe from 2030, Fiat said it would be an all electric company
+                        by 2030, Volvo said its entire car line-up would be fully electric by the same year, and both Audi
+                        and Daimler-Mercedes announced they were no longer developing new combustion engine models.
+
+
+                        In terms of products, there is no longer any rational reason to opt for a combustion engine in the
+                        near future. Wolf-Henning Scheider CEO, Mercedes Benz 75. In March, the IEA said that the global demand
+                        for gasoline had peaked, and was unlikely to return to pre-pandemic levels given the shift to electric
+                        vehicles, and in July, the world officially rid itself of leaded gasoline, after a refinery in Algeria
+                        used up the last stockpile. It took a 40 year campaign by the UN to achieve this, and it’s estimated
+                        elimination will prevent more than 1.2 million deaths annually.
+
+
+                        76. If you remember just one number from this section, make it 10%. That’s the proportion of global
+                        vehicle sales that are now electric. To put this in perspective, in the first quarter of 2010, 395
+                        electric vehicles in total were sold worldwide, 0.002% of passenger car sales. In the last quarter
+                        of this year, 1.7 million were sold, of which more than half were in Asia.
+
+
+                        77. Sales in Germany and China were particularly mindblowing. More than a third of new German cars
+                        sold are now plugins, while in the world’s largest car market EV sales have reached nearly 20%. In
+                        October, the Tesla Model 3 was the best selling car in Europe (not the best selling electric vehicle
+                        — the best selling car, overall), and Hertz bought 100,000 of them for its new fleet, the largest
+                        electric car order of all time.
+
+
+                        78. In May, Ford unveiled its new electric pickup truck, the F-150 Lightning, whose petrol-powered
+                        counterpart, the F-150, is the biggest selling pickup truck in the United States. The real gamechanger
+                        however, were the first customer deliveries for all electric carmaker Rivian’s new truck, and the
+                        company’s subsequent $100 billion plus valuation, higher than GM or Ford.
+
+
+                        79. It wasn’t just passenger vehicles that had a good year. Ebike sales continued to boom, and trucks
+                        also proved they were poised for electrification, as 13 models were released in the US alone. Also,
+                        we heard that the global fleet of battery powered buses has increased by 22% since 2019, and 18% of
+                        all municipal buses on the road worldwide are now zero-emissions.
+
+
+                        80. Canada and Chile announced bans on sales of combustion vehicles by 2035, the EU proposed a plan
+                        to do the same (although it’s not law yet) and then the really big one: at COP26, 37 countries, including
+                        the UK, India, Mexico, Morocco and Turkey, committed to phasing out gas car sales by 2035 in rich
+                        countries, and by 2040 in poorer ones.
+
+
+                        81. Thanks to progressive policies over the past 24 years, California announced that it had clocked
+                        up a 78% reduction in diesel particulate pollution, the toxic black stuff from car exhausts, and that
+                        the cleaner air had resulted in 82% fewer deaths from heart and lung disease. New York also became
+                        the second state after California to announce combustion engine ban, after governor, Kathy Hochul,
+                        signed a bill requiring all passenger vehicles sold in the state to be emissions-free by 2035.
+
+
+                        82. In December, the US EPA issued new rules that significantly tighten greenhouse gas emissions levels
+                        for new cars, SUVs, and pickup trucks sold in model years 2023 through 2026. All told, these standards
+                        will cut carbon emissions by 3.1 billion metric tons by 2050, equivalent to two full years of emissions
+                        from all transportation in the United States.
+
+
+                        83. Animal rights activists in the UK and Spain won major victories this year with landmark reforms
+                        that legally recognize animals as ‘sentient beings, preventing cruelty and mistreatment, and in the
+                        United States, activists celebrated big wins on trophy hunting, state-funded wildlife killing experiments,
+                        cage confinement, and a historic ban on fur.
+
+
+                        84. The EU voted to phase out the use of animals in laboratory experiments, saving eight million monkeys,
+                        dogs, cats, rabbits, mice and rats a year, Virginia became the fourth state in America to ban cosmetic
+                        animal testing and Mexico became the 41st country to do the same, after Save Ralph, an animated film
+                        about a rabbit cosmetic tester, spurred 1.3 million people to petition for new legislation.
+
+
+                        85. Consumption of wild animals was reported to have dropped by almost 30% across China, Myanmar,
+                        Thailand, Vietnam, and the USA due to shifting cultural tastes and concerns about COVID-19, and an
+                        undercover investigation forced South Korea’s largest dog meat auction house to close, with advocates
+                        now calling for a permanent ban on all slaughtering and processing of dogs for food.
+
+
+                        86. Tanzania said it was hopeful of reaching its ‘zero-elephant-poaching’ target after making thousands
+                        of arrests, including 21 kingpins of the illegal trafficking trade. Since 2014, its elephant population
+                        has increased by 17,000. Malawi also reported a dramatic reduction in wildlife poaching and trafficking,
+                        thanks to tougher penalties, with 90% of wildlife criminals serving an average of four and half years
+                        in prison since legislation was amended in 2017, and no international ivory seizures linked to the
+                        country since.
+
+
+                        87. Good news for the global dawn chorus (go on, open it, trust us). 400 years after being wiped out,
+                        the UK’s crane population has passed a crucial milestone on its road to recovery, in Chile, the population
+                        of the Burrowing Parrot was reported to have increased from 217 in 1986 to over 4,000 today, and in
+                        Namibia fisherman said they have reduced the accidental deaths of seabirds from 30,000 per year in
+                        2009 to just 215 at last count, thanks to bird-scaring lines (a sort of nautical scarecrow) on fishing
+                        boats.
+
+
+                        88. The bald eagle has quadrupled its population in the past decade with more than 300,000 birds soaring
+                        across American skies, the California condor is returning to its home skies after nearly a century
+                        thanks to the efforts of the Yurok Tribe, and Bulgaria now has a stable population of around  80 griffon
+                        vultures, more than 40 years after the birds were declared extinct.
+
+
+                        89. Turning the tides, Gabon passed landmark measures to protect the country’s 69 species of sharks
+                        and rays, and Mozambique passed a powerful new fisheries law protecting dolphins, whale sharks and
+                        manta rays, off the back of news that the country’s largest marine conservation area has cut illegal
+                        fishing by nearly half.
+
+
+                        90. The population of four endangered tuna species — Atlantic bluefin, Southern bluefin, Albacore
+                        and Yellowfin — are all showing signs of recovery thanks to the enforcement of fishing quotas over
+                        the past decade, and in the United States, overfishing has essentially ended with 91% of stocks now
+                        reporting recoveries. Not just good news for the planet, but for fishing communities too. “We’re catching
+                        bigger fish and getting more bang for our buck.”
+
+
+                        91. In North Cyprus, nest counts of green turtles have increasing by 162% and loggerhead turtles by
+                        46% since 1993 and in Cape Verde, the number of nests has increased from 10,000 to almost 200,000
+                        in the past six years, thanks to conservation measures and new laws to criminalise their killing,
+                        trade, and consumption of sea turtles.
+
+
+                        92. The US government ramped up its protection of endangered humpback whales this year, declaring
+                        300,000 km² of the Pacific Ocean as critical habitat. It’s a big win for conservationists who sued
+                        the federal government in 2018 over its failure to designate protected areas, which are proven to
+                        double the chance of species’ recovery.
+
+
+                        93. Animal rights activists in China pulled off an incredible rescue mission, removing 101 moon bears
+                        from a bile extraction facility and transporting them over 1,200 km to a rehab centre. It took years
+                        of planning, and involved three convoys of nine trucks each, and a dedicated team of vets and carers
+                        who will continue to rehabilitate the bears as they settle into their new home.
+
+
+                        <a href="https://medium.com/media/9036e0dca5876de3b9681f34138c82db/href">https://medium.com/media/9036e0dca5876de3b9681f34138c82db/href</a>
+                        94. China doubled the number of wild animals protected under its conservation rules, imposing hefty
+                        fines on the trading and consumption of 500 species, including many birds and wolves. It comes after
+                        30 years of Chinese environmental groups fighting for animals to be added to the protected list.
+
+
+                        95. Chinese officials also announced that they no longer consider giant pandas an endangered species.
+                        There are now 1,800 giant pandas living in the wild, thanks to a series of conservation initiatives
+                        in recent years. Those initiatives have also benefited other species: Siberian tigers, Asian elephants,
+                        and crested ibises are all seeing population increases too.
+
+
+                        96. The population of the critically endangered Grauer’s gorilla has doubled, with numbers up from
+                        3,800 in 2016 to 6,800 today, thanks to conservation efforts in the Oku Community Forests in the Congo.
+                        Across Europe, the population of European bison has tripled in the last 17 years, in Vietnam, the
+                        population of the Delacour’s Langur, a critically endangered monkey, has quadrupled in the past 20
+                        years.
+
+
+                        97. In Kazakhstan, the Saiga antelope has more than doubled its numbers since 2019, in the UAE, the
+                        population of the Arabian oryx has increased by 22% in the last four years, and the mhorr, or Dama
+                        gazelle, is on the road to recovery thanks to a rescue mission by an army captain from Spain 50 years
+                        ago. The descendants of the rescued gazelles now number 4,000 and have been reintroduced in Tunisia,
+                        Morocco, and Senegal.
+
+
+                        98. The Polish wolf has recovered to an estimated population of 3,000, a massive leap from the 60
+                        in existence in the early 1970s, and in Scotland, the number of beavers has more than doubled in the
+                        last three years, thanks to illegal re-wilding efforts by environmental activists.
+
+
+                        99. Nepal revealed it is on track to become the first country to double its tiger population. It’s
+                        part of TX2, a global imitative supported by Russia, Nepal and 13 other countries. Nepal’s tiger population
+                        has grown steadily from 121 tigers 11 years ago, to 235 tigers 3 years ago and the country is likely
+                        to reach the 250-mark next year.
+
+
+                        100. One more, just for good measure. Did you hear that humanity invented the first new pasta shape
+                        in over a century? It’s called Cascatelli, which means little waterfall in Italian — designed for
+                        maximum sauceability, forkability and tooth sinkability. Don’t say we don’t bring you the big stories
+                        here.
+
+
+                        <a href="https://medium.com/media/f7242be104e8af2a703576c54384cf5a/href">https://medium.com/media/f7242be104e8af2a703576c54384cf5a/href</a>
+                        99 Good News Stories You Probably Didn’t Hear About in 2021 was originally published in Future Crunch
+                        on Medium, where people are continuing the conversation by highlighting and responding to this story.'
+                      content_snippet: '...them for its new fleet, the largest <b>electric</b> <b>car</b> order of all time.
+
+
+                        78. In May, Ford unveiled its new electric pickup ... experiments, saving eight million monkeys, <b>dogs</b>,
+                        <b>cats</b>, rabbits, mice and rats a year, Virginia became the fourth state in...'
+                      docscore:
+                        test_score: 1
+                      domain_url: http://medium.com/
+                      engagement: 474
+                      entity_url:
+                      - resolved_url: https://www.aljazeera.com/news/2021/5/7/ecuador-abortion-rights-victory-hailed-as-latest-in-tidal-wave
+                        url: https://www.aljazeera.com/news/2021/5/7/ecuador-abortion-rights-victory-hailed-as-latest-in-tidal-wave
+                      - url: https://www.bloomberg.com/graphics/covid-vaccine-tracker-global-distribution/
+                      - url: https://www.carbonbrief.org/guest-post-how-worlds-coal-power-pipeline-has-shrunk-by-three-quarters
+                      - url: https://www.worldbank.org/en/news/video/2021/07/25/-india-restores-its-mangroves
+                      - url: https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=2492e4fcacfb
+                      - url: https://www.reuters.com/article/us-somalia-women-fgm-trfn-idUSKCN2DN1UT
+                      - url: https://www.irishtimes.com/news/environment/vast-area-of-atlantic-to-be-protected-in-effort-to-conserve-seabird-species-1.4688866
+                      - url: https://www.abc.net.au/news/science/2021-10-21/influenza-virus-yamagata-eradication-vaccine-covid-pandemic/100546836
+                      - url: https://apnews.com/article/business-prisons-f32b5148896c798ab586a8701cfac58c
+                      - url: https://www.bloomberg.com/opinion/articles/2021-08-25/used-solar-panels-are-powering-the-developing-world?sref=B9VwE2e5
+                      - url: https://www.nytimes.com/2021/11/08/business/e-bikes-urban-transit.html
+                      - url: https://www.eltis.org/in-brief/news/barcelona-issues-annual-public-transport-tickets-former-car-owners
+                      - url: https://www.abc.net.au/news/2021-09-02/the-just-transition-as-spain-says-goodbye-to-coal/100421216
+                      - url: https://www.euronews.com/green/2021/08/21/a-rewilding-revolution-how-9-million-trees-reforested-england
+                      - url: https://www.newagebd.net/article/149461/number-of-electricity-connection-increasing-rapidly
+                      - url: https://www.borgenmagazine.com/female-literacy-in-sub-saharan-africa/
+                      - url: https://m.facebook.com/DavidWimblePhotography/photos/a.1932649820142949/5768380119903214/?type=3&source=48
+                      - url: https://www.reuters.com/article/us-womens-day-vietnam-idUSKBN20T0E9
+                      - url: https://www.borgenmagazine.com/philippines-birth-practices/
+                      - url: https://gulfnews.com/world/asia/pakistan/pakistan-set-to-secure-4th-or-5th-position-on-world-ranking-of-countries-having-most-mangrove-forests-1.82331452
+                      - url: https://worldanimalnews.com/breaking-largest-dog-meat-auction-house-in-south-korea-closes-following-lady-freethinker-investigation/
+                      - url: https://www.audubon.org/news/a-decisive-victory-most-important-coastal-law-youve-never-heard
+                      - url: https://www.reuters.com/world/china/china-pledges-limit-emissions-coolant-that-swells-greenhouse-gases-2021-09-25/
+                      - url: https://www.pv-magazine-australia.com/press-releases/trend-breaking-year-for-renewables-as-residential-solar-up-and-onshore-wind-down-in-2021/
+                      - url: https://pdfhost.io/v/PtmUZF9pL_America_is_substantially_reducing_poverty_among_children___The_Economist
+                      - url: https://thehill.com/changing-america/resilience/refugees/556882-native-american-tribe-buys-island-it-lost-160-years-ago
+                      - url: https://cdn-images-1.medium.com/max/800/0
+                      - url: https://www.bloomberg.com/news/articles/2021-12-16/the-year-in-review-ten-charts?sref=B9VwE2e5
+                      - url: https://www.theguardian.com/environment/2021/oct/26/abp-pension-fund-to-stop-investing-in-fossil-fuels-amid-climate-fears
+                      - url: https://allafrica.com/stories/202108220016.html
+                      - url: https://www.abc.net.au/news/2021-03-26/new-zealand-passes-miscarriage-leave-law-for-grieving-parents/100030266
+                      - url: https://www.spglobal.com/platts/en/market-insights/latest-news/energy-transition/092821-chinas-guangdong-to-ban-new-coal-fired-power-plants-and-plant-expansions
+                      - url: https://twitter.com/RJScaringe/status/1437842808384233477/photo/2
+                      - url: https://timesofindia.indiatimes.com/city/dehradun/ukhand-becomes-1st-state-to-give-co-ownership-rights-to-women-in-husbands-ancestral-property/articleshow/81096564.cms
+                      - url: https://www.aljazeera.com/news/2021/1/4/irans-government-passes-bill-to-combat-violence-against-women
+                      - url: https://medium.com/future-crunch
+                      - url: https://www.newsweek.com/hawaii-island-rats-lehua-eating-birds-1585701
+                      - url: https://www.nytimes.com/2021/06/01/climate/biden-drilling-arctic-national-wildlife-refuge.html
+                      - url: https://newseu.cgtn.com/news/2021-01-30/Rewilding-success-European-bison-no-longer-a-vulnerable-species-XsbUyzXJ84/index.html
+                      - url: www.mashed.com/362512/everything-you-need-to-know-about-cascatelli-the-worlds-newest-pasta-shape/?utm_campaign=clip
+                      - url: https://balkangreenenergynews.com/romania-tells-eu-it-would-close-all-coal-mines-by-2032/
+                      - url: https://www.nytimes.com/2021/10/07/climate/bears-ears-grand-staircase-escalante-biden.html
+                      - url: https://www.animalsasia.org/au/media/news/news-archive/animals-asia-brings-101-bears-home-in-largest-ever-operation-of-its-kind.html
+                      - url: https://www.electrive.com/2021/03/08/daimler-considers-earlier-stop-to-combustion-engines/
+                      - url: https://www.nytimes.com/2021/02/08/climate/africa-pollution-climate-change.html
+                      - url: https://about.bnef.com/blog/electric-vehicle-sales-headed-for-five-and-a-half-million-in-2021-as-automakers-target-40-million-per-year-by-2030/
+                      - url: https://www.jpost.com/middle-east/lebanon-finally-criminalizes-sexual-harassment-652944
+                      - url: https://www.nadja.co/2021/06/24/tanzania-will-now-offer-education-to-pregnant-girls-and-teen-mothers/
+                      - url: https://www.bbc.co.uk/programmes/p094t71c
+                      - url: https://www.bbc.com/news/health-59148620
+                      extra_author_attributes:
+                        gender: MALE
+                        id: ex:medium.com-275568739
+                        name: Angus Hervey
+                      extra_source_attributes:
+                        id: ex:medium.com
+                        name: medium.com
+                        world_data:
+                          city: Washington, D.C.
+                          continent: North America
+                          country: United States
+                          country_code: us
+                          latitude: 38.89984130859375
+                          longitude: -77.0086669921875
+                          region: Washington, D.C.
+                          resolution: COUNTRY
+                      fluency_level: 100
+                      host_url: http://medium.com/
+                      images:
+                      - height: 1500
+                        url: https://miro.medium.com/max/1200/1*9JewJgFKonuuhBG1b5UIgg.jpeg
+                        width: 1200
+                      indexed: 1640924963207
+                      lang: en
+                      matched_profile:
+                      - kpnutesu_1234
+                      parent_url: https://medium.com/future-crunch/99-goodnews-2021-2492e4fcacfb
+                      porn_level: 0
+                      post_type:
+                      - TEXT
+                      published: 1640921729799
+                      reach: 42276784
+                      root_url: https://medium.com/
+                      search_indexed: 1640925103364
+                      sentiment: 0
+                      source_extended_attributes:
+                        alexa_pageviews: 94700000
+                        alexa_unique_visitors: 42276784
+                      source_type:
+                      - BLOG
+                      - BLOG_OTHER
+                      tags_internal:
+                      - containsImage
+                      - containsVideo
+                      - hasImage
+                      - isQuestion
+                      title: 99 Good News Stories You Probably Didn't Hear About in 2021 | Future Crunch
+                      title_snippet: 99 Good News Stories You Probably Didn't Hear About in 2021 | Future Crunch
+                      tokens_content:
+                      - American Cancer Society
+                      - Tongass National Forest
+                      - Yavarí Tapiche Reserve
+                      - Pacific Marine Corridor
+                      - Eastern Tropical Pacific
+                      - Arctic National Wildlife
+                      - National Wildlife Refuge
+                      - New River Gorge
+                      - Global Tobacco Trends
+                      - Evlanov Sea Basin
+                      tokens_title:
+                      - Good News Stories
+                      - Good News Stories
+                      - Future Crunch
+                      - Future Crunch
+                      - Probably Didn
+                      - Probably Didn
+                      - Good News
+                      - Good News
+                      - News Stories
+                      - News Stories
+                      trending_score: 0
+                      url: https://medium.com/future-crunch/99-goodnews-2021-2492e4fcacfb
+                      videos:
+                      - url: http://www.youtube.com/watch?v=I36bAHXTgrQ
+                      word_count: 7652
+                  - data:
+                      external_author_id: '799357096261193728'
+                      external_id: '1495480510398742529'
+                      external_provider: twitter
+                      fluency_level: 79
+                      indexed: 1645385336856
+                      lang: en
+                      post_type:
+                      - IMAGE
+                      search_indexed: 1645385604197
+                      sentiment: 5
+                      source_type:
+                      - SOCIALMEDIA
+                      - SOCIALMEDIA_TWITTER
+                status_code: '0'
+                status_message: OK
+              schema:
+                type: object
+          description: OK
+      summary: Retrieve documents from a Talkwalker project
+      tags:
+      - Search API
+  /api/v1/search/results:
+    get:
+      description: Retrieve up to 500 sorted results for a given timeframe within the last **30 days**.
+      parameters:
+      - description: The query to search for.
+        example: cats AND dogs
+        in: query
+        name: q
+        required: true
+        schema:
+          type: string
+      - description: 'Timezone for the time_range (e.g. Europe/Luxembourg).
+
+          Allowed values are timezone names.
+
+          Default value: UTC'
+        example: CET
+        in: query
+        name: timezone
+        schema:
+          type: string
+      - description: 'Time range filter.
+
+          Format `number` + a time unit character (e.g. `30d` for 30 days.).'
+        example: 30d
+        in: query
+        name: time_range
+        schema:
+          type: string
+      - description: 'Number of results to skip (for paging).
+
+          Vaule is between 0 and 500.
+
+          Default value: 0.'
+        example: '0'
+        in: query
+        name: offset
+        schema:
+          type: integer
+      - description: "Number of hits per page (for paging). \nAllowed value is between 0 and 500 (between 100 and 500 if summarize\
+          \ is on).\nDefault value: 10 (100 if summarize is on)."
+        example: '10'
+        in: query
+        name: hpp
+        schema:
+          type: integer
+      - description: "Criteria for sorting the results. \nAllowed values: engagement, published, reach, facebook_shares, facebook_likes,\
+          \ twitter_shares, twitter_retweets, twitter_followers, youtube_likes, youtube_dislikes, youtube_views, cluster_size,\
+          \ comment_count, published, search_indexed, trending_score. \nDefault value is engagement."
+        example: engagement
+        in: query
+        name: sort_by
+        schema:
+          type: string
+      - description: "Sorting order (ascending or descending). \nAllowed values: asc, desc\nDefault value: desc."
+        example: desc
+        in: query
+        name: sort_order
+        schema:
+          type: string
+      - description: "Turns highlighting on or off. \nAllowed values: true or false.\nDefault value: true."
+        example: 'true'
+        in: query
+        name: hl
+        schema:
+          type: boolean
+      - description: 'Formatted json for testing.
+
+          Allowed values: true or false.
+
+          Default value: false.'
+        example: 'false'
+        in: query
+        name: pretty
+        schema:
+          type: boolean
+      - description: 'To get the AI Summaries for a Search API call.
+
+          Allowed values: true (on) or false (off).
+
+          Default value: false.'
+        example: 'on'
+        in: query
+        name: summarize
+        schema:
+          type: boolean
+      - description: Topic on which summary should focus
+        example: food
+        in: query
+        name: custom_focus
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                pagination:
+                  next: GET /api/v1/search/results?q=cats%20AND%20dogs&offset=2&hpp=2&sort_by=engagement&sort_order=desc&hl=true&pretty=false&access_token=abcd_1234_abcd
+                  total: 105362
+                request: GET /api/v1/search/results?q=cats%20AND%20dogs&offset=0&hpp=2&sort_by=engagement&sort_order=desc&hl=true&pretty=false&access_token=abcd_1234_abcd
+                request_id: '#r8vn08dfe6e9#'
+                result_content:
+                  data:
+                  - data:
+                      DEPRECATED_spam_level: 0
+                      article_extended_attributes:
+                        facebook_likes: 241282
+                        facebook_shares: 6537
+                        num_comments: 10988
+                        twitter_shares: 80
+                      cluster_id: http://twitter.com/worldnewstweet_/status/1499876602544476162
+                      content: 'Tears of little girls who may never see their brave daddy again: Ukrainian man bids farewell
+                        to his children, aged six and tw...'
+                      content_snippet: '...worst-hit areas – along with 11,000 <b>cats</b> and <b>dogs</b> – to the west,
+                        either directly to borders or to cities nearby such as...'
+                      domain_url: http://dailymail.co.uk/
+                      engagement: 258887
+                      entity_url:
+                      - url: https://i.dailymail.co.uk/1s/2022/03/04/22/54967895-10579573-image-a-33_1646432778016.jpg
+                      - url: https://i.dailymail.co.uk/1s/2022/03/04/22/54967905-10579573-image-a-32_1646432767939.jpg
+                      extra_author_attributes:
+                        gender: MALE
+                        id: ex:www.dailymail.co.uk-1414438987
+                        name: Ian Gallagher
+                      extra_source_attributes:
+                        id: ex:www.dailymail.co.uk
+                        name: www.dailymail.co.uk
+                        world_data:
+                          city: London
+                          continent: Europe
+                          country: United Kingdom
+                          country_code: uk
+                          latitude: 51.50115966796875
+                          longitude: -0.1153564453125
+                          region: Greater London
+                          resolution: COUNTRY
+                      fluency_level: 100
+                      host_url: http://www.dailymail.co.uk/
+                      images:
+                      - url: https://i.dailymail.co.uk/1s/2022/03/04/22/54967893-0-image-a-26_1646432743014.jpg
+                      indexed: 1646433894625
+                      lang: en
+                      parent_url: https://www.dailymail.co.uk/news/article-10579573/Tears-little-girls-never-brave-daddy-again.html
+                      porn_level: 0
+                      post_type:
+                      - TEXT
+                      published: 1646432900000
+                      reach: 41651376
+                      root_url: https://www.dailymail.co.uk/
+                      search_indexed: 1646433919683
+                      sentiment: 0
+                      source_extended_attributes:
+                        alexa_pageviews: 90800000
+                        alexa_unique_visitors: 41651376
+                      source_type:
+                      - ONLINENEWS
+                      - ONLINENEWS_NEWSPAPER
+                      tags_internal:
+                      - containsImage
+                      - hasImage
+                      - isQuestion
+                      title: Tears of little girls who may never see their brave daddy again
+                      title_snippet: Tears of little girls who may never see their brave daddy again
+                      tokens_content:
+                      - Vladimir Putin
+                      - Vladimir Putin
+                      - Svobody Avenue
+                      - Ukrainian Railways
+                      - Opera House
+                      - Dasha
+                      - Dasha
+                      - Dasha
+                      - Anna
+                      - Anna
+                      tokens_title:
+                      - their brave daddy
+                      - brave daddy
+                      - their brave
+                      - little girls
+                      - Tears
+                      - Tears
+                      - daddy
+                      - brave
+                      - girls
+                      trending_score: 0
+                      url: https://www.dailymail.co.uk/news/article-10579573/Tears-little-girls-never-brave-daddy-again.html
+                      word_count: 854
+                  - data:
+                      DEPRECATED_spam_level: 0
+                      article_extended_attributes:
+                        facebook_likes: 189948
+                        facebook_shares: 9750
+                        num_comments: 7429
+                        twitter_shares: 864
+                      cluster_id: https://en.mogaznews.com/World-News/1918852/Polish-Pen-Farthing-risks-his-life-to-rescue-more-than-100-cats-and-dogs-.html
+                      content: 'NICK PISA in Przemysl: How ''Polish Pen Farthing'' risks his life to rescue more than 100
+                        cats and dogs stuck in war-torn Ukrai...'
+                      content_snippet: '...<b>cats</b> and <b>dogs</b> stuck in war-torn Ukraine while dodging Putin''s army
+
+
+                        EXCLUSIVE: Polish charity worker is saving <b>cats</b> and <b>dogs</b> ... charity Dioz have rescued
+                        more than 100 <b>dogs</b>, <b>cats</b>, rabbits, hamsters and even a chameleon.
+
+
+                        Konrad said: ''There has been a...'
+                      domain_url: http://dailymail.co.uk/
+                      engagement: 207991
+                      entity_url:
+                      - url: https://i.dailymail.co.uk/1s/2022/03/04/12/54945165-10577489-image-m-31_1646395615796.jpg
+                      - url: https://i.dailymail.co.uk/1s/2022/03/04/12/54945579-10577489-image-a-1_1646395407041.jpg
+                      - url: https://i.dailymail.co.uk/1s/2022/03/04/12/54945135-10577489-image-m-32_1646395622395.jpg
+                      - url: https://i.dailymail.co.uk/1s/2022/03/04/12/54945117-10577489-image-a-14_1646395470317.jpg
+                      - url: https://i.dailymail.co.uk/1s/2022/03/04/12/54945577-10577489-image-a-3_1646395411003.jpg
+                      - url: https://www.facebook.com/centrumadopcyjne
+                      - url: https://i.dailymail.co.uk/1s/2022/03/04/12/54945167-10577489-image-a-2_1646395408936.jpg
+                      - url: https://i.dailymail.co.uk/1s/2022/03/04/12/54945137-10577489-image-a-4_1646395420162.jpg
+                      - url: https://i.dailymail.co.uk/1s/2022/03/04/12/54945149-10577489-image-m-29_1646395609026.jpg
+                      - url: https://i.dailymail.co.uk/1s/2022/03/04/12/54945163-10577489-image-m-33_1646395629579.jpg
+                      - url: https://i.dailymail.co.uk/1s/2022/03/04/12/54945155-10577489-image-a-30_1646395612133.jpg
+                      - url: https://i.dailymail.co.uk/1s/2022/03/04/12/54945141-10577489-image-m-34_1646395637344.jpg
+                      - url: https://i.dailymail.co.uk/1s/2022/03/04/12/54945129-10577489-image-m-28_1646395603364.jpg
+                      extra_author_attributes:
+                        gender: MALE
+                        id: ex:www.dailymail.co.uk-2119827620
+                        name: Nick Pisa
+                      extra_source_attributes:
+                        id: ex:www.dailymail.co.uk
+                        name: www.dailymail.co.uk
+                        world_data:
+                          city: London
+                          continent: Europe
+                          country: United Kingdom
+                          country_code: uk
+                          latitude: 51.50115966796875
+                          longitude: -0.1153564453125
+                          region: Greater London
+                          resolution: COUNTRY
+                      fluency_level: 100
+                      host_url: http://www.dailymail.co.uk/
+                      images:
+                      - url: https://i.dailymail.co.uk/1s/2022/03/04/12/54946159-0-image-a-16_1646395485118.jpg
+                      indexed: 1646398250533
+                      lang: en
+                      parent_url: https://www.dailymail.co.uk/news/article-10577489/Polish-Pen-Farthing-risks-life-rescue-100-cats-dogs-stuck-Ukraine.html
+                      porn_level: 0
+                      post_type:
+                      - TEXT
+                      published: 1646395963000
+                      reach: 41651376
+                      root_url: https://www.dailymail.co.uk/
+                      search_indexed: 1646398263762
+                      sentiment: 0
+                      source_extended_attributes:
+                        alexa_pageviews: 90800000
+                        alexa_unique_visitors: 41651376
+                      source_type:
+                      - ONLINENEWS
+                      - ONLINENEWS_NEWSPAPER
+                      tags_internal:
+                      - containsImage
+                      - hasImage
+                      title: '''Polish Pen Farthing'' risks his life to rescue more than 100 cats and dogs stuck in Ukraine'
+                      title_snippet: '''Polish Pen Farthing'' risks his life to rescue more than 100 <b>cats</b> and <b>dogs</b>
+                        stuck in Ukraine'
+                      tokens_content:
+                      - Polish Pen Farthing
+                      - How Polish Pen
+                      - Ukraine Konrad Kuzminski
+                      - German Shepherd
+                      - Instagram Konrad
+                      - NICK PISA
+                      - Konrad Kuzminski
+                      - How Polish
+                      - Radoslaw Fedaczynski
+                      - Polish Pen
+                      tokens_title:
+                      - Polish Pen Farthing
+                      - Polish Pen Farthing
+                      - and dogs stuck
+                      - than 100 cats
+                      - Pen Farthing risks
+                      - Polish Pen
+                      - Polish Pen
+                      - Pen Farthing
+                      - Pen Farthing
+                      - his life
+                      trending_score: 0
+                      url: https://www.dailymail.co.uk/news/article-10577489/Polish-Pen-Farthing-risks-life-rescue-100-cats-dogs-stuck-Ukraine.html
+                      word_count: 858
+                status_code: '0'
+                status_message: OK
+              schema:
+                type: object
+          description: OK
+      summary: Retrieve documents from global index
+      tags:
+      - Search API
+  /api/v1/search/summary:
+    get:
+      tags:
+      - Summary API
+      summary: Fetch summary from global index
+      description: Fetch the AI summary of the first 1000 matching results (sorted by engagement) from global index. No results
+        are returned.
+      parameters:
+      - description: The query to search for.
+        example: cats AND dogs
+        in: query
+        name: q
+        required: true
+        schema:
+          type: string
+      - description: Topic on which summary should focus
+        example: food
+        in: query
+        name: custom_focus
+        schema:
+          type: string
+      - description: 'Timezone for the time_range (e.g. Europe/Luxembourg).
+
+          Allowed values are timezone names.
+
+          Default value: UTC'
+        example: CET
+        in: query
+        name: timezone
+        schema:
+          type: string
+      - description: 'Time range filter.
+
+          Format `number` + a time unit character (e.g. `30d` for 30 days.).'
+        example: 30d
+        in: query
+        name: time_range
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status_code: '0'
+                status_message: OK
+                request: GET /api/v1/search/summary?q=cats%20AND%20dogs&access_token=abcd_1234_abcd
+                request_id: '#rxl5is2tsjc1#'
+                summary:
+                  summary: The collection of online documents reveals a strong interest in pets, particularly cats and dogs,
+                    with discussions around their behavior, care, and emotional connection with humans. Animal welfare and
+                    rescue efforts are prominent themes, highlighted by news releases about organizations reuniting lost pets
+                    and investigations into animal neglect. Social media trends, including viral memes and puzzle toys for
+                    pets, demonstrate engagement with animal-related content. Furthermore, there’s a notable interest in broader
+                    geopolitical issues and personal reflections on life’s challenges.
+  /api/v1/search/p/<project_id>/summary:
+    get:
+      tags:
+      - Summary API
+      summary: Fetch summary from a Talkwalker project
+      description: Fetch the AI summary of the first 1000 matching results (sorted by engagement) from a Talkwalker project.
+        No results are returned.
+      parameters:
+      - description: The query to search for.
+        example: cats AND dogs
+        in: query
+        name: q
+        schema:
+          type: string
+      - description: 'Timezone for the time_range (e.g. Europe/Luxembourg).
+
+          Allowed values are timezone names.
+
+          Default value: UTC'
+        example: CET
+        in: query
+        name: timezone
+        schema:
+          type: string
+      - description: 'Time range filter.
+
+          Format `number` + a time unit character (e.g. `30d` for 30 days.).'
+        example: 30d
+        in: query
+        name: time_range
+        schema:
+          type: string
+      - description: One or more topics that are defined in the Talkwalker project
+        in: query
+        name: topic
+        schema:
+          type: string
+      - description: One or more filters that are defined in the Talkwalker project.
+        in: query
+        name: filter
+        schema:
+          type: string
+      - description: One or more channels that are defined in the Talkwalker project.
+        in: query
+        name: channel
+        schema:
+          type: string
+      - description: One or more source panels that are defined in the Talkwalker project.
+        in: query
+        name: panel
+        schema:
+          type: string
+      - description: One or more datasets ID that are defined in the Talkwalker Customer Intelligence project
+        in: query
+        name: dataset
+        schema:
+          type: string
+      - example: a1ab1abc-a123-123a-123a-abcd12ab1a12
+        in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status_code: '0'
+                status_message: OK
+                request: GET /api/v1/search/p/a1ab1abc-a123-123a-123a-abcd12ab1a12/summary?q=cats%20AND%20dogs&access_token=abcd_1234_abcd
+                request_id: '#rxl5is2tsjc1#'
+                summary:
+                  summary: The collection of online documents reveals a strong interest in pets, particularly cats and dogs,
+                    with discussions around their behavior, care, and emotional connection with humans. Animal welfare and
+                    rescue efforts are prominent themes, highlighted by news releases about organizations reuniting lost pets
+                    and investigations into animal neglect. Social media trends, including viral memes and puzzle toys for
+                    pets, demonstrate engagement with animal-related content. Furthermore, there’s a notable interest in broader
+                    geopolitical issues and personal reflections on life’s challenges.
+components:
+  securitySchemes:
+    apikeyAuth:
+      in: query
+      name: access_token
+      type: apiKey

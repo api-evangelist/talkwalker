@@ -1,0 +1,82 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/_original/talkwalker-openapi.yaml
+docs: https://developer.talkwalker.com/docs/
+note: >-
+  Derived from the Talkwalker-published OpenAPI plus the developer docs. Talkwalker publishes no
+  compliance program page, no trust center and no certification list that could be verified — see
+  security/ — so NO `type: Compliance` pointer is wired from this file.
+standards:
+  - id: openapi-3.0
+    conforms: true
+    evidence: >-
+      Talkwalker publishes an OpenAPI 3.0.0 document at
+      https://developer.talkwalker.com/talkwalker-api.yaml (42 paths, 50 operations), linked from the
+      "Specification:" footer of https://developer.talkwalker.com/api/endpoints.
+  - id: openapi-3.1
+    conforms: false
+    evidence: info declares openapi 3.0.0.
+  - id: oauth2
+    conforms: false
+    evidence: >-
+      No oauth2 securityScheme. The single scheme is an apiKey carried in the query string
+      (name access_token).
+  - id: oidc
+    conforms: false
+    evidence: /.well-known/openid-configuration returns 404 on every host.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Errors use a vendor envelope (status_code / status_message / request / request_id) served as
+      application/json, not application/problem+json.
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: /.well-known/security.txt returns 404 on www, developer and api hosts.
+  - id: rfc8594-sunset-header
+    conforms: false
+    evidence: No Sunset or Deprecation header is documented; no deprecation policy is published.
+  - id: rfc8615-well-known
+    conforms: false
+    evidence: No /.well-known/ document is served on any host. See well-known/talkwalker-well-known.yml.
+  - id: idempotency-key
+    conforms: false
+    evidence: >-
+      No Idempotency-Key header or parameter in the docs or in any of the 50 published operations.
+      Only HTTP-verb idempotency on PUT stream/collector replace.
+  - id: rate-limit-headers
+    conforms: false
+    evidence: >-
+      No X-RateLimit-*, RateLimit-* or Retry-After response headers are published. Per-endpoint call
+      limit exhaustion returns HTTP 401 with body status_code "8" rather than 429.
+  - id: json-api
+    conforms: false
+    evidence: Responses are a flat vendor envelope, not a JSON:API document.
+  - id: asyncapi
+    conforms: false
+    evidence: >-
+      Real-time delivery is a client-pulled chunked-JSON HTTP stream, not a broker surface, and no
+      AsyncAPI document is published.
+  - id: mcp
+    conforms: false
+    evidence: >-
+      No first-party MCP server. Third-party wrappers exist (viaSocket, Zapier) but are not published
+      by Talkwalker.
+  - id: a2a
+    conforms: false
+    evidence: /.well-known/agent-card.json and /.well-known/agent.json return 404 on every host.
+  - id: llms-txt
+    conforms: false
+    evidence: >-
+      https://www.talkwalker.com/llms.txt returns HTTP 200 carrying the 18-byte placeholder string
+      "No llmsTxt content" — a served path, not a served document.
+  - id: https-required
+    conforms: true
+    evidence: >-
+      Error code 27 ("Connection is not secure, must use HTTPS") is documented; all hosts negotiate
+      TLSv1.3 (security/talkwalker-domain-security.yml).
+  - id: dmarc-enforced
+    conforms: true
+    evidence: talkwalker.com publishes SPF and DMARC with policy=reject (probed).
+  - id: dnssec
+    conforms: false
+    evidence: talkwalker.com is not DNSSEC-signed (probed).

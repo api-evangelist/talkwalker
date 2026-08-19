@@ -1,0 +1,667 @@
+# Refined from the Talkwalker-published OpenAPI at
+# https://developer.talkwalker.com/talkwalker-api.yaml (harvested 2026-08-13)
+# Split by tag group; operations carried verbatim. Verbatim source: openapi/_original/talkwalker-openapi.yaml
+openapi: 3.0.0
+info:
+  title: Talkwalker Histogram API
+  description: Talkwalker Advanced API
+  version: 0.0.1
+  contact:
+    email: client-api@talkwalker.com
+    name: Client-API
+externalDocs:
+  description: Find more info here or there
+  url: https://apidocs.talkwalker.com/
+servers:
+- description: Production environment server
+  url: https://api.talkwalker.com
+security:
+- apikeyAuth: []
+tags:
+- name: Search API > Histogram API
+paths:
+  /api/v1/search/histogram/{type}:
+    get:
+      description: Retrieve the distribution of the number of search results for a given search query. Histograms can be made
+        for distribution over time or over specific metrics.
+      parameters:
+      - description: The query to search for.
+        example: cats AND dogs
+        in: query
+        name: q
+        required: true
+        schema:
+          type: string
+      - description: Minimum value for bins
+        in: query
+        name: min
+        schema:
+          type: string
+      - description: Maximum value for bins
+        in: query
+        name: max
+        schema:
+          type: string
+      - description: 'Include min value.
+
+          Allowed values: true or false.
+
+          Default value: true.'
+        in: query
+        name: min_include
+        schema:
+          type: string
+      - description: 'Include max value.
+
+          Allowed values: true or false.
+
+          Default value: false.'
+        in: query
+        name: max_include
+        schema:
+          type: string
+      - description: "Bin Interval. \nDuration for published and search_indexed / Integer for histogram / not used for distribution."
+        in: query
+        name: interval
+        schema:
+          type: string
+      - description: 'Timezone for the duration interval (e.g. Europe/Luxembourg).
+
+          Allowed values are timezone names.
+
+          Default value: UTC'
+        example: UTC
+        in: query
+        name: timezone
+        schema:
+          type: string
+      - description: 'Nested histogram.
+
+          Allowed values: sentiment, sourcetype, country.'
+        example: sentiment
+        in: query
+        name: breakdown
+        schema:
+          type: string
+      - description: Nested metric for time based histograms.
+        example: engagement
+        in: query
+        name: value_type
+        schema:
+          type: string
+      - description: Size limiter for demographic distribution.
+        example: '10'
+        in: query
+        name: top_n
+        schema:
+          type: integer
+      - example: published
+        in: path
+        name: type
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                request: GET /api/v1/search/histogram/published?q=cats%20AND%20dogs&timezone=UTC&breakdown=sentiment&value_type=engagement&access_token=abcd_1234_abcd
+                request_id: '#r8vmw3mva1r1#'
+                result_histogram:
+                  data:
+                  - t: 1646870400000
+                    v:
+                    - 1160
+                    - 2696
+                    - 513
+                    val:
+                    - avg: 0.631896551724138
+                      count: 1160
+                      max: 461
+                      min: 0
+                      sum: 733
+                    - avg: 59.75445103857567
+                      count: 2696
+                      max: 142597
+                      min: 0
+                      sum: 161098
+                    - avg: 2.539961013645224
+                      count: 513
+                      max: 585
+                      min: 0
+                      sum: 1303
+                  - t: 1646956800000
+                    v:
+                    - 821
+                    - 1941
+                    - 313
+                    val:
+                    - avg: 11.053593179049939
+                      count: 821
+                      max: 4062
+                      min: 0
+                      sum: 9075
+                    - avg: 26.512107161257084
+                      count: 1941
+                      max: 39225
+                      min: 0
+                      sum: 51460
+                    - avg: 2.1246006389776357
+                      count: 313
+                      max: 295
+                      min: 0
+                      sum: 665
+                  - t: 1647043200000
+                    v:
+                    - 655
+                    - 1609
+                    - 395
+                    val:
+                    - avg: 15.105343511450382
+                      count: 655
+                      max: 9523
+                      min: 0
+                      sum: 9894
+                    - avg: 3.7408328154133
+                      count: 1609
+                      max: 1399
+                      min: 0
+                      sum: 6019
+                    - avg: 26.2
+                      count: 395
+                      max: 8939
+                      min: 0
+                      sum: 10349
+                  - t: 1647129600000
+                    v:
+                    - 778
+                    - 1875
+                    - 565
+                    val:
+                    - avg: 0.8637532133676092
+                      count: 778
+                      max: 426
+                      min: 0
+                      sum: 672
+                    - avg: 20.535466666666668
+                      count: 1875
+                      max: 30834
+                      min: 0
+                      sum: 38504
+                    - avg: 0.9168141592920354
+                      count: 565
+                      max: 284
+                      min: 0
+                      sum: 518
+                  - t: 1647216000000
+                    v:
+                    - 965
+                    - 2319
+                    - 349
+                    val:
+                    - avg: 1.5430051813471504
+                      count: 965
+                      max: 461
+                      min: 0
+                      sum: 1489
+                    - avg: 4.047003018542475
+                      count: 2319
+                      max: 2625
+                      min: 0
+                      sum: 9385
+                    - avg: 0.498567335243553
+                      count: 349
+                      max: 55
+                      min: 0
+                      sum: 174
+                  - t: 1647302400000
+                    v:
+                    - 897
+                    - 2319
+                    - 451
+                    val:
+                    - avg: 24.37346711259755
+                      count: 897
+                      max: 20753
+                      min: 0
+                      sum: 21863
+                    - avg: 14.813712807244501
+                      count: 2319
+                      max: 24738
+                      min: 0
+                      sum: 34353
+                    - avg: 7.06430155210643
+                      count: 451
+                      max: 2800
+                      min: 0
+                      sum: 3186
+                  - t: 1647388800000
+                    v:
+                    - 803
+                    - 2145
+                    - 362
+                    val:
+                    - avg: 0.5180572851805728
+                      count: 803
+                      max: 203
+                      min: 0
+                      sum: 416
+                    - avg: 2.4326340326340326
+                      count: 2145
+                      max: 2051
+                      min: 0
+                      sum: 5218
+                    - avg: 1.0828729281767955
+                      count: 362
+                      max: 97
+                      min: 0
+                      sum: 392
+                  - t: 1647475200000
+                    v:
+                    - 140
+                    - 360
+                    - 71
+                    val:
+                    - avg: 0.21428571428571427
+                      count: 140
+                      max: 5
+                      min: 0
+                      sum: 30
+                    - avg: 0.2111111111111111
+                      count: 360
+                      max: 9
+                      min: 0
+                      sum: 76
+                    - avg: 0.056338028169014086
+                      count: 71
+                      max: 3
+                      min: 0
+                      sum: 4
+                  header:
+                    v:
+                    - POSITIVE
+                    - NEUTRAL
+                    - NEGATIVE
+                status_code: '0'
+                status_message: OK
+              schema:
+                type: object
+          description: OK
+      summary: Histogram from global index
+      tags:
+      - Search API > Histogram API
+  /api/v1/search/p/{project_id}/histogram/{type}:
+    get:
+      description: Retrieve the distribution of the number of search results for a given search query. Histograms can be made
+        for distribution over time or over specific metrics.
+      parameters:
+      - description: The query to search for.
+        example: cats AND dogs
+        in: query
+        name: q
+        schema:
+          type: string
+      - description: Minimum value for bins
+        in: query
+        name: min
+        schema:
+          type: string
+      - description: Maximum value for bins
+        in: query
+        name: max
+        schema:
+          type: string
+      - description: 'Include min value.
+
+          Allowed values: true or false.
+
+          Default value: true.'
+        in: query
+        name: min_include
+        schema:
+          type: string
+      - description: 'Include max value.
+
+          Allowed values: true or false.
+
+          Default value: false.'
+        in: query
+        name: max_include
+        schema:
+          type: string
+      - description: "Bin Interval. \nDuration for published and search_indexed / Integer for histogram / not used for distribution."
+        in: query
+        name: interval
+        schema:
+          type: string
+      - description: 'Timezone for the duration interval (e.g. Europe/Luxembourg).
+
+          Allowed values are timezone names.
+
+          Default value: UTC'
+        example: UTC
+        in: query
+        name: timezone
+        schema:
+          type: string
+      - description: 'Nested histogram.
+
+          Allowed values: sentiment, sourcetype, country, topic, channel.'
+        example: sentiment
+        in: query
+        name: breakdown
+        schema:
+          type: string
+      - description: Nested metric for time based histograms.
+        example: engagement
+        in: query
+        name: value_type
+        schema:
+          type: string
+      - description: Size limiter for demographic distribution.
+        example: '10'
+        in: query
+        name: top_n
+        schema:
+          type: integer
+      - description: 'Time series forecast in days for enabled projects.
+
+          Available for histogram types `published` and `search_indexed`
+
+          Value: [1, 90]'
+        example: '14'
+        in: query
+        name: forecast_days
+        schema:
+          type: integer
+      - example: a1ab1abc-a123-123a-123a-abcd12ab1a12
+        in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+      - example: published
+        in: path
+        name: type
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                request: GET /api/v1/search/p/a1ab1abc-a123-123a-123a-abcd12ab1a12/histogram/published?q=cats%20AND%20dogs&timezone=UTC&breakdown=sentiment&value_type=engagement&top_n=10&access_token=abcd_1234_abcd
+                request_id: '#r8vmxsvivoqa#'
+                result_histogram:
+                  data:
+                  - t: 1646870400000
+                    v:
+                    - 0
+                    - 11
+                    - 0
+                    val:
+                    - count: 0
+                      sum: 0
+                    - avg: 0
+                      count: 11
+                      max: 0
+                      min: 0
+                      sum: 0
+                    - count: 0
+                      sum: 0
+                  - t: 1646956800000
+                    v:
+                    - 0
+                    - 5
+                    - 0
+                    val:
+                    - count: 0
+                      sum: 0
+                    - avg: 0
+                      count: 5
+                      max: 0
+                      min: 0
+                      sum: 0
+                    - count: 0
+                      sum: 0
+                  - t: 1647043200000
+                    v:
+                    - 0
+                    - 6
+                    - 0
+                    val:
+                    - count: 0
+                      sum: 0
+                    - avg: 0
+                      count: 6
+                      max: 0
+                      min: 0
+                      sum: 0
+                    - count: 0
+                      sum: 0
+                  - t: 1647129600000
+                    v:
+                    - 0
+                    - 9
+                    - 0
+                    val:
+                    - count: 0
+                      sum: 0
+                    - avg: 0
+                      count: 9
+                      max: 0
+                      min: 0
+                      sum: 0
+                    - count: 0
+                      sum: 0
+                  - t: 1647216000000
+                    v:
+                    - 1
+                    - 3
+                    - 0
+                    val:
+                    - avg: 0
+                      count: 1
+                      max: 0
+                      min: 0
+                      sum: 0
+                    - avg: 0
+                      count: 3
+                      max: 0
+                      min: 0
+                      sum: 0
+                    - count: 0
+                      sum: 0
+                  - t: 1647302400000
+                    v:
+                    - 0
+                    - 2
+                    - 0
+                    val:
+                    - count: 0
+                      sum: 0
+                    - avg: 0
+                      count: 2
+                      max: 0
+                      min: 0
+                      sum: 0
+                    - count: 0
+                      sum: 0
+                  - t: 1647388800000
+                    v:
+                    - 0
+                    - 4
+                    - 0
+                    val:
+                    - count: 0
+                      sum: 0
+                    - avg: 0
+                      count: 4
+                      max: 0
+                      min: 0
+                      sum: 0
+                    - count: 0
+                      sum: 0
+                  - t: 1647475200000
+                    v:
+                    - 0
+                    - 1
+                    - 0
+                    val:
+                    - count: 0
+                      sum: 0
+                    - avg: 0
+                      count: 1
+                      max: 0
+                      min: 0
+                      sum: 0
+                    - count: 0
+                      sum: 0
+                  header:
+                    v:
+                    - POSITIVE
+                    - NEUTRAL
+                    - NEGATIVE
+                status_code: '0'
+                status_message: OK
+              schema:
+                type: object
+          description: OK
+      summary: Histogram from a talkwalker project
+      tags:
+      - Search API > Histogram API
+  /api/v1/search/p/{project_id}/histogram/top_influencers:
+    get:
+      tags:
+      - Search API > Histogram API
+      summary: Histogram Top influencers from a talkwalker project
+      parameters:
+      - name: influencer_type
+        in: query
+        schema:
+          type: string
+        description: 'Get the results for authors or sources.
+
+          Allowed values: author or source.
+
+          Default value is author.'
+        example: author
+      - name: sort_criteria
+        in: query
+        schema:
+          type: string
+        description: 'Sort the results (always descending) by a criteria.
+
+          Allowed values : total, positive, negative, neutral, reach, engagement, engagement_per_mention, reach_per_mention.
+
+          Default value : total'
+        example: total
+      - name: q
+        in: query
+        schema:
+          type: string
+        description: The query to search for.
+        example: cat AND dogs
+      - name: top_n
+        in: query
+        schema:
+          type: integer
+        description: 'Size limiter for demographic distribution.
+
+          Allowed values : between 1 and 100.
+
+          Default value : 10.'
+        example: '10'
+      - name: topic
+        in: query
+        schema:
+          type: string
+        description: One or more topics that are defined in the Talkwalker project
+      - name: filter
+        in: query
+        schema:
+          type: string
+        description: One or more filters that are defined in the Talkwalker project
+      - name: channel
+        in: query
+        schema:
+          type: string
+        description: One or more channels that are defined in the Talkwalker project
+      - name: panel
+        in: query
+        schema:
+          type: string
+        description: One or more source panels that are defined in the Talkwalker project
+      - name: dataset
+        in: query
+        schema:
+          type: string
+        description: One or more datasets that are defined in the Talkwalker Customer Intelligence project
+      - name: project_id
+        in: path
+        schema:
+          type: string
+        required: true
+        example: '{{project_id}}'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status_code: '0'
+                status_message: OK
+                request: GET /api/v1/search/p/a1ab1abc-a123-123a-123a-abcd12ab1a12/histogram/top_influencers?influencer_type=author&sort_criteria=total&q=cat%20AND%20dogs&top_n=10&access_token=abcd_1234_abcd
+                request_id: '#rkm7q5m7xypt#'
+                result_top_influencers:
+                  influencers:
+                  - matched_topics:
+                    - topic_id: kpnutesu_1234
+                      posts_amount: 0
+                    - topic_id: kpnzh6u5_1234
+                      posts_amount: 880
+                    details:
+                      name: Yantocool (domzale.info)
+                      url: https://domzale.info/product/4000191110230/womens-office-clothes-dresses-front-office-dresses-womens-office-clothes-two-piece-dresses-long-sleeves-autumn-and-winter
+                      id: ex:domzale.info-137038294
+                    network: ONLINENEWS_OTHER
+                    posts: 880
+                    sentiment:
+                      positive: 226
+                      negative: 0
+                      neutral: 654
+                    reach: 0
+                    reach_per_mention: 0
+                    engagement: 1
+                    engagement_per_mention: 0.0001704448610874382
+                  - matched_topics:
+                    - topic_id: kpnutesu_1234
+                      posts_amount: 0
+                    - topic_id: lib-kpnzh6u5_1234
+                      posts_amount: 193
+                    details:
+                      name: Yantocool (ebuzznew.com)
+                      url: https://ebuzznew.com/detail/32949642512/girls-boys-canvas-cotton-ballet-shoes-kids-adult-ballet-flat-slippers-children-soft-sole-dance-practice-shoes
+                      id: ex:ebuzznew.com-137038294
+                    network: BLOG_OTHER
+                    posts: 193
+                    sentiment:
+                      positive: 94
+                      negative: 0
+                      neutral: 99
+                    reach: 0
+                    reach_per_mention: 0
+                    engagement: 0
+                    engagement_per_mention: 0
+                  influencer_type: AUTHOR
+                  sort_criteria: TOTAL
+components:
+  securitySchemes:
+    apikeyAuth:
+      in: query
+      name: access_token
+      type: apiKey

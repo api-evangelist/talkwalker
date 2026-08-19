@@ -1,0 +1,69 @@
+generated: '2026-08-13'
+method: searched
+source: https://developer.talkwalker.com/docs/
+versioning:
+  scheme: uri-path
+  current: v3
+  versions_live: [v1, v2, v3]
+  docs: https://developer.talkwalker.com/api/
+  detail: >-
+    Three major versions are served concurrently from https://api.talkwalker.com and each carries a
+    DIFFERENT product surface rather than a newer edition of the same one: /api/v1 (search, summary,
+    histogram, status/credits), /api/v2 (document modification, resources, topics, source panels,
+    custom metrics, image detection), /api/v3 (streaming, collectors, export tasks). The published
+    OpenAPI declares info.version "0.0.1", which does not track the path versions.
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  deprecated_operations: []
+  detail: >-
+    No deprecation or sunset policy is published anywhere on developer.talkwalker.com. No operation in
+    the published OpenAPI carries `deprecated: true`, and no RFC 8594 Sunset or Deprecation response
+    header is documented. No `type: Deprecation` pointer is wired — there is no policy page to point at.
+sla:
+  url: null
+  uptime_target: null
+  detail: >-
+    No public SLA or uptime commitment was found. talkwalker.com/sla returns 404. Commercial terms
+    sit behind the sales process (see plans/talkwalker-plans-pricing.yml).
+status_page:
+  url: https://status.talkwalker.com/
+  platform: Atlassian Statuspage
+  operator: Hootsuite Inc.
+  probed: '2026-08-13'
+  http_status: 200
+  components_observed:
+    - Lumen by Talkwalker
+    - Talkwalker Web Application
+  detail: >-
+    status.talkwalker.com is a real Atlassian Statuspage, titled "Hootsuite Inc. Status" and carrying
+    Talkwalker-named components. Talkwalker was acquired by Hootsuite, so the parent brand on the
+    status page is expected, not a mismatch — the page is served from Talkwalker's own subdomain and
+    names Talkwalker components explicitly. Email and SMS incident subscriptions are offered.
+  note: >-
+    The standard Statuspage JSON endpoints (/api/v2/status.json, /history.rss) did NOT return machine
+    -readable documents on this deployment — both returned the same 109,892-byte HTML page as the
+    root, so an agent cannot poll status programmatically.
+changelog:
+  url: null
+  published: false
+  detail: >-
+    No dated changelog or release-notes page exists on developer.talkwalker.com
+    (/changelog and /docs/changelog both 404) or on apidocs.talkwalker.com. There is no way to learn
+    what changed in the API. No ChangeLog pointer is wired.
+rebrand:
+  note: >-
+    Talkwalker is being rebranded to "Lumen by Talkwalker" as Hootsuite and Talkwalker converge
+    ("Same data, same reports, same workflows and integrations"). The developer portal, the API host
+    and the published OpenAPI all still carry the Talkwalker name and talkwalker.com domains as of
+    2026-08-13.
+  source: https://www.talkwalker.com/
+evidence:
+  - url: https://status.talkwalker.com/
+    status: 200
+  - url: https://developer.talkwalker.com/changelog
+    status: 404
+  - url: https://www.talkwalker.com/sla
+    status: 404

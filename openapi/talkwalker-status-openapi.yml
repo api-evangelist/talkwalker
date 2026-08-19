@@ -1,0 +1,56 @@
+# Refined from the Talkwalker-published OpenAPI at
+# https://developer.talkwalker.com/talkwalker-api.yaml (harvested 2026-08-13)
+# Split by tag group; operations carried verbatim. Verbatim source: openapi/_original/talkwalker-openapi.yaml
+openapi: 3.0.0
+info:
+  title: Talkwalker Status API
+  description: Talkwalker Advanced API
+  version: 0.0.1
+  contact:
+    email: client-api@talkwalker.com
+    name: Client-API
+externalDocs:
+  description: Find more info here or there
+  url: https://apidocs.talkwalker.com/
+servers:
+- description: Production environment server
+  url: https://api.talkwalker.com
+security:
+- apikeyAuth: []
+tags:
+- name: Status API
+paths:
+  /api/v1/status/credits:
+    get:
+      description: Remaining Credits Endpoint
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                request: GET /api/v1/status/credits?access_token=abcd-1234-abcd
+                request_id: '#r8ugx4n31ny1#'
+                result_creditinfo:
+                  estimate_credits_used_until_end_of_billing_period: 1611
+                  monthly_total: 30000
+                  next_billing_period: 1647817200000
+                  remaining_allowance_processing: 0
+                  remaining_credits_monthly: 21388
+                  remaining_credits_onetime: 100000
+                  used_credits_monthly: 8612
+                  used_credits_onetime: 0
+                  used_credits_processing: 33
+                status_code: '0'
+                status_message: OK
+              schema:
+                type: object
+          description: OK
+      summary: Status credits
+      tags:
+      - Status API
+components:
+  securitySchemes:
+    apikeyAuth:
+      in: query
+      name: access_token
+      type: apiKey

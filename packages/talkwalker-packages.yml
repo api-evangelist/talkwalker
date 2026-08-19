@@ -1,0 +1,51 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  registry.npmjs.org, pypi.org, rubygems.org, crates.io, api.github.com/orgs/talkwalker/repos,
+  https://developer.talkwalker.com/docs/
+package_count: 0
+official_package_count: 0
+packages: []
+note: >-
+  Talkwalker publishes NO first-party client library in any package registry, and the developer
+  portal documents none — every example in the docs is a raw curl call against
+  https://api.talkwalker.com with access_token in the query string. There is therefore no `type: SDKs`
+  pointer in apis.yml; an SDK pointer here would credit Talkwalker with client tooling it does not
+  ship. This is a recorded absence, not an unchecked gap.
+registries_probed:
+  - registry: npm
+    endpoint: https://registry.npmjs.org/-/v1/search?text=talkwalker&size=50
+    status: 200
+    official_hits: 0
+    note: >-
+      One unrelated third-party result, `alerts-dumper` (version 0.5.0, published 2017-02-12, by
+      npm user `odynvolk`) — a personal utility that reads Talkwalker and Google alerts. Not
+      first-party; not recorded as a package.
+  - registry: pypi
+    endpoint: https://pypi.org/pypi/talkwalker/json
+    status: 404
+    official_hits: 0
+  - registry: rubygems
+    endpoint: https://rubygems.org/api/v1/search.json?query=talkwalker
+    status: 200
+    official_hits: 0
+    note: Empty result set.
+  - registry: crates.io
+    endpoint: https://crates.io/api/v1/crates?q=talkwalker
+    status: 200
+    official_hits: 0
+    note: Empty result set (total 0).
+  - registry: github
+    endpoint: https://api.github.com/orgs/talkwalker/repos?per_page=100
+    status: 200
+    official_hits: 0
+    note: >-
+      The github.com/talkwalker organization exists but publishes ZERO public repositories, so there
+      is no source-code distribution channel either.
+third_party:
+  - name: dlt (dlthub) Talkwalker source
+    url: https://dlthub.com/context/source/talkwalker
+    official: false
+    note: >-
+      Community Python data-pipeline source that wraps the REST API. Not published or endorsed by
+      Talkwalker; recorded for context only.

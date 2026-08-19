@@ -1,0 +1,49 @@
+generated: '2026-08-13'
+method: generated
+source: >-
+  openapi/_original/talkwalker-openapi.yaml (Talkwalker-published, harvested from
+  https://developer.talkwalker.com/talkwalker-api.yaml) + https://developer.talkwalker.com/docs/
+note: >-
+  Every step in every skill is grounded in an operation that exists verbatim in Talkwalker's own
+  published OpenAPI. The spec ships NO operationId on any of its 50 operations, so operations are
+  identified by METHOD + PATH; overlays/talkwalker-*-overlay.yaml adds deterministic operationIds
+  without mutating the harvested spec.
+skills:
+  - file: talkwalker-export-project-mentions.md
+    name: Export brand mentions from a Talkwalker project
+    api: openapi/talkwalker-search-openapi.yml
+    operations:
+      - GET /api/v1/search/info
+      - GET /api/v1/search/p/{project_id}/results
+      - GET /api/v1/status/credits
+  - file: talkwalker-stream-and-resume.md
+    name: Monitor mentions in real time with a resumable Talkwalker collector
+    api: openapi/talkwalker-streaming-openapi.yml
+    operations:
+      - GET /api/v3/stream/info
+      - PUT /api/v3/stream/s/{stream_id}
+      - PUT /api/v3/stream/c/{collector_id}
+      - GET /api/v3/stream/c/{collector_id}/results
+      - POST /api/v3/stream/c/{collector_id}/pause
+      - POST /api/v3/stream/c/{collector_id}/resume
+      - DELETE /api/v3/stream/s/{stream_id}
+  - file: talkwalker-import-documents.md
+    name: Import your own documents and custom metrics into a Talkwalker project
+    api: openapi/talkwalker-documents-openapi.yml
+    operations:
+      - GET /api/v1/search/info
+      - POST /api/v2/talkwalker/p/{project_id}/custom_metrics/add
+      - POST /api/v2/docs/p/{project_id}
+      - POST /api/v2/docs/p/{project_id}/{action}
+      - POST /api/v2/docs/p/{project_id}/d/{dataset_id}
+      - POST /api/v2/talkwalker/p/{project_id}/topics/import
+  - file: talkwalker-reproduce-dashboard-widgets.md
+    name: Reproduce Talkwalker dashboard widgets with the Histogram API
+    api: openapi/talkwalker-histogram-openapi.yml
+    operations:
+      - GET /api/v1/search/info
+      - GET /api/v1/search/p/{project_id}/histogram/{type}
+      - GET /api/v1/search/p/{project_id}/histogram/top_influencers
+      - GET /api/v1/search/histogram/{type}
+      - GET /api/v1/search/summary
+      - GET /api/v1/status/credits

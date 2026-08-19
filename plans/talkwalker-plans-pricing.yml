@@ -1,50 +1,106 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.talkwalker.com/pricing
 name: Talkwalker Plans and Pricing
-description: Talkwalker offers three subscription tiers for social media listening and analytics. All plans include unlimited users and require a custom quote — no public per-seat pricing is listed.
+description: >-
+  Talkwalker (now marketed as "Lumen by Talkwalker") publishes three subscription tiers for social
+  listening and analytics. NO price is published for any tier — every tier ends in "get a custom
+  quote" behind a demo-request form. All plans include unlimited users.
 url: https://www.talkwalker.com/pricing
+plan_count: 3
+priced_plan_count: 0
+currency: null
+billing_period: annual subscription
+pricing_model: quote-only
+self_service_signup: false
+free_tier: false
+trial: false
+note: >-
+  plan_count is 3 because Talkwalker names three tiers with differentiated entitlements; priced_plan_count
+  is 0 because none of them carries a number. The page headline is literally "Pick your plan to get a
+  custom quote". Volume differences are expressed only as multipliers relative to the base tier
+  (2x, 6x), never as absolute quotas, so a buyer cannot size a plan without talking to sales.
+api_metering:
+  note: >-
+    API access is metered SEPARATELY from the subscription tiers, in credits, and the credit
+    allowance is not stated on the pricing page. See rate-limits/talkwalker-rate-limits.yml and
+    https://developer.talkwalker.com/docs/getting-started/credits-pricing. API access tokens are
+    issued on request by Talkwalker; there is no self-service API signup.
 plans:
   - name: Core
-    description: Foundational real-time brand, audience, and market understanding with social listening and media monitoring.
+    description: >-
+      Real-time, always-on understanding of brand, audience and market with the Lumen by Talkwalker
+      intelligence engine.
+    price: null
+    currency: null
+    billing: annual subscription
+    pricing: Custom quote required
+    included_quota: >-
+      "Ideal volume for essential social listening with non-sampled results" — no absolute figure
+      published.
+    overage: not published
     features:
-      - Social listening and media monitoring
+      - Industry-leading social listening and media monitoring
       - Topic and channel analytics
       - Custom dashboards, reports, and alerts
-      - TalkwalkerAI with peak detection and forecasting
-      - AI Agent for instant insights
-      - LLM Insights monitoring
-      - Pre-built IQ Apps dashboards
-      - Non-sampled results (standard volume)
+      - 'Wisdom: peak detection, forecasting, and AI summaries'
+      - 'AI Agent: ask questions and instantly surface insights from your data'
+      - 'LLM Insights: monitor how AI assistants talk about your brand and industry'
+      - 'IQ Apps: pre-built use case dashboards'
       - Unlimited users
-      - Professional onboarding
-      - Training and regional customer support
-      - Strategy reviews with experts
-    pricing: Custom quote required
-    billing: Annual subscription
-
   - name: Analyze
-    description: Expanded intelligence for tracking multiple brands and markets, doubling the data volume of Core.
+    popular: true
+    description: >-
+      Track more brands, campaigns and markets for deeper insight into conversations, performance,
+      competitors and trends.
+    price: null
+    currency: null
+    billing: annual subscription
+    pricing: Custom quote required
+    included_quota: 2x the non-sampled results volume of Core; 25 additional topics, filters and channels.
+    overage: not published
     features:
-      - All Core features
+      - Everything in Core
       - 2x non-sampled results volume
       - 25 additional topics, filters, and channels
-      - Multi-brand and multi-audience tracking
-    pricing: Custom quote required
-    billing: Annual subscription
-    popular: true
-
+      - Multi-brand, multi-market and multi-audience tracking
   - name: Business
-    description: Enterprise-grade deployment with maximum data volume, historical depth, and governance controls.
+    description: >-
+      The most comprehensive data coverage and advanced capabilities, for insights across an entire
+      organization.
+    price: null
+    currency: null
+    billing: annual subscription
+    pricing: Custom quote required
+    included_quota: >-
+      6x the non-sampled results volume of Core; 3x more topics, filters and channels; additional
+      historical data.
+    overage: not published
     features:
-      - All Analyze features
+      - Everything in Analyze
       - 6x non-sampled results volume
       - 3x more topics, filters, and channels
-      - Extended historical data access
-      - Additional AI agent questions
-      - Additional LLM Insights channels
-      - More workspaces and enterprise governance features
-    pricing: Custom quote required
-    billing: Annual subscription
-
+      - Additional historical data
+      - Additional AI agent questions and LLM Insights channels
+      - More workspaces, enterprise features and governance to scale across regions and departments
+included_with_every_plan:
+  - Unlimited users
+  - Professional onboarding
+  - Best practice articles, guides, and tutorials
+  - Continuous online training courses led by experts
+  - Comprehensive customer support in your region
+  - Regular strategy reviews with Talkwalker experts
+platform_claims:
+  - 150 million data sources
+  - 30+ social platforms
+  - 187 languages
+  - 196 countries
+  - 30% more relevant data
+platform_claims_note: >-
+  Vendor marketing claims from the pricing page, recorded as claims — not independently verified.
 notes:
-  - Pricing is not publicly listed; all plans require contacting Talkwalker for a quote.
-  - Third-party sources estimate entry-level annual costs starting around USD 9,000 per year.
-  - Talkwalker was acquired by Hootsuite; some plans may be bundled with Hootsuite offerings.
+  - Pricing is not publicly listed; every tier routes to a demo-request form for a quote.
+  - Talkwalker was acquired by Hootsuite and the product is being rebranded "Lumen by Talkwalker".
+evidence:
+  - url: https://www.talkwalker.com/pricing
+    status: 200

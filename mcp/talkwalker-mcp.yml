@@ -1,0 +1,543 @@
+generated: '2026-08-13'
+method: derived
+status: candidate
+source: openapi/_original/talkwalker-openapi.yaml
+note: CANDIDATE ONLY. Talkwalker publishes no MCP server of any kind. This tool list is DERIVED one-to-one from
+  the 50 operations in Talkwalker's own published OpenAPI so that the agent surface Talkwalker could expose is legible;
+  nothing here is callable as MCP today. The published spec ships NO operationId on any of its 50 operations, so
+  each tool is bound to its backing operation by METHOD + PATH rather than by operationId.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: api-key
+  verified: derived
+  note: No first-party remote endpoint and no first-party stdio package. Third-party wrappers are marketed by viaSocket
+    (viasocket.com/mcp/talkwalker) and Zapier (zapier.com/mcp/talkwalker); neither is published by Talkwalker, so
+    neither is recorded as a Talkwalker deployment. Any real server would authenticate with the same access_token
+    query parameter the REST API uses.
+server: null
+tool_count: 50
+tools:
+- name: histogram_from_global_index
+  description: Histogram from global index
+  source_operation: openapi/talkwalker-histogram-openapi.yml#GET /api/v1/search/histogram/{type}
+  http: GET /api/v1/search/histogram/{type}
+  surface: Search API > Histogram API
+  write: false
+  input_parameters:
+  - q*
+  - min
+  - max
+  - min_include
+  - max_include
+  - interval
+  - timezone
+  - breakdown
+  - value_type
+  - top_n
+  - type*
+- name: list_of_allowed_projects
+  description: List of allowed projects
+  source_operation: openapi/talkwalker-search-openapi.yml#GET /api/v1/search/info
+  http: GET /api/v1/search/info
+  surface: Search API
+  write: false
+  input_parameters: null
+- name: histogram_from_a_talkwalker_project
+  description: Histogram from a talkwalker project
+  source_operation: openapi/talkwalker-histogram-openapi.yml#GET /api/v1/search/p/{project_id}/histogram/{type}
+  http: GET /api/v1/search/p/{project_id}/histogram/{type}
+  surface: Search API > Histogram API
+  write: false
+  input_parameters:
+  - q
+  - min
+  - max
+  - min_include
+  - max_include
+  - interval
+  - timezone
+  - breakdown
+  - value_type
+  - top_n
+  - forecast_days
+  - project_id*
+  - type*
+- name: histogram_top_influencers_from_a_talkwalker_project
+  description: Histogram Top influencers from a talkwalker project
+  source_operation: openapi/talkwalker-histogram-openapi.yml#GET /api/v1/search/p/{project_id}/histogram/top_influencers
+  http: GET /api/v1/search/p/{project_id}/histogram/top_influencers
+  surface: Search API > Histogram API
+  write: false
+  input_parameters:
+  - influencer_type
+  - sort_criteria
+  - q
+  - top_n
+  - topic
+  - filter
+  - channel
+  - panel
+  - dataset
+  - project_id*
+- name: retrieve_documents_from_a_talkwalker_project
+  description: Retrieve documents from a Talkwalker project
+  source_operation: openapi/talkwalker-search-openapi.yml#GET /api/v1/search/p/{project_id}/results
+  http: GET /api/v1/search/p/{project_id}/results
+  surface: Search API
+  write: false
+  input_parameters:
+  - q
+  - timezone
+  - time_range
+  - offset
+  - hpp
+  - sort_by
+  - sort_order
+  - hl
+  - pretty
+  - topic
+  - filter
+  - channel
+  - panel
+  - dataset
+  - project_id*
+  - summarize
+  - custom_focus
+- name: retrieve_documents_from_global_index
+  description: Retrieve documents from global index
+  source_operation: openapi/talkwalker-search-openapi.yml#GET /api/v1/search/results
+  http: GET /api/v1/search/results
+  surface: Search API
+  write: false
+  input_parameters:
+  - q*
+  - timezone
+  - time_range
+  - offset
+  - hpp
+  - sort_by
+  - sort_order
+  - hl
+  - pretty
+  - summarize
+  - custom_focus
+- name: status_credits
+  description: Status credits
+  source_operation: openapi/talkwalker-status-openapi.yml#GET /api/v1/status/credits
+  http: GET /api/v1/status/credits
+  surface: Status API
+  write: false
+  input_parameters: null
+- name: fetch_summary_from_global_index
+  description: Fetch summary from global index
+  source_operation: openapi/talkwalker-search-openapi.yml#GET /api/v1/search/summary
+  http: GET /api/v1/search/summary
+  surface: Summary API
+  write: false
+  input_parameters:
+  - q*
+  - custom_focus
+  - timezone
+  - time_range
+- name: fetch_summary_from_a_talkwalker_project
+  description: Fetch summary from a Talkwalker project
+  source_operation: openapi/talkwalker-search-openapi.yml#GET /api/v1/search/p/<project_id>/summary
+  http: GET /api/v1/search/p/<project_id>/summary
+  surface: Summary API
+  write: false
+  input_parameters:
+  - q
+  - timezone
+  - time_range
+  - topic
+  - filter
+  - channel
+  - panel
+  - dataset
+  - project_id*
+- name: process_an_image_by_url
+  description: Process an image by URL
+  source_operation: openapi/talkwalker-image-openapi.yml#GET /api/v2/detect/images/{model}
+  http: GET /api/v2/detect/images/{model}
+  surface: Image API
+  write: false
+  input_parameters:
+  - image_url*
+  - detect
+  - model*
+- name: process_an_image_by_file
+  description: Process an image by file
+  source_operation: openapi/talkwalker-image-openapi.yml#POST /api/v2/detect/images/{model}
+  http: POST /api/v2/detect/images/{model}
+  surface: Image API
+  write: true
+  input_parameters:
+  - model*
+- name: modify_a_batch_of_documents
+  description: Modify a batch of documents
+  source_operation: openapi/talkwalker-documents-openapi.yml#POST /api/v2/docs/p/{project_id}
+  http: POST /api/v2/docs/p/{project_id}
+  surface: Modify documents API
+  write: true
+  input_parameters:
+  - annotate
+  - return_entry
+  - proc_tokens_calc
+  - proc_lang_autodetect
+  - proc_content_ellipsis
+  - proc_lang_fallback
+  - proc_annotate_language
+  - proc_annotate_sentiment
+  - project_id*
+- name: modify_simple_document
+  description: Modify simple document
+  source_operation: openapi/talkwalker-documents-openapi.yml#POST /api/v2/docs/p/{project_id}/{action}
+  http: POST /api/v2/docs/p/{project_id}/{action}
+  surface: Modify documents API
+  write: true
+  input_parameters:
+  - annotate
+  - return_entry
+  - proc_tokens_calc
+  - proc_lang_autodetect
+  - proc_content_ellipsis
+  - proc_lang_fallback
+  - proc_annotate_language
+  - proc_annotate_sentiment
+  - project_id*
+  - action*
+- name: modify_simple_review
+  description: Modify simple review
+  source_operation: openapi/talkwalker-documents-openapi.yml#POST /api/v2/docs/p/{project_id}/d/{dataset_id}/{action}
+  http: POST /api/v2/docs/p/{project_id}/d/{dataset_id}/{action}
+  surface: Modify documents API
+  write: true
+  input_parameters:
+  - annotate
+  - return_entry
+  - proc_tokens_calc
+  - proc_lang_autodetect
+  - proc_content_ellipsis
+  - proc_lang_fallback
+  - proc_annotate_language
+  - proc_annotate_sentiment
+  - project_id*
+  - dataset_id*
+  - action*
+- name: modify_a_batch_of_reviews
+  description: Modify a batch of reviews
+  source_operation: openapi/talkwalker-documents-openapi.yml#POST /api/v2/docs/p/{project_id}/d/{dataset_id}
+  http: POST /api/v2/docs/p/{project_id}/d/{dataset_id}
+  surface: Modify documents API
+  write: true
+  input_parameters:
+  - annotate
+  - return_entry
+  - proc_tokens_calc
+  - proc_lang_autodetect
+  - proc_content_ellipsis
+  - proc_lang_fallback
+  - proc_annotate_language
+  - proc_annotate_sentiment
+  - project_id*
+  - dataset_id*
+- name: list_of_resources
+  description: List of resources
+  source_operation: openapi/talkwalker-resources-openapi.yml#GET /api/v2/talkwalker/p/{project_id}/resources
+  http: GET /api/v2/talkwalker/p/{project_id}/resources
+  surface: Resources API
+  write: false
+  input_parameters:
+  - type
+  - project_id*
+- name: create_a_new_panel
+  description: Create a new panel
+  source_operation: openapi/talkwalker-resources-openapi.yml#POST /api/v2/talkwalker/p/{project_id}/source_panels/add
+  http: POST /api/v2/talkwalker/p/{project_id}/source_panels/add
+  surface: Source panels API
+  write: true
+  input_parameters:
+  - project_id*
+- name: list_all_panels_with_their_members
+  description: List all panels with their members
+  source_operation: openapi/talkwalker-resources-openapi.yml#GET /api/v2/talkwalker/p/{project_id}/source_panels/list
+  http: GET /api/v2/talkwalker/p/{project_id}/source_panels/list
+  surface: Source panels API
+  write: false
+  input_parameters:
+  - project_id*
+- name: create_a_new_group_of_panels
+  description: Create a new group of panels
+  source_operation: openapi/talkwalker-resources-openapi.yml#POST /api/v2/talkwalker/p/{project_id}/source_panels/groups/add
+  http: POST /api/v2/talkwalker/p/{project_id}/source_panels/groups/add
+  surface: Source panels API
+  write: true
+  input_parameters:
+  - Content-Type
+  - project_id*
+- name: list_of_custom_tags
+  description: List of custom tags
+  source_operation: openapi/talkwalker-resources-openapi.yml#GET /api/v2/talkwalker/p/{project_id}/tags
+  http: GET /api/v2/talkwalker/p/{project_id}/tags
+  surface: Resources API
+  write: false
+  input_parameters:
+  - project_id*
+- name: list_of_views
+  description: List of views
+  source_operation: openapi/talkwalker-resources-openapi.yml#GET /api/v2/talkwalker/p/{project_id}/views
+  http: GET /api/v2/talkwalker/p/{project_id}/views
+  surface: Resources API
+  write: false
+  input_parameters:
+  - project_id*
+- name: list_of_custom_metrics
+  description: List of custom metrics
+  source_operation: openapi/talkwalker-resources-openapi.yml#GET /api/v2/talkwalker/p/{project_id}/custom_metrics/list
+  http: GET /api/v2/talkwalker/p/{project_id}/custom_metrics/list
+  surface: Resources API
+  write: false
+  input_parameters:
+  - project_id*
+- name: add_custom_metrics
+  description: Add custom metrics
+  source_operation: openapi/talkwalker-resources-openapi.yml#POST /api/v2/talkwalker/p/{project_id}/custom_metrics/add
+  http: POST /api/v2/talkwalker/p/{project_id}/custom_metrics/add
+  surface: Resources API
+  write: true
+  input_parameters:
+  - project_id*
+- name: update_custom_metrics
+  description: Update custom metrics
+  source_operation: openapi/talkwalker-resources-openapi.yml#POST /api/v2/talkwalker/p/{project_id}/custom_metrics/update
+  http: POST /api/v2/talkwalker/p/{project_id}/custom_metrics/update
+  surface: Resources API
+  write: true
+  input_parameters:
+  - project_id*
+- name: delete_specific_custom_metric
+  description: Delete specific custom metric
+  source_operation: openapi/talkwalker-resources-openapi.yml#DELETE /api/v2/talkwalker/p/{project_id}/custom_metrics/m/{metric_name}
+  http: DELETE /api/v2/talkwalker/p/{project_id}/custom_metrics/m/{metric_name}
+  surface: Resources API
+  write: true
+  input_parameters:
+  - project_id*
+  - metric_name*
+- name: delete_custom_metrics
+  description: Delete custom metrics
+  source_operation: openapi/talkwalker-resources-openapi.yml#POST /api/v2/talkwalker/p/{project_id}/custom_metrics/delete
+  http: POST /api/v2/talkwalker/p/{project_id}/custom_metrics/delete
+  surface: Resources API
+  write: true
+  input_parameters:
+  - project_id*
+- name: delete_a_batch_of_topics
+  description: Delete a batch of topics
+  source_operation: openapi/talkwalker-resources-openapi.yml#POST /api/v2/talkwalker/p/{project_id}/topics/delete
+  http: POST /api/v2/talkwalker/p/{project_id}/topics/delete
+  surface: Topic API
+  write: true
+  input_parameters:
+  - project_id*
+- name: create_or_update_a_batch_of_topics
+  description: Create or update a batch of topics
+  source_operation: openapi/talkwalker-resources-openapi.yml#POST /api/v2/talkwalker/p/{project_id}/topics/import
+  http: POST /api/v2/talkwalker/p/{project_id}/topics/import
+  surface: Topic API
+  write: true
+  input_parameters:
+  - project_id*
+- name: list_topics_with_definitions
+  description: List topics with definitions
+  source_operation: openapi/talkwalker-resources-openapi.yml#GET /api/v2/talkwalker/p/{project_id}/topics/list
+  http: GET /api/v2/talkwalker/p/{project_id}/topics/list
+  surface: Topic API
+  write: false
+  input_parameters:
+  - project_id*
+- name: retrieve_definition_of_a_specific_topic
+  description: Retrieve definition of a specific topic
+  source_operation: openapi/talkwalker-resources-openapi.yml#GET /api/v2/talkwalker/p/{project_id}/topics/list/{topic_id}
+  http: GET /api/v2/talkwalker/p/{project_id}/topics/list/{topic_id}
+  surface: Topic API
+  write: false
+  input_parameters:
+  - project_id*
+  - topic_id*
+- name: delete_a_collector
+  description: Delete a collector
+  source_operation: openapi/talkwalker-streaming-openapi.yml#DELETE /api/v3/stream/c/{collector_id}
+  http: DELETE /api/v3/stream/c/{collector_id}
+  surface: Streaming API > Collector API
+  write: true
+  input_parameters:
+  - collector_id*
+- name: get_collector_definition
+  description: Get collector definition
+  source_operation: openapi/talkwalker-streaming-openapi.yml#GET /api/v3/stream/c/{collector_id}
+  http: GET /api/v3/stream/c/{collector_id}
+  surface: Streaming API > Collector API
+  write: false
+  input_parameters:
+  - collector_id*
+- name: create_or_replace_a_collector
+  description: Create or replace a collector
+  source_operation: openapi/talkwalker-streaming-openapi.yml#PUT /api/v3/stream/c/{collector_id}
+  http: PUT /api/v3/stream/c/{collector_id}
+  surface: Streaming API > Collector API
+  write: true
+  input_parameters:
+  - collector_id*
+- name: pause_a_collector
+  description: Pause a collector
+  source_operation: openapi/talkwalker-streaming-openapi.yml#POST /api/v3/stream/c/{collector_id}/pause
+  http: POST /api/v3/stream/c/{collector_id}/pause
+  surface: Streaming API > Collector API
+  write: true
+  input_parameters:
+  - collector_id*
+- name: read_a_collector
+  description: Read a collector
+  source_operation: openapi/talkwalker-streaming-openapi.yml#GET /api/v3/stream/c/{collector_id}/results
+  http: GET /api/v3/stream/c/{collector_id}/results
+  surface: Streaming API > Collector API
+  write: false
+  input_parameters:
+  - resume_offset
+  - end_behaviour
+  - collector_id*
+- name: resume_a_collector
+  description: Resume a collector
+  source_operation: openapi/talkwalker-streaming-openapi.yml#POST /api/v3/stream/c/{collector_id}/resume
+  http: POST /api/v3/stream/c/{collector_id}/resume
+  surface: Streaming API > Collector API
+  write: true
+  input_parameters:
+  - collector_id*
+- name: create_a_new_export_task
+  description: Create a new export task
+  source_operation: openapi/talkwalker-streaming-openapi.yml#POST /api/v3/stream/export
+  http: POST /api/v3/stream/export
+  surface: Streaming API > Task API
+  write: true
+  input_parameters: null
+- name: list_of_streams_and_collectors
+  description: List of streams and collectors
+  source_operation: openapi/talkwalker-streaming-openapi.yml#GET /api/v3/stream/info
+  http: GET /api/v3/stream/info
+  surface: Streaming API
+  write: false
+  input_parameters: null
+- name: create_a_new_export_taks_on_a_specific_project
+  description: Create a new export taks on a specific project
+  source_operation: openapi/talkwalker-streaming-openapi.yml#POST /api/v3/stream/p/{project_id}/export
+  http: POST /api/v3/stream/p/{project_id}/export
+  surface: Streaming API > Task API
+  write: true
+  input_parameters:
+  - project_id*
+- name: listen_on_a_specific_project
+  description: Listen on a specific project
+  source_operation: openapi/talkwalker-streaming-openapi.yml#GET /api/v3/stream/p/{project_id}/results
+  http: GET /api/v3/stream/p/{project_id}/results
+  surface: Streaming API
+  write: false
+  input_parameters:
+  - q
+  - max_hits
+  - topic
+  - dataset
+  - filter
+  - panel
+  - project_id*
+- name: listen_on_a_specific_project_post_method
+  description: Listen on a specific project - POST method
+  source_operation: openapi/talkwalker-streaming-openapi.yml#POST /api/v3/stream/p/{project_id}/results
+  http: POST /api/v3/stream/p/{project_id}/results
+  surface: Streaming API
+  write: true
+  input_parameters:
+  - max_hits
+  - topic
+  - dataset
+  - filter
+  - panel
+  - project_id*
+- name: delete_a_stream
+  description: Delete a stream
+  source_operation: openapi/talkwalker-streaming-openapi.yml#DELETE /api/v3/stream/s/{stream_id}
+  http: DELETE /api/v3/stream/s/{stream_id}
+  surface: Streaming API
+  write: true
+  input_parameters:
+  - stream_id*
+- name: get_stream_definition
+  description: Get stream definition
+  source_operation: openapi/talkwalker-streaming-openapi.yml#GET /api/v3/stream/s/{stream_id}
+  http: GET /api/v3/stream/s/{stream_id}
+  surface: Streaming API
+  write: false
+  input_parameters:
+  - stream_id*
+- name: create_or_replace_a_stream
+  description: Create or replace a stream
+  source_operation: openapi/talkwalker-streaming-openapi.yml#PUT /api/v3/stream/s/{stream_id}
+  http: PUT /api/v3/stream/s/{stream_id}
+  surface: Streaming API
+  write: true
+  input_parameters:
+  - stream_id*
+- name: create_a_new_export_task_based_on_a_stream_definition
+  description: Create a new export task based on a stream definition
+  source_operation: openapi/talkwalker-streaming-openapi.yml#POST /api/v3/stream/s/{stream_id}/export
+  http: POST /api/v3/stream/s/{stream_id}/export
+  surface: Streaming API > Task API
+  write: true
+  input_parameters:
+  - stream_id*
+- name: listen_a_stream
+  description: Listen a stream
+  source_operation: openapi/talkwalker-streaming-openapi.yml#GET /api/v3/stream/s/{stream_id}/results
+  http: GET /api/v3/stream/s/{stream_id}/results
+  surface: Streaming API
+  write: false
+  input_parameters:
+  - q
+  - max_hits
+  - stream_id*
+- name: listen_a_stream_post_method
+  description: Listen a stream - POST method
+  source_operation: openapi/talkwalker-streaming-openapi.yml#POST /api/v3/stream/s/{stream_id}/results
+  http: POST /api/v3/stream/s/{stream_id}/results
+  surface: Streaming API
+  write: true
+  input_parameters:
+  - max_hits
+  - stream_id*
+- name: retrieve_all_recent_tasks_status
+  description: Retrieve all recent tasks status
+  source_operation: openapi/talkwalker-streaming-openapi.yml#GET /api/v3/tasks/export
+  http: GET /api/v3/tasks/export
+  surface: Streaming API > Task API
+  write: false
+  input_parameters: null
+- name: abort_a_task
+  description: Abort a task
+  source_operation: openapi/talkwalker-streaming-openapi.yml#DELETE /api/v3/tasks/export/{task_id}
+  http: DELETE /api/v3/tasks/export/{task_id}
+  surface: Streaming API > Task API
+  write: true
+  input_parameters:
+  - task_id*
+- name: retrieve_status_of_the_task
+  description: Retrieve status of the task
+  source_operation: openapi/talkwalker-streaming-openapi.yml#GET /api/v3/tasks/export/{task_id}
+  http: GET /api/v3/tasks/export/{task_id}
+  surface: Streaming API > Task API
+  write: false
+  input_parameters:
+  - task_id*

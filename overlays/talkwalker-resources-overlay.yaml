@@ -1,0 +1,74 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Talkwalker Resources API
+  version: 1.0.0
+extends: openapi/talkwalker-resources-openapi.yml
+x-generated: '2026-08-13'
+x-method: generated
+x-note: Talkwalker's published OpenAPI carries NO operationId on any operation, so no tool, SDK generator, Arazzo workflow
+  or MCP binding can address its operations by name. These actions add a deterministic operationId derived from method +
+  path, plus provenance and auth-semantics annotations. Applying this overlay does not change any request or response contract.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-slug: talkwalker
+    x-apievangelist-source: https://developer.talkwalker.com/talkwalker-api.yaml
+    x-apievangelist-harvested: '2026-08-13'
+    x-apievangelist-error-catalog: errors/talkwalker-problem-types.yml
+    x-apievangelist-conventions: conventions/talkwalker-conventions.yml
+    x-apievangelist-rate-limits: rate-limits/talkwalker-rate-limits.yml
+    x-apievangelist-sandbox-token: access_token=demo (search + histogram + streaming only; queries limited to cats, dogs,
+      cats AND dogs)
+- target: $.components.securitySchemes.apikeyAuth
+  update:
+    description: 'Talkwalker access token, passed as the access_token QUERY parameter (not a header). Two rights levels
+      exist: read_only (search) and read_write (search plus document, stream, panel and rule writes). Because the credential
+      travels in the URL it is recorded in intermediary access logs.'
+    x-apievangelist-rights-levels:
+    - read_only
+    - read_write
+- target: $.paths['/api/v2/talkwalker/p/{project_id}/resources'].get
+  update:
+    operationId: get_v2_talkwalker_p_project_id_resources
+- target: $.paths['/api/v2/talkwalker/p/{project_id}/source_panels/add'].post
+  update:
+    operationId: post_v2_talkwalker_p_project_id_source_panels_add
+- target: $.paths['/api/v2/talkwalker/p/{project_id}/source_panels/list'].get
+  update:
+    operationId: get_v2_talkwalker_p_project_id_source_panels_list
+- target: $.paths['/api/v2/talkwalker/p/{project_id}/source_panels/groups/add'].post
+  update:
+    operationId: post_v2_talkwalker_p_project_id_source_panels_groups_add
+- target: $.paths['/api/v2/talkwalker/p/{project_id}/tags'].get
+  update:
+    operationId: get_v2_talkwalker_p_project_id_tags
+- target: $.paths['/api/v2/talkwalker/p/{project_id}/views'].get
+  update:
+    operationId: get_v2_talkwalker_p_project_id_views
+- target: $.paths['/api/v2/talkwalker/p/{project_id}/custom_metrics/list'].get
+  update:
+    operationId: get_v2_talkwalker_p_project_id_custom_metrics_list
+- target: $.paths['/api/v2/talkwalker/p/{project_id}/custom_metrics/add'].post
+  update:
+    operationId: post_v2_talkwalker_p_project_id_custom_metrics_add
+- target: $.paths['/api/v2/talkwalker/p/{project_id}/custom_metrics/update'].post
+  update:
+    operationId: post_v2_talkwalker_p_project_id_custom_metrics_update
+- target: $.paths['/api/v2/talkwalker/p/{project_id}/custom_metrics/m/{metric_name}'].delete
+  update:
+    operationId: delete_v2_talkwalker_p_project_id_custom_metrics_m_metric_name
+- target: $.paths['/api/v2/talkwalker/p/{project_id}/custom_metrics/delete'].post
+  update:
+    operationId: post_v2_talkwalker_p_project_id_custom_metrics_delete
+- target: $.paths['/api/v2/talkwalker/p/{project_id}/topics/delete'].post
+  update:
+    operationId: post_v2_talkwalker_p_project_id_topics_delete
+- target: $.paths['/api/v2/talkwalker/p/{project_id}/topics/import'].post
+  update:
+    operationId: post_v2_talkwalker_p_project_id_topics_import
+- target: $.paths['/api/v2/talkwalker/p/{project_id}/topics/list'].get
+  update:
+    operationId: get_v2_talkwalker_p_project_id_topics_list
+- target: $.paths['/api/v2/talkwalker/p/{project_id}/topics/list/{topic_id}'].get
+  update:
+    operationId: get_v2_talkwalker_p_project_id_topics_list_topic_id

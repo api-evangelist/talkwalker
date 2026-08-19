@@ -1,0 +1,38 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Talkwalker Histogram API
+  version: 1.0.0
+extends: openapi/talkwalker-histogram-openapi.yml
+x-generated: '2026-08-13'
+x-method: generated
+x-note: Talkwalker's published OpenAPI carries NO operationId on any operation, so no tool, SDK generator, Arazzo workflow
+  or MCP binding can address its operations by name. These actions add a deterministic operationId derived from method +
+  path, plus provenance and auth-semantics annotations. Applying this overlay does not change any request or response contract.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-slug: talkwalker
+    x-apievangelist-source: https://developer.talkwalker.com/talkwalker-api.yaml
+    x-apievangelist-harvested: '2026-08-13'
+    x-apievangelist-error-catalog: errors/talkwalker-problem-types.yml
+    x-apievangelist-conventions: conventions/talkwalker-conventions.yml
+    x-apievangelist-rate-limits: rate-limits/talkwalker-rate-limits.yml
+    x-apievangelist-sandbox-token: access_token=demo (search + histogram + streaming only; queries limited to cats, dogs,
+      cats AND dogs)
+- target: $.components.securitySchemes.apikeyAuth
+  update:
+    description: 'Talkwalker access token, passed as the access_token QUERY parameter (not a header). Two rights levels
+      exist: read_only (search) and read_write (search plus document, stream, panel and rule writes). Because the credential
+      travels in the URL it is recorded in intermediary access logs.'
+    x-apievangelist-rights-levels:
+    - read_only
+    - read_write
+- target: $.paths['/api/v1/search/histogram/{type}'].get
+  update:
+    operationId: get_v1_search_histogram_type
+- target: $.paths['/api/v1/search/p/{project_id}/histogram/{type}'].get
+  update:
+    operationId: get_v1_search_p_project_id_histogram_type
+- target: $.paths['/api/v1/search/p/{project_id}/histogram/top_influencers'].get
+  update:
+    operationId: get_v1_search_p_project_id_histogram_top_influencers

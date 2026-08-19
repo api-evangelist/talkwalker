@@ -1,0 +1,130 @@
+# Refined from the Talkwalker-published OpenAPI at
+# https://developer.talkwalker.com/talkwalker-api.yaml (harvested 2026-08-13)
+# Split by tag group; operations carried verbatim. Verbatim source: openapi/_original/talkwalker-openapi.yaml
+openapi: 3.0.0
+info:
+  title: Talkwalker Image API
+  description: Talkwalker Advanced API
+  version: 0.0.1
+  contact:
+    email: client-api@talkwalker.com
+    name: Client-API
+externalDocs:
+  description: Find more info here or there
+  url: https://apidocs.talkwalker.com/
+servers:
+- description: Production environment server
+  url: https://api.talkwalker.com
+security:
+- apikeyAuth: []
+tags:
+- name: Image API
+paths:
+  /api/v2/detect/images/{model}:
+    get:
+      parameters:
+      - description: URL where to download the image.
+        example: https://i.pinimg.com/originals/50/6e/d8/506ed8d71b3c287cf549a6f586587736.jpg
+        in: query
+        name: image_url
+        required: true
+        schema:
+          type: string
+      - description: Only for logos, List of logo IDs to detect in the image.
+        example: audi,bmw
+        in: query
+        name: detect
+        schema:
+          type: string
+      - description: 'The mode of the detection.
+
+          Allowed values: logo, object or scene.'
+        example: logo
+        in: path
+        name: model
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                request: GET /api/v2/detect/images/logo?image_url=https://i.pinimg.com/originals/50/6e/d8/506ed8d71b3c287cf549a6f586587736.jpg&detect=audi,bmw&access_token=abcd_1234_abcd
+                request_id: '#r8w7jw81fpll#'
+                result_processing:
+                  height: 430
+                  match:
+                  - bottom: 283
+                    confidence: 0.6167415976524353
+                    id: audi
+                    left: 122
+                    right: 239
+                    top: 209
+                  width: 720
+                status_code: '0'
+                status_message: OK
+              schema:
+                type: object
+          description: OK
+      summary: Process an image by URL
+      tags:
+      - Image API
+    post:
+      parameters:
+      - description: 'The mode of the detection.
+
+          Allowed values: logo, object or scene.'
+        example: scene
+        in: path
+        name: model
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                image_file:
+                  description: Filename of the image to be past as multipart/form-data.
+                  format: binary
+                  type: string
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                request: POST /api/v2/detect/images/scene?access_token=abcd_1234_abcd
+                request_id: '#r8w7rauiorqr#'
+                result_processing:
+                  height: 1667
+                  match:
+                  - bottom: 0
+                    confidence: 0.9999935626983643
+                    id: scene-airport_terminal
+                    left: 0
+                    right: 0
+                    top: 0
+                  - bottom: 0
+                    confidence: 0.9892786145210266
+                    id: scene-indoor
+                    left: 0
+                    right: 0
+                    top: 0
+                  width: 2500
+                status_code: '0'
+                status_message: OK
+              schema:
+                type: object
+          description: OK
+      summary: Process an image by file
+      tags:
+      - Image API
+components:
+  securitySchemes:
+    apikeyAuth:
+      in: query
+      name: access_token
+      type: apiKey

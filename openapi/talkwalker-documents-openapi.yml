@@ -1,0 +1,559 @@
+# Refined from the Talkwalker-published OpenAPI at
+# https://developer.talkwalker.com/talkwalker-api.yaml (harvested 2026-08-13)
+# Split by tag group; operations carried verbatim. Verbatim source: openapi/_original/talkwalker-openapi.yaml
+openapi: 3.0.0
+info:
+  title: Talkwalker Documents API
+  description: Talkwalker Advanced API
+  version: 0.0.1
+  contact:
+    email: client-api@talkwalker.com
+    name: Client-API
+externalDocs:
+  description: Find more info here or there
+  url: https://apidocs.talkwalker.com/
+servers:
+- description: Production environment server
+  url: https://api.talkwalker.com
+security:
+- apikeyAuth: []
+tags:
+- name: Modify documents API
+paths:
+  /api/v2/docs/p/{project_id}:
+    post:
+      parameters:
+      - description: Talkwalker API recalculates set field based on the updated content.
+        example: sentiment
+        in: query
+        name: annotate
+        schema:
+          type: string
+      - description: 'Specifies if the modified document should be returned.
+
+          Allowed values: hide or show.
+
+          Default value: hide'
+        example: hide
+        in: query
+        name: return_entry
+        schema:
+          type: string
+      - description: 'Specifies when and which tokens are generated.
+
+          Allowed values: all_if_new, all_always_if_possible.
+
+          default value: all_if_new'
+        example: all_if_new
+        in: query
+        name: proc_tokens_calc
+        schema:
+          type: string
+      - description: 'Specifies when the language is automatically detected
+
+          Allowed values: only_if_new, always_if_new_content.
+
+          Fefault value: only_if_new'
+        example: only_if_new
+        in: query
+        name: proc_lang_autodetect
+        schema:
+          type: string
+      - description: 'Special behavior for ellipsis in string fields.
+
+          Allowed values: no_special_handling, ignore_if_start_same.
+
+          Default value: ignore_if_start_same'
+        example: ignore_if_start_same
+        in: query
+        name: proc_content_ellipsis
+        schema:
+          type: string
+      - description: 'default language code: en'
+        example: en
+        in: query
+        name: proc_lang_fallback
+        schema:
+          type: string
+      - description: 'Language annotation.
+
+          Allowed values: annotate_if_not_set, use_default.
+
+          Default value: annotate_if_not_set.'
+        example: annotate_if_not_set
+        in: query
+        name: proc_annotate_language
+        schema:
+          type: string
+      - description: 'Sentiment annotation.
+
+          Allowed values: annotate_if_not_set, use_default.
+
+          Default value: annotate_if_not_set.'
+        example: annotate_if_not_set
+        in: query
+        name: proc_annotate_sentiment
+        schema:
+          type: string
+      - example: a1ab1abc-a123-123a-123a-abcd12ab1a12
+        in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+              - update:
+                  content: tesla electric car update content
+                  noise_level: 0
+                  sentiment: 5
+                  url: https://test-cpl.tt
+              - create:
+                  content: should match my topic about telsa and bitcoin.
+                  extra_author_attributes:
+                    gender: FEMALE
+                    name: Shy
+                  lang: en
+                  published: '1647346224000'
+                  title: How tesla Has Changed Everyday Life
+                  url: https://test-cpl2.tt
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                request: POST /api/v2/docs/p/a2ce1ade-a513-413f-868c-fafc25ba9a23?annotate=sentiment&return_entry=hide&proc_tokens_calc=all_if_new&proc_lang_autodetect=only_if_new&proc_content_ellipsis=ignore_if_start_same&proc_lang_fallback=en&proc_annotate_language=annotate_if_not_set&proc_annotate_sentiment=annotate_if_not_set&access_token=abcd-1234-abcd
+                request_id: '#r8w2c5j0pm2r#'
+                result_searchdoc:
+                - action: update
+                  status_code: '0'
+                  status_message: OK
+                  url: https://test-cpl.tt
+                - action: create
+                  status_code: '0'
+                  status_message: OK
+                  url: https://test-cpl2.tt
+                status_code: '0'
+                status_message: OK
+              schema:
+                type: object
+          description: OK
+      summary: Modify a batch of documents
+      tags:
+      - Modify documents API
+  /api/v2/docs/p/{project_id}/{action}:
+    post:
+      parameters:
+      - description: Talkwalker API recalculates set field based on the updated content.
+        example: sentiment
+        in: query
+        name: annotate
+        schema:
+          type: string
+      - description: 'Specifies if the modified document should be returned.
+
+          Allowed values: hide or show.
+
+          Default value: hide'
+        example: hide
+        in: query
+        name: return_entry
+        schema:
+          type: string
+      - description: 'Specifies when and which tokens are generated.
+
+          Allowed values: all_if_new, all_always_if_possible.
+
+          default value: all_if_new'
+        example: all_if_new
+        in: query
+        name: proc_tokens_calc
+        schema:
+          type: string
+      - description: 'Specifies when the language is automatically detected
+
+          Allowed values: only_if_new, always_if_new_content.
+
+          Fefault value: only_if_new'
+        example: only_if_new
+        in: query
+        name: proc_lang_autodetect
+        schema:
+          type: string
+      - description: 'Special behavior for ellipsis in string fields.
+
+          Allowed values: no_special_handling, ignore_if_start_same.
+
+          Default value: ignore_if_start_same'
+        example: ignore_if_start_same
+        in: query
+        name: proc_content_ellipsis
+        schema:
+          type: string
+      - description: 'default language code: en'
+        example: en
+        in: query
+        name: proc_lang_fallback
+        schema:
+          type: string
+      - description: 'Language annotation.
+
+          Allowed values: annotate_if_not_set, use_default.
+
+          Default value: annotate_if_not_set.'
+        example: annotate_if_not_set
+        in: query
+        name: proc_annotate_language
+        schema:
+          type: string
+      - description: 'Sentiment annotation.
+
+          Allowed values: annotate_if_not_set, use_default.
+
+          Default value: annotate_if_not_set.'
+        example: annotate_if_not_set
+        in: query
+        name: proc_annotate_sentiment
+        schema:
+          type: string
+      - example: a1ab1abc-a123-123a-123a-abcd12ab1a12
+        in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+      - description: 'Operation to do on the ducument.
+
+          Allowed values: create, update, upserte, delete, undelete.'
+        example: update
+        in: path
+        name: action
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                content: tesla electric car
+                extra_author_attributes:
+                  gender: MALE
+                  name: Pascal
+                noise_level: 20
+                published: '1639487342000'
+                source_type:
+                - BROADCAST
+                - BROADCAST_TV
+                tags_customer:
+                - Category / tv_clip
+                - Category / news
+                title: How the Internet Has Changed Everyday Life
+                url: https://test-cpl.tt
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                request: POST /api/v2/docs/p/a1ab1abc-a123-123a-123a-abcd12ab1a12/update?annotate=sentiment&return_entry=hide&proc_tokens_calc=all_if_new&proc_lang_autodetect=only_if_new&proc_content_ellipsis=ignore_if_start_same&proc_lang_fallback=en&proc_annotate_language=annotate_if_not_set&proc_annotate_sentiment=annotate_if_not_set&access_token=abcd_1234_abcd
+                request_id: '#r8vvcgx8oa06#'
+                result_searchdoc:
+                - action: update
+                  status_code: '0'
+                  status_message: OK
+                  url: https://test-cpl.tt
+                status_code: '0'
+                status_message: OK
+              schema:
+                type: object
+          description: OK
+      summary: Modify simple document
+      tags:
+      - Modify documents API
+  /api/v2/docs/p/{project_id}/d/{dataset_id}/{action}:
+    post:
+      tags:
+      - Modify documents API
+      summary: Modify simple review
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                url: https://test_ci_pcl.lu/review/1
+                parent_url: https://test_ci_pcl.lu/review/1
+                title: This is my review
+                content: So excited about this API
+                published: '1690722383000'
+                source_type:
+                - MONITOREDSITE_OTHER
+                extra_source_attributes:
+                  name: Pascal's reviews
+                  geo: lu
+                rating: 9
+                extra_author_attributes:
+                  name: Pascal
+                  gender: MALE
+      parameters:
+      - name: annotate
+        in: query
+        schema:
+          type: string
+        description: Talkwalker API recalculates set field based on the updated content.
+        example: sentiment
+      - name: return_entry
+        in: query
+        schema:
+          type: string
+        description: 'Specifies if the modified document should be returned.
+
+          Allowed values: hide or show.
+
+          Default value: hide'
+        example: show
+      - name: proc_tokens_calc
+        in: query
+        schema:
+          type: string
+        description: 'Specifies when and which tokens are generated.
+
+          Allowed values: all_if_new, all_always_if_possible.
+
+          default value: all_if_new'
+        example: all_if_new
+      - name: proc_lang_autodetect
+        in: query
+        schema:
+          type: string
+        description: 'Specifies when the language is automatically detected
+
+          Allowed values: only_if_new, always_if_new_content.
+
+          Fefault value: only_if_new'
+        example: only_if_new
+      - name: proc_content_ellipsis
+        in: query
+        schema:
+          type: string
+        description: 'Special behavior for ellipsis in string fields.
+
+          Allowed values: no_special_handling, ignore_if_start_same.
+
+          Default value: ignore_if_start_same'
+        example: ignore_if_start_same
+      - name: proc_lang_fallback
+        in: query
+        schema:
+          type: string
+        description: 'default language code: en'
+        example: en
+      - name: proc_annotate_language
+        in: query
+        schema:
+          type: string
+        description: 'Language annotation.
+
+          Allowed values: annotate_if_not_set, use_default.
+
+          Default value: annotate_if_not_set.'
+        example: annotate_if_not_set
+      - name: proc_annotate_sentiment
+        in: query
+        schema:
+          type: string
+        description: 'Sentiment annotation.
+
+          Allowed values: annotate_if_not_set, use_default.
+
+          Default value: annotate_if_not_set.'
+        example: annotate_if_not_set
+      - name: project_id
+        in: path
+        schema:
+          type: string
+        required: true
+        example: 9123-abcd-1233
+      - name: dataset_id
+        in: path
+        schema:
+          type: string
+        required: true
+        example: d1234-abcd-1234
+      - name: action
+        in: path
+        schema:
+          type: string
+        required: true
+        description: 'Operation to do on the ducument.
+
+          Allowed values: create, update, upserte, delete, undelete.'
+        example: upsert
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status_code: '0'
+                status_message: OK
+                request: POST /api/v2/docs/p/9123-abcd-1233/d/d1234-abcd-1234/upsert?annotate=sentiment&return_entry=hide&proc_tokens_calc=all_if_new&proc_lang_autodetect=only_if_new&proc_content_ellipsis=ignore_if_start_same&proc_lang_fallback=en&proc_annotate_language=annotate_if_not_set&proc_annotate_sentiment=annotate_if_not_set&access_token=abcd_1234_abcd
+                result_searchdoc:
+                - status_code: '0'
+                  status_message: OK
+                  action: upsert
+                  url: https://test_ci_pcl.lu/review/1
+                request_id: '#rynwjspzxv1m#'
+  /api/v2/docs/p/{project_id}/d/{dataset_id}:
+    post:
+      tags:
+      - Modify documents API
+      summary: Modify a batch of reviews
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+              - update:
+                  url: https://test_ci_pcl.lu/review/1
+                  extra_source_attributes:
+                    geo: de
+                  rating: 9
+                  extra_author_attributes:
+                    name: Richard
+                    gender: MALE
+              - create:
+                  url: https://test_ci_pcl.lu/review/2
+                  parent_url: https://test_ci_pcl.lu/review/1
+                  title: Review 2
+                  content: Content 2
+                  published: '1690729583000'
+                  rating: 4
+                  source_type:
+                  - MONITOREDSITE
+                  extra_source_attributes:
+                    name: Pascal's reviews
+                    geo: lu
+                  extra_author_attributes:
+                    name: Maxime
+                    gender: MALE
+      parameters:
+      - name: annotate
+        in: query
+        schema:
+          type: string
+        description: Talkwalker API recalculates set field based on the updated content.
+        example: sentiment
+      - name: return_entry
+        in: query
+        schema:
+          type: string
+        description: 'Specifies if the modified document should be returned.
+
+          Allowed values: hide or show.
+
+          Default value: hide'
+        example: hide
+      - name: proc_tokens_calc
+        in: query
+        schema:
+          type: string
+        description: 'Specifies when and which tokens are generated.
+
+          Allowed values: all_if_new, all_always_if_possible.
+
+          default value: all_if_new'
+        example: all_if_new
+      - name: proc_lang_autodetect
+        in: query
+        schema:
+          type: string
+        description: 'Specifies when the language is automatically detected
+
+          Allowed values: only_if_new, always_if_new_content.
+
+          Fefault value: only_if_new'
+        example: only_if_new
+      - name: proc_content_ellipsis
+        in: query
+        schema:
+          type: string
+        description: 'Special behavior for ellipsis in string fields.
+
+          Allowed values: no_special_handling, ignore_if_start_same.
+
+          Default value: ignore_if_start_same'
+        example: ignore_if_start_same
+      - name: proc_lang_fallback
+        in: query
+        schema:
+          type: string
+        description: 'default language code: en'
+        example: en
+      - name: proc_annotate_language
+        in: query
+        schema:
+          type: string
+        description: 'Language annotation.
+
+          Allowed values: annotate_if_not_set, use_default.
+
+          Default e annotate_if_not_set.'
+        example: annotate_if_not_set
+      - name: proc_annotate_sentiment
+        in: query
+        schema:
+          type: string
+        description: 'Sentiment annotation.
+
+          Allowed values: annotate_if_not_set, use_default.
+
+          Default value: annotate_if_not_set.'
+        example: annotate_if_not_set
+      - name: project_id
+        in: path
+        schema:
+          type: string
+        required: true
+        example: 9123-abcd-1233
+      - name: dataset_id
+        in: path
+        schema:
+          type: string
+        required: true
+        example: d1234-abcd-1234
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status_code: '0'
+                status_message: OK
+                request: POST /api/v2/docs/p/9123-abcd-1233/d/d1234-abcd-1234?annotate=sentiment&return_entry=hide&proc_tokens_calc=all_if_new&proc_lang_autodetect=only_if_new&proc_content_ellipsis=ignore_if_start_same&proc_lang_fallback=en&proc_annotate_language=annotate_if_not_set&proc_annotate_sentiment=annotate_if_not_set&access_token=abcd-1234-abcd
+                result_searchdoc:
+                - status_code: '0'
+                  status_message: OK
+                  action: update
+                  url: https://test_ci_pcl.lu/review/1
+                - status_code: '0'
+                  status_message: OK
+                  action: create
+                  url: https://test_ci_pcl.lu/review/2
+                request_id: '#rynwzrzalgto#'
+components:
+  securitySchemes:
+    apikeyAuth:
+      in: query
+      name: access_token
+      type: apiKey
