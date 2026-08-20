@@ -138,6 +138,10 @@ apis:
     baseURL: https://api.talkwalker.com
     tags:
       - Image Detection
+      - Artificial Intelligence
+      - Visual Analytics
+    tags_raw:
+      - Image Detection
       - AI
       - Visual Analytics
     properties:
