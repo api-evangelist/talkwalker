@@ -27,134 +27,367 @@ tags:
   - Campaign Analytics
 
 apis:
-  - aid: talkwalker:search-api
-    name: Talkwalker Search API
-    description: Search and export a subset of documents from a Talkwalker project, including brand mentions and social data across supported channels. Results are metered at 1 credit per result plus a minimum of 10 credits per call.
-    humanURL: https://developer.talkwalker.com/docs/overview/search-api/search-results-project-api
-    baseURL: https://api.talkwalker.com
-    tags:
-      - Search
-      - Social Listening
-      - Brand Mentions
-    properties:
-      - type: Documentation
-        url: https://developer.talkwalker.com/docs/overview
-      - type: OpenAPI
-        url: openapi/talkwalker-search-openapi.yml
-      - type: Overlay
-        url: overlays/talkwalker-search-overlay.yaml
-      - type: AgentSkill
-        url: skills/talkwalker-export-project-mentions.md
-      - type: APIReference
-        url: https://developer.talkwalker.com/api/search-api
-
-  - aid: talkwalker:streaming-api
-    name: Talkwalker Streaming API
-    description: Real-time streaming API (v3) for monitoring keyword-based streams and project or topic-level data feeds. Charged at 1 credit per streamed result with no per-call minimum.
-    humanURL: https://developer.talkwalker.com/docs/overview/streaming-api-v3
-    baseURL: https://api.talkwalker.com
-    tags:
-      - Streaming
-      - Real-Time
-      - Social Monitoring
-    properties:
-      - type: Documentation
-        url: https://developer.talkwalker.com/docs/overview/streaming-api-v3
-      - type: OpenAPI
-        url: openapi/talkwalker-streaming-openapi.yml
-      - type: Overlay
-        url: overlays/talkwalker-streaming-overlay.yaml
-      - type: AgentSkill
-        url: skills/talkwalker-stream-and-resume.md
-      - type: APIReference
-        url: https://developer.talkwalker.com/api/streaming-api
-
-  - aid: talkwalker:histogram-api
-    name: Talkwalker Histogram API
-    description: Reproduce Talkwalker dashboard widgets programmatically by fetching histogram data. Charged at 10 credits per call.
-    humanURL: https://developer.talkwalker.com/docs/overview
-    baseURL: https://api.talkwalker.com
-    tags:
-      - Analytics
-      - Dashboards
-      - Histograms
-    properties:
-      - type: Documentation
-        url: https://developer.talkwalker.com/docs/overview
-      - type: OpenAPI
-        url: openapi/talkwalker-histogram-openapi.yml
-      - type: Overlay
-        url: overlays/talkwalker-histogram-overlay.yaml
-      - type: AgentSkill
-        url: skills/talkwalker-reproduce-dashboard-widgets.md
-      - type: APIReference
-        url: https://developer.talkwalker.com/api/search-api-histogram-api
-
-  - aid: talkwalker:resources-api
-    name: Talkwalker Resources API
-    description: Manage and retrieve project resources including topics, filters, pages, events, panels, and datasets. Also exposes tag and view (dashboard, report, alert) management endpoints. Free to call — no credit cost.
-    humanURL: https://developer.talkwalker.com/docs/overview/resources-api
-    baseURL: https://api.talkwalker.com
-    tags:
-      - Resources
-      - Topics
-      - Tags
-      - Dashboards
-    properties:
-      - type: Documentation
-        url: https://developer.talkwalker.com/docs/overview/resources-api
-      - type: OpenAPI
-        url: openapi/talkwalker-resources-openapi.yml
-      - type: Overlay
-        url: overlays/talkwalker-resources-overlay.yaml
-      - type: APIReference
-        url: https://developer.talkwalker.com/api/resources-api
-
-  - aid: talkwalker:document-api
-    name: Talkwalker Document API
-    description: Import custom documents and modify existing documents within Talkwalker projects. Supports custom metrics creation for imported content. Document imports are free — no credit cost.
-    humanURL: https://developer.talkwalker.com/docs/overview
-    baseURL: https://api.talkwalker.com
-    tags:
-      - Documents
-      - Import
-      - Custom Metrics
-    properties:
-      - type: Documentation
-        url: https://developer.talkwalker.com/docs/overview
-      - type: OpenAPI
-        url: openapi/talkwalker-documents-openapi.yml
-      - type: Overlay
-        url: overlays/talkwalker-documents-overlay.yaml
-      - type: AgentSkill
-        url: skills/talkwalker-import-documents.md
-      - type: APIReference
-        url: https://developer.talkwalker.com/api/modify-documents-api
-
-  - aid: talkwalker:image-api
-    name: Talkwalker Image API
-    description: Detect features and entities within images using Talkwalker's image detection capabilities, enabling logo detection and visual content analytics.
-    humanURL: https://developer.talkwalker.com/docs/overview
-    baseURL: https://api.talkwalker.com
-    tags:
-      - Image Detection
-      - Artificial Intelligence
-      - Visual Analytics
-    tags_raw:
-      - Image Detection
-      - AI
-      - Visual Analytics
-    properties:
-      - type: Documentation
-        url: https://developer.talkwalker.com/docs/overview
-      - type: OpenAPI
-        url: openapi/talkwalker-image-openapi.yml
-      - type: Overlay
-        url: overlays/talkwalker-image-overlay.yaml
-      - type: APIReference
-        url: https://developer.talkwalker.com/api/image-api
-
+- aid: talkwalker:talkwalker-image-api-api
+  name: Talkwalker Image API
+  description: The Image API API from Talkwalker — 1 operation(s) for image api.
+  humanURL: https://developer.talkwalker.com/docs/overview/search-api/search-results-project-api
+  baseURL: https://api.talkwalker.com
+  tags:
+  - Image API
+  properties:
+  - type: OpenAPI
+    url: openapi/talkwalker-image-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/search-api
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview/streaming-api-v3
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/streaming-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/search-api-histogram-api
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview/resources-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/resources-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/modify-documents-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/image-api
+- aid: talkwalker:talkwalker-modify-documents-api-api
+  name: Talkwalker Modify documents API
+  description: The Modify documents API API from Talkwalker — 4 operation(s) for modify documents api.
+  humanURL: https://developer.talkwalker.com/docs/overview/search-api/search-results-project-api
+  baseURL: https://api.talkwalker.com
+  tags:
+  - Modify documents API
+  properties:
+  - type: OpenAPI
+    url: openapi/talkwalker-modify-documents-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/search-api
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview/streaming-api-v3
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/streaming-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/search-api-histogram-api
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview/resources-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/resources-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/modify-documents-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/image-api
+- aid: talkwalker:talkwalker-resources-api-api
+  name: Talkwalker Resources API
+  description: The Resources API API from Talkwalker — 8 operation(s) for resources api.
+  humanURL: https://developer.talkwalker.com/docs/overview/search-api/search-results-project-api
+  baseURL: https://api.talkwalker.com
+  tags:
+  - Resources API
+  properties:
+  - type: OpenAPI
+    url: openapi/talkwalker-resources-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/search-api
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview/streaming-api-v3
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/streaming-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/search-api-histogram-api
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview/resources-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/resources-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/modify-documents-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/image-api
+- aid: talkwalker:talkwalker-search-api-api
+  name: Talkwalker Search API
+  description: The Search API API from Talkwalker — 3 operation(s) for search api.
+  humanURL: https://developer.talkwalker.com/docs/overview/search-api/search-results-project-api
+  baseURL: https://api.talkwalker.com
+  tags:
+  - Search API
+  properties:
+  - type: OpenAPI
+    url: openapi/talkwalker-search-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/search-api
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview/streaming-api-v3
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/streaming-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/search-api-histogram-api
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview/resources-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/resources-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/modify-documents-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/image-api
+- aid: talkwalker:talkwalker-search-api-histogram-api-api
+  name: Talkwalker Search API > Histogram API
+  description: >-
+    The Search API > Histogram API API from Talkwalker — 3 operation(s) for search api > histogram api.
+  humanURL: https://developer.talkwalker.com/docs/overview/search-api/search-results-project-api
+  baseURL: https://api.talkwalker.com
+  tags:
+  - Search API > Histogram API
+  properties:
+  - type: OpenAPI
+    url: openapi/talkwalker-search-api-histogram-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/search-api
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview/streaming-api-v3
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/streaming-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/search-api-histogram-api
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview/resources-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/resources-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/modify-documents-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/image-api
+- aid: talkwalker:talkwalker-source-panels-api-api
+  name: Talkwalker Source panels API
+  description: The Source panels API API from Talkwalker — 3 operation(s) for source panels api.
+  humanURL: https://developer.talkwalker.com/docs/overview/search-api/search-results-project-api
+  baseURL: https://api.talkwalker.com
+  tags:
+  - Source panels API
+  properties:
+  - type: OpenAPI
+    url: openapi/talkwalker-source-panels-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/search-api
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview/streaming-api-v3
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/streaming-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/search-api-histogram-api
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview/resources-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/resources-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/modify-documents-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/image-api
+- aid: talkwalker:talkwalker-status-api-api
+  name: Talkwalker Status API
+  description: The Status API API from Talkwalker — 1 operation(s) for status api.
+  humanURL: https://developer.talkwalker.com/docs/overview/search-api/search-results-project-api
+  baseURL: https://api.talkwalker.com
+  tags:
+  - Status API
+  properties:
+  - type: OpenAPI
+    url: openapi/talkwalker-status-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/search-api
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview/streaming-api-v3
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/streaming-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/search-api-histogram-api
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview/resources-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/resources-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/modify-documents-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/image-api
+- aid: talkwalker:talkwalker-streaming-api-api
+  name: Talkwalker Streaming API
+  description: The Streaming API API from Talkwalker — 4 operation(s) for streaming api.
+  humanURL: https://developer.talkwalker.com/docs/overview/search-api/search-results-project-api
+  baseURL: https://api.talkwalker.com
+  tags:
+  - Streaming API
+  properties:
+  - type: OpenAPI
+    url: openapi/talkwalker-streaming-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/search-api
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview/streaming-api-v3
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/streaming-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/search-api-histogram-api
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview/resources-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/resources-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/modify-documents-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/image-api
+- aid: talkwalker:talkwalker-streaming-api-collector-api-api
+  name: Talkwalker Streaming API > Collector API
+  description: >-
+    The Streaming API > Collector API API from Talkwalker — 4 operation(s) for streaming api > collector
+    api.
+  humanURL: https://developer.talkwalker.com/docs/overview/search-api/search-results-project-api
+  baseURL: https://api.talkwalker.com
+  tags:
+  - Streaming API > Collector API
+  properties:
+  - type: OpenAPI
+    url: openapi/talkwalker-streaming-api-collector-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/search-api
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview/streaming-api-v3
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/streaming-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/search-api-histogram-api
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview/resources-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/resources-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/modify-documents-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/image-api
+- aid: talkwalker:talkwalker-streaming-api-task-api-api
+  name: Talkwalker Streaming API > Task API
+  description: >-
+    The Streaming API > Task API API from Talkwalker — 5 operation(s) for streaming api > task api.
+  humanURL: https://developer.talkwalker.com/docs/overview/search-api/search-results-project-api
+  baseURL: https://api.talkwalker.com
+  tags:
+  - Streaming API > Task API
+  properties:
+  - type: OpenAPI
+    url: openapi/talkwalker-streaming-api-task-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/search-api
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview/streaming-api-v3
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/streaming-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/search-api-histogram-api
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview/resources-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/resources-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/modify-documents-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/image-api
+- aid: talkwalker:talkwalker-summary-api-api
+  name: Talkwalker Summary API
+  description: The Summary API API from Talkwalker — 2 operation(s) for summary api.
+  humanURL: https://developer.talkwalker.com/docs/overview/search-api/search-results-project-api
+  baseURL: https://api.talkwalker.com
+  tags:
+  - Summary API
+  properties:
+  - type: OpenAPI
+    url: openapi/talkwalker-summary-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/search-api
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview/streaming-api-v3
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/streaming-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/search-api-histogram-api
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview/resources-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/resources-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/modify-documents-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/image-api
+- aid: talkwalker:talkwalker-topic-api-api
+  name: Talkwalker Topic API
+  description: The Topic API API from Talkwalker — 4 operation(s) for topic api.
+  humanURL: https://developer.talkwalker.com/docs/overview/search-api/search-results-project-api
+  baseURL: https://api.talkwalker.com
+  tags:
+  - Topic API
+  properties:
+  - type: OpenAPI
+    url: openapi/talkwalker-topic-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/search-api
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview/streaming-api-v3
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/streaming-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/search-api-histogram-api
+  - type: Documentation
+    url: https://developer.talkwalker.com/docs/overview/resources-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/resources-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/modify-documents-api
+  - type: APIReference
+    url: https://developer.talkwalker.com/api/image-api
 common:
+  - type: Overlay
+    url: overlays/talkwalker-search-overlay.yaml
+  - type: AgentSkill
+    url: skills/talkwalker-export-project-mentions.md
+  - type: Overlay
+    url: overlays/talkwalker-streaming-overlay.yaml
+  - type: AgentSkill
+    url: skills/talkwalker-stream-and-resume.md
+  - type: Overlay
+    url: overlays/talkwalker-histogram-overlay.yaml
+  - type: AgentSkill
+    url: skills/talkwalker-reproduce-dashboard-widgets.md
+  - type: Overlay
+    url: overlays/talkwalker-resources-overlay.yaml
+  - type: Overlay
+    url: overlays/talkwalker-documents-overlay.yaml
+  - type: AgentSkill
+    url: skills/talkwalker-import-documents.md
+  - type: Overlay
+    url: overlays/talkwalker-image-overlay.yaml
   - type: Authentication
     url: authentication/talkwalker-authentication.yml
   - type: DomainSecurity
