@@ -1,6 +1,18 @@
 aid: talkwalker
 name: Talkwalker
 description: Talkwalker is a social media analytics and listening platform that provides REST APIs for tracking brand mentions, analyzing sentiment, measuring campaign performance, and monitoring competitors across 150 million websites and 10+ social networks. The API suite covers search, streaming, histograms, document management, image detection, topic management, and custom metrics.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: unknown
