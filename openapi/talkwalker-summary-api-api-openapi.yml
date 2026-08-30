@@ -1,0 +1,153 @@
+openapi: 3.2.0
+info:
+  title: Talkwalker Search Summary API
+  description: Talkwalker Advanced API
+  version: 0.0.1
+  contact:
+    email: client-api@talkwalker.com
+    name: Client-API
+servers:
+- description: Production environment server
+  url: https://api.talkwalker.com
+security:
+- apikeyAuth: []
+tags:
+- name: Summary API
+paths:
+  /api/v1/search/summary:
+    get:
+      tags:
+      - Summary API
+      summary: Fetch summary from global index
+      description: Fetch the AI summary of the first 1000 matching results (sorted by engagement) from global index. No results are returned.
+      parameters:
+      - description: The query to search for.
+        example: cats AND dogs
+        in: query
+        name: q
+        required: true
+        schema:
+          type: string
+      - description: Topic on which summary should focus
+        example: food
+        in: query
+        name: custom_focus
+        schema:
+          type: string
+      - description: 'Timezone for the time_range (e.g. Europe/Luxembourg).
+
+          Allowed values are timezone names.
+
+          Default value: UTC'
+        example: CET
+        in: query
+        name: timezone
+        schema:
+          type: string
+      - description: 'Time range filter.
+
+          Format `number` + a time unit character (e.g. `30d` for 30 days.).'
+        example: 30d
+        in: query
+        name: time_range
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status_code: '0'
+                status_message: OK
+                request: GET /api/v1/search/summary?q=cats%20AND%20dogs&access_token=abcd_1234_abcd
+                request_id: '#rxl5is2tsjc1#'
+                summary:
+                  summary: The collection of online documents reveals a strong interest in pets, particularly cats and dogs, with discussions around their behavior, care, and emotional connection with humans. Animal welfare and rescue efforts are prominent themes, highlighted by news releases about organizations reuniting lost pets and investigations into animal neglect. Social media trends, including viral memes and puzzle toys for pets, demonstrate engagement with animal-related content. Furthermore, there’s a notable interest in broader geopolitical issues and personal reflections on life’s challenges.
+  /api/v1/search/p/<project_id>/summary:
+    get:
+      tags:
+      - Summary API
+      summary: Fetch summary from a Talkwalker project
+      description: Fetch the AI summary of the first 1000 matching results (sorted by engagement) from a Talkwalker project. No results are returned.
+      parameters:
+      - description: The query to search for.
+        example: cats AND dogs
+        in: query
+        name: q
+        schema:
+          type: string
+      - description: 'Timezone for the time_range (e.g. Europe/Luxembourg).
+
+          Allowed values are timezone names.
+
+          Default value: UTC'
+        example: CET
+        in: query
+        name: timezone
+        schema:
+          type: string
+      - description: 'Time range filter.
+
+          Format `number` + a time unit character (e.g. `30d` for 30 days.).'
+        example: 30d
+        in: query
+        name: time_range
+        schema:
+          type: string
+      - description: One or more topics that are defined in the Talkwalker project
+        in: query
+        name: topic
+        schema:
+          type: string
+      - description: One or more filters that are defined in the Talkwalker project.
+        in: query
+        name: filter
+        schema:
+          type: string
+      - description: One or more channels that are defined in the Talkwalker project.
+        in: query
+        name: channel
+        schema:
+          type: string
+      - description: One or more source panels that are defined in the Talkwalker project.
+        in: query
+        name: panel
+        schema:
+          type: string
+      - description: One or more datasets ID that are defined in the Talkwalker Customer Intelligence project
+        in: query
+        name: dataset
+        schema:
+          type: string
+      - example: a1ab1abc-a123-123a-123a-abcd12ab1a12
+        in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status_code: '0'
+                status_message: OK
+                request: GET /api/v1/search/p/a1ab1abc-a123-123a-123a-abcd12ab1a12/summary?q=cats%20AND%20dogs&access_token=abcd_1234_abcd
+                request_id: '#rxl5is2tsjc1#'
+                summary:
+                  summary: The collection of online documents reveals a strong interest in pets, particularly cats and dogs, with discussions around their behavior, care, and emotional connection with humans. Animal welfare and rescue efforts are prominent themes, highlighted by news releases about organizations reuniting lost pets and investigations into animal neglect. Social media trends, including viral memes and puzzle toys for pets, demonstrate engagement with animal-related content. Furthermore, there’s a notable interest in broader geopolitical issues and personal reflections on life’s challenges.
+components:
+  securitySchemes:
+    apikeyAuth:
+      in: query
+      name: access_token
+      type: apiKey
+externalDocs:
+  description: Find more info here or there
+  url: https://apidocs.talkwalker.com/

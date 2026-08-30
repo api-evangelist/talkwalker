@@ -1,0 +1,252 @@
+openapi: 3.2.0
+info:
+  title: Talkwalker Streaming Streaming API > Task API
+  description: Talkwalker Advanced API
+  version: 0.0.1
+  contact:
+    email: client-api@talkwalker.com
+    name: Client-API
+servers:
+- description: Production environment server
+  url: https://api.talkwalker.com
+security:
+- apikeyAuth: []
+tags:
+- name: Streaming API > Task API
+paths:
+  /api/v3/stream/export:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                limit: 1000000
+                query: cats AND dogs
+                start: '2022-01-01'
+                stop: '2022-01-31'
+                target: collector_1
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                request: POST /api/v3/stream/export?access_token=abcd-1234-abcd
+                request_id: '#r8ugtpzg9o2q#'
+                result_tasks:
+                  tasks:
+                  - creation_date: '2022-03-16T15:39:25.306Z'
+                    id: 2136f070-2e0b-4888-8d1f-679fba1e95f1
+                    processed: 0
+                    progress: 0
+                    status: queued
+                    target: collector_1
+                    type: export
+                status_code: '0'
+                status_message: OK
+              schema:
+                type: object
+          description: OK
+      summary: Create a new export task
+      tags:
+      - Streaming API > Task API
+  /api/v3/stream/p/{project_id}/export:
+    post:
+      parameters:
+      - example: a1ab1abc-a123-123a-123a-abcd12ab1a12
+        in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                datasets:
+                - datasets1_id
+                - datasets2_id
+                limit: 10
+                query: cats AND dogs
+                start: '2022-01-01'
+                stop: '2022-01-31'
+                target: collector_1
+                topics:
+                - topic1_id
+                - topic2_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                request: POST /api/v3/stream/export?access_token=abce_1234_abcd
+                request_id: '#r8vu20qzflna#'
+                result_tasks:
+                  tasks:
+                  - creation_date: '2022-03-17T09:22:48.695Z'
+                    id: 87b74a59-69ad-4866-8e77-27ac49a7f8f4
+                    processed: 0
+                    progress: 0
+                    status: queued
+                    target: collector_1
+                    type: export
+                status_code: '0'
+                status_message: OK
+              schema:
+                type: object
+          description: OK
+      summary: Create a new export taks on a specific project
+      tags:
+      - Streaming API > Task API
+  /api/v3/stream/s/{stream_id}/export:
+    post:
+      parameters:
+      - example: stream_1
+        in: path
+        name: stream_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                limit: 10
+                query: cats AND dogs
+                start: '2022-01-01'
+                stop: '2022-01-31'
+                target: collector_1
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                request: POST /api/v3/stream/s/stream_1/export?access_token=abcd_1234_abcd
+                request_id: '#r8vukhhi0kdt#'
+                result_tasks:
+                  tasks:
+                  - creation_date: '2022-03-17T09:33:53.743Z'
+                    id: 8ae89c33-389e-4816-ad3f-319c655b3996
+                    processed: 0
+                    progress: 0
+                    status: queued
+                    target: collector_1
+                    type: export
+                status_code: '0'
+                status_message: OK
+              schema:
+                type: object
+          description: OK
+      summary: Create a new export task based on a stream definition
+      tags:
+      - Streaming API > Task API
+  /api/v3/tasks/export:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                request: GET /api/v3/tasks/export?access_token=abcd_1234_abcd
+                request_id: '#r8vo6gj1e1ij#'
+                result_tasks:
+                  tasks:
+                  - creation_date: '2022-03-16T15:39:25.203Z'
+                    id: 2136f070-2e0b-4888-8d1f-679fba1e95f1
+                    processed: 104753
+                    progress: 0.9272556673836648
+                    status: aborted
+                    target: collector_1
+                    type: export
+                    ready: 104753
+                  - creation_date: '2022-02-03T13:23:34.746Z'
+                    id: 978c7579-8f08-4361-a6dc-26a74329e899
+                    processed: 499
+                    progress: 1
+                    status: finished
+                    target: test_c_pbi
+                    type: export
+                    ready: 499
+                status_code: '0'
+                status_message: OK
+              schema:
+                type: object
+          description: OK
+      summary: Retrieve all recent tasks status
+      tags:
+      - Streaming API > Task API
+  /api/v3/tasks/export/{task_id}:
+    delete:
+      parameters:
+      - example: 5a67f289-c768-4c89-8e3a-0f54b786c0e9
+        in: path
+        name: task_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                request: DELETE /api/v3/tasks/export/5a67f289-c768-4c89-8e3a-0f54b786c0e9?access_token=abcd_1234_abcd
+                request_id: '#r8vtqey7vr2e#'
+                result_tasks:
+                  tasks:
+                  - id: 5a67f289-c768-4c89-8e3a-0f54b786c0e9
+                    status: deleted
+                status_code: '0'
+                status_message: OK
+              schema:
+                type: object
+          description: OK
+      summary: Abort a task
+      tags:
+      - Streaming API > Task API
+    get:
+      parameters:
+      - example: 2136f070-2e0b-4888-8d1f-679fba1e95f1
+        in: path
+        name: task_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                request: GET /api/v3/tasks/export/2136f070-2e0b-4888-8d1f-679fba1e95f1?access_token=abcd-1234-abcd
+                request_id: '#r8uh8gixfkjx#'
+                result_tasks:
+                  tasks:
+                  - creation_date: '2022-03-16T15:39:25.203Z'
+                    id: 2136f070-2e0b-4888-8d1f-679fba1e95f1
+                    processed: 104753
+                    progress: 0.9272556673836648
+                    status: running
+                    target: collector_1
+                    type: export
+                    ready: 104753
+                status_code: '0'
+                status_message: OK
+              schema:
+                type: object
+          description: OK
+      summary: Retrieve status of the task
+      tags:
+      - Streaming API > Task API
+components:
+  securitySchemes:
+    apikeyAuth:
+      in: query
+      name: access_token
+      type: apiKey
+externalDocs:
+  description: Find more info here or there
+  url: https://apidocs.talkwalker.com/

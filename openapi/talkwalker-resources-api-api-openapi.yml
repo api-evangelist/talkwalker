@@ -1,0 +1,402 @@
+openapi: 3.2.0
+info:
+  title: Talkwalker Resources Resources API
+  description: Talkwalker Advanced API
+  version: 0.0.1
+  contact:
+    email: client-api@talkwalker.com
+    name: Client-API
+servers:
+- description: Production environment server
+  url: https://api.talkwalker.com
+security:
+- apikeyAuth: []
+tags:
+- name: Resources API
+paths:
+  /api/v2/talkwalker/p/{project_id}/resources:
+    get:
+      description: Retrieve a list of data retrieval settings from a Talkwalker project.
+      parameters:
+      - description: 'Filter on the type of resources.
+
+          Allowed values: search, filter, page, event or panel.'
+        example: search
+        in: query
+        name: type
+        schema:
+          type: string
+      - example: a1ab1abc-a123-123a-123a-abcd12ab1a12
+        in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                request: GET /api/v2/talkwalker/p/a1ab1abc-a123-123a-123a-abcd12ab1a12/resources?type=search&access_token=abcd_1234_abcd
+                request_id: '#r8w4jwr5idz3#'
+                result_resources:
+                  projects:
+                  - id: a1ab1abc-a123-123a-123a-abcd12ab1a12
+                    title: Pascal's Project
+                    topics:
+                    - id: default
+                      nodes:
+                      - description: ''
+                        id: kpnutesu_1234
+                        title: Tesla
+                      - description: ''
+                        id: kpnzh6u5_1234
+                        title: BMW
+                      title: ''
+                status_code: '0'
+                status_message: OK
+              schema:
+                type: object
+          description: OK
+      summary: List of resources
+      tags:
+      - Resources API
+  /api/v2/talkwalker/p/{project_id}/tags:
+    get:
+      description: List of custom tags defined in the Talkwalker project
+      parameters:
+      - example: a1ab1abc-a123-123a-123a-abcd12ab1a12
+        in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                request: GET /api/v2/talkwalker/p/a1ab1abc-a123-123a-123a-abcd12ab1a12/tags?access_token=abcd_1234_abcd
+                request_id: '#r8w4z2a9f0w6#'
+                result_tags:
+                  tags:
+                  - id: AX8G0S7Eo1ymquPAbjFf
+                    label: AI Tags/Bot
+                  - id: AX25FRouwrmZKQFrGoWW
+                    label: Category / news
+                  - id: AX25FjsBwrmZKQFrGouw
+                    label: Category / tv_clip
+                  - id: AXp1ysu8qhsP5DbNVS8Y
+                    label: isReported
+                status_code: '0'
+                status_message: OK
+              schema:
+                type: object
+          description: OK
+      summary: List of custom tags
+      tags:
+      - Resources API
+  /api/v2/talkwalker/p/{project_id}/views:
+    get:
+      description: List of dashboards, reports and alerts defined in the Talkwalker project.
+      parameters:
+      - example: a1ab1abc-a123-123a-123a-abcd12ab1a12
+        in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                request: GET /api/v2/talkwalker/p/a1ab1abc-a123-123a-123a-abcd12ab1a12/views?access_token=abcd_1234_abcd
+                request_id: '#r8w53fmn4lqc#'
+                result_views:
+                  projects:
+                  - dashboards:
+                    - id: d|kpwljr81_5imm9n0rkoiy
+                      last_update: 1643363616716
+                      title: My brand over time
+                    - id: d|kvm6rteh_1tucp7x76h74x
+                      last_update: 1636105165826
+                      title: Twitter dashboard
+                    - id: d|ksq3qjwe_1tucp7xbajz8r
+                      last_update: 1641894004945
+                      title: test API
+                    id: a1ab1abc-a123-123a-123a-abcd12ab1a12
+                    reports:
+                    - id: r|ks5tu5bt_1tucp7xe5hxkb
+                      last_update: 1641894680353
+                      title: test report
+                    - id: r|ks5twkt7_1tucp7xe5hzky
+                      last_update: 1632729761325
+                      title: test alert
+                    title: Pascal's Project
+                status_code: '0'
+                status_message: OK
+              schema:
+                type: object
+          description: OK
+      summary: List of views
+      tags:
+      - Resources API
+  /api/v2/talkwalker/p/{project_id}/custom_metrics/list:
+    get:
+      tags:
+      - Resources API
+      summary: List of custom metrics
+      parameters:
+      - name: project_id
+        in: path
+        schema:
+          type: string
+        required: true
+        example: '{{project_id}}'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status_code: '0'
+                status_message: OK
+                request: GET /api/v2/talkwalker/p/a1ab1abc-a123-123a-123a-abcd12ab1a12/custom_metrics/list?access_token=abcd_1234_abcd
+                request_id: '#rkmdna3yrn54#'
+                result_custom_metrics:
+                  data:
+                  - custom_metric:
+                      name: email
+                      title: Email
+                      description: ''
+                      display_in_ui: true
+                      update_ts: 1626449454677
+                      format:
+                        name: KEYWORD
+                  - custom_metric:
+                      name: text
+                      title: Text
+                      description: ''
+                      display_in_ui: true
+                      update_ts: 1629473310655
+                      format:
+                        name: TEXT
+                  - custom_metric:
+                      name: score
+                      title: Score
+                      description: ''
+                      display_in_ui: true
+                      update_ts: 1629473331535
+                      format:
+                        name: INTEGER
+  /api/v2/talkwalker/p/{project_id}/custom_metrics/add:
+    post:
+      tags:
+      - Resources API
+      summary: Add custom metrics
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                custom_metrics:
+                - name: metric1
+                  title: 1st metric
+                  description: ''
+                  display_in_ui: true
+                  format: INTEGER
+                - name: metric2
+                  title: text metric
+                  description: ''
+                  display_in_ui: true
+                  format: TEXT
+      parameters:
+      - name: project_id
+        in: path
+        schema:
+          type: string
+        required: true
+        example: '{{project_id}}'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status_code: '0'
+                status_message: OK
+                request: POST /api/v2/talkwalker/p/a1ab1abc-a123-123a-123a-abcd12ab1a12/custom_metrics/add?access_token=abcd_1234_abcd
+                request_id: '#rxl4w6edcgbb#'
+                result_custom_metrics:
+                  data:
+                  - custom_metric:
+                      name: metric1
+                      title: 1st metric
+                      description: ''
+                      display_in_ui: true
+                      update_ts: 1689000198343
+                      format:
+                        name: INTEGER
+                    success: true
+                  - custom_metric:
+                      name: metric2
+                      title: text metric
+                      description: ''
+                      display_in_ui: true
+                      update_ts: 1689000198437
+                      format:
+                        name: TEXT
+                    success: true
+  /api/v2/talkwalker/p/{project_id}/custom_metrics/update:
+    post:
+      tags:
+      - Resources API
+      summary: Update custom metrics
+      description: Changing the name or the type is not allowed.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                custom_metrics:
+                - name: metric1
+                  title: 1st metric
+                  description: ''
+                  display_in_ui: false
+                - name: metric2
+                  title: Category
+                  description: ''
+                  display_in_ui: true
+      parameters:
+      - name: project_id
+        in: path
+        schema:
+          type: string
+        required: true
+        example: '{{project_id}}'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status_code: '0'
+                status_message: OK
+                request: POST /api/v2/talkwalker/p/a1ab1abc-a123-123a-123a-abcd12ab1a12/custom_metrics/update?access_token=abcd_1234_abcd
+                request_id: '#rxl54hs4q8pm#'
+                result_custom_metrics:
+                  data:
+                  - custom_metric:
+                      name: metric1
+                      title: 1st metric
+                      description: ''
+                      display_in_ui: false
+                      update_ts: 1689000497379
+                      format:
+                        name: INTEGER
+                    success: true
+                  - custom_metric:
+                      name: metric2
+                      title: Category
+                      description: ''
+                      display_in_ui: true
+                      update_ts: 1689000497386
+                      format:
+                        name: TEXT
+                    success: true
+  /api/v2/talkwalker/p/{project_id}/custom_metrics/m/{metric_name}:
+    delete:
+      tags:
+      - Resources API
+      summary: Delete specific custom metric
+      parameters:
+      - name: project_id
+        in: path
+        schema:
+          type: string
+        required: true
+        example: '{{project_id}}'
+      - name: metric_name
+        in: path
+        schema:
+          type: string
+        required: true
+        description: Custom metric's name
+        example: metric1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status_code: '0'
+                status_message: OK
+                request: DELETE /api/v2/talkwalker/p/a1ab1abc-a123-123a-123a-abcd12ab1a12/custom_metrics/m/metric1?access_token=abcd_1234_abcd
+                request_id: '#rxl5azv6ygmh#'
+                result_custom_metrics:
+                  data:
+                  - custom_metric:
+                      name: metric1
+                    success: true
+  /api/v2/talkwalker/p/{project_id}/custom_metrics/delete:
+    post:
+      tags:
+      - Resources API
+      summary: Delete custom metrics
+      description: Changing the name or the type is not allowed.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                metric_names:
+                - metric2
+                - variety_food3
+      parameters:
+      - name: project_id
+        in: path
+        schema:
+          type: string
+        required: true
+        example: '{{project_id}}'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status_code: '0'
+                status_message: OK
+                request: POST /api/v2/talkwalker/p/a1ab1abc-a123-123a-123a-abcd12ab1a12/custom_metrics/delete?access_token=abcd_1234_abcd
+                request_id: '#rxl5is2tsjc1#'
+                result_custom_metrics:
+                  data:
+                  - custom_metric:
+                      name: metric2
+                    success: true
+                  - custom_metric:
+                      name: variety_food3
+                    success: true
+components:
+  securitySchemes:
+    apikeyAuth:
+      in: query
+      name: access_token
+      type: apiKey
+externalDocs:
+  description: Find more info here or there
+  url: https://apidocs.talkwalker.com/

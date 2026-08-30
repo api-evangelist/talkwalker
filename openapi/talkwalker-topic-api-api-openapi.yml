@@ -1,0 +1,273 @@
+openapi: 3.2.0
+info:
+  title: Talkwalker Resources Topic API
+  description: Talkwalker Advanced API
+  version: 0.0.1
+  contact:
+    email: client-api@talkwalker.com
+    name: Client-API
+servers:
+- description: Production environment server
+  url: https://api.talkwalker.com
+security:
+- apikeyAuth: []
+tags:
+- name: Topic API
+paths:
+  /api/v2/talkwalker/p/{project_id}/topics/delete:
+    post:
+      parameters:
+      - example: a1ab1abc-a123-123a-123a-abcd12ab1a12
+        in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                bulk_topics:
+                - category_id: l0v16esw_1555byucibc75
+                  id: l0v16esw_1555byucibc74
+                - category_id: default
+                  id: l0v1c44o_1555bys20chuu
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                request: POST /api/v2/talkwalker/p/a1ab1abc-a123-123a-123a-abcd12ab1a12/topics/delete?access_token=abcd_1234_abcd
+                request_id: '#r8w5wyfp26pp#'
+                result_topic_deletion:
+                  bulk_answer:
+                  - category_id: l0v16esw_1555byucibc75
+                    id: l0v16esw_1555byucibc74
+                    success: true
+                  - category_id: default
+                    id: l0v1c44o_1555bys20chuu
+                    success: true
+                status_code: '0'
+                status_message: OK
+              schema:
+                type: object
+          description: OK
+      summary: Delete a batch of topics
+      tags:
+      - Topic API
+  /api/v2/talkwalker/p/{project_id}/topics/import:
+    post:
+      parameters:
+      - example: a1ab1abc-a123-123a-123a-abcd12ab1a12
+        in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                topic_line_import:
+                - category_title: my new group
+                  included_query: true
+                  override: false
+                  query: cats
+                  topic_description: This is a topic description
+                  topic_title: my new topic
+                topic_type: search
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                request: POST /api/v2/talkwalker/p/a1ab1abc-a123-123a-123a-abcd12ab1a12/topics/import?access_token=abcd_1234_abcd
+                request_id: '#r8w5k4liu8js#'
+                result_topics:
+                  filter_categories:
+                  - description: ''
+                    id: default_filter
+                    query_topics:
+                    - description: ''
+                      id: kszspjer_1tucp7xd2omic
+                      included_queries:
+                      - 'lang:fr '
+                      title: test ungrouped
+                    title: ''
+                  topic_categories:
+                  - description: ''
+                    id: default
+                    query_topics:
+                    - description: ''
+                      excluded_queries:
+                      - (noisecategory:financial_news OR noisecategory:promotions)
+                      id: kpnutesu_5imm9mo4lbsj
+                      included_queries:
+                      - tesla AND "electric car" AND lang:en
+                      title: Tesla
+                    - description: ''
+                      id: kpnzh6u5_5imm9mo4kozc
+                      included_queries:
+                      - BMW AND electric AND car
+                      title: BMW
+                    title: ''
+                  - description: ''
+                    id: l0v16esw_1555byucibc75
+                    query_topics:
+                    - description: This is a topic description
+                      id: l0v16esw_1555byucibc74
+                      included_queries:
+                      - cats
+                      title: my new topic
+                    title: my new group
+                status_code: '0'
+                status_message: OK
+              schema:
+                type: object
+          description: OK
+      summary: Create or update a batch of topics
+      tags:
+      - Topic API
+  /api/v2/talkwalker/p/{project_id}/topics/list:
+    get:
+      tags:
+      - Topic API
+      summary: List topics with definitions
+      description: Retrieve the definition of all topics and custom filters
+      parameters:
+      - name: project_id
+        in: path
+        schema:
+          type: string
+        required: true
+        example: '{{project_id}}'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status_code: '0'
+                status_message: OK
+                request: GET /api/v2/talkwalker/p/a1ab1abc-a123-123a-123a-abcd12ab1a12/topics/list?access_token=abcd_1234_abcd
+                request_id: '#rx7so7zw3fl0#'
+                result_topics:
+                  topic_categories:
+                  - id: default
+                    title: ''
+                    description: ''
+                    query_topics:
+                    - id: kpnutesu_5immdyrglbsj
+                      title: Tesla
+                      description: ''
+                      included_queries:
+                      - tesla AND "electric car" AND lang:en
+                      excluded_queries:
+                      - 'noisecategory:hate_speech '
+                      created_ts: 1623145323054
+                      updated_ts: 1680849247501
+                      color: '#596CBB'
+                    - id: kpnzh6u5_5imm9mo4kozc
+                      title: BMW
+                      description: ''
+                      included_queries:
+                      - BMW AND electric AND car
+                      created_ts: 1623153150941
+                      updated_ts: 1680849247501
+                      color: '#000000'
+                  - id: l2qamuys_1555baaaz47u
+                    title: Topic group 1
+                    description: ''
+                    query_topics:
+                    - id: l3blj0n1_donwfawrgc6jo
+                      title: Test group
+                      description: ''
+                      included_queries:
+                      - electric AND car
+                      created_ts: 1652879080189
+                      updated_ts: 1680849247501
+                      color: '#F79646'
+                  filter_categories:
+                  - id: default_filter
+                    title: ''
+                    description: ''
+                    query_topics:
+                    - id: kszspjer_1tucdrgsd2omic
+                      title: test ungrouped
+                      description: ''
+                      included_queries:
+                      - 'lang:fr '
+                      created_ts: 1630397724291
+                      updated_ts: 1630399991344
+                      color: '#0089C0'
+                  - id: converted_from_topic
+                    title: ''
+                    description: ''
+                    query_topics:
+                    - id: kprz90ma_5immrgrgz19oz
+                      title: Tesla on Twitter
+                      description: ''
+                      included_queries:
+                      - tesla AND "electric car" AND lang:en AND sourcetype:SOCIALMEDIA_TWITTER
+                      created_ts: 1623394634338
+                      updated_ts: 1623397368613
+                      color: '#596CBB'
+  /api/v2/talkwalker/p/{project_id}/topics/list/{topic_id}:
+    get:
+      tags:
+      - Topic API
+      summary: Retrieve definition of a specific topic
+      description: In order to only get the definition of a specific topic or custom filter when calling the endpoint, we can add the topic ID to the endpoint.
+      parameters:
+      - name: project_id
+        in: path
+        schema:
+          type: string
+        required: true
+        example: '{{project_id}}'
+      - name: topic_id
+        in: path
+        schema:
+          type: string
+        required: true
+        description: topic ID or filter ID
+        example: kpnutesu_5imm9mo4lbsj
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status_code: '0'
+                status_message: OK
+                request: GET /api/v2/talkwalker/p/a1ab1abc-a123-123a-123a-abcd12ab1a12/topics/list/kpnutesu_5imm9mo4lbsj?access_token=abcd_1234_abcd
+                request_id: '#rbawwg5flbh7#'
+                result_topic_details:
+                  id: kpnutesu_1234
+                  title: Tesla
+                  description: ''
+                  category_id: default
+                  category_title: ''
+                  category_description: ''
+                  included_queries:
+                  - tesla AND "electric car" AND lang:en
+                  excluded_queries:
+                  - (noisecategory:financial_news OR noisecategory:promotions)
+                  type: SEARCH
+components:
+  securitySchemes:
+    apikeyAuth:
+      in: query
+      name: access_token
+      type: apiKey
+externalDocs:
+  description: Find more info here or there
+  url: https://apidocs.talkwalker.com/

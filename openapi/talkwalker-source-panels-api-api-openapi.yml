@@ -1,0 +1,206 @@
+openapi: 3.2.0
+info:
+  title: Talkwalker Resources Source panels API
+  description: Talkwalker Advanced API
+  version: 0.0.1
+  contact:
+    email: client-api@talkwalker.com
+    name: Client-API
+servers:
+- description: Production environment server
+  url: https://api.talkwalker.com
+security:
+- apikeyAuth: []
+tags:
+- name: Source panels API
+paths:
+  /api/v2/talkwalker/p/{project_id}/source_panels/add:
+    post:
+      tags:
+      - Source panels API
+      summary: Create a new panel
+      description: Create one or multiple source panels. Entries can be a source, an author or an URL.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                panels:
+                - title: API Panel demo
+                  description: test by API
+                  included_entries:
+                  - entry_type: URL
+                    url: www.testme.com
+                  - entry_type: AUTHOR
+                    id: tw:234
+                    name: Pascal bird 234
+      parameters:
+      - name: project_id
+        in: path
+        schema:
+          type: string
+        required: true
+        example: a1ab1abc-a123-123a-123a-abcd12ab1a12
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status_code: '0'
+                status_message: OK
+                request: POST /api/v2/talkwalker/p/a1ab1abc-a123-123a-123a-abcd12ab1a12/source_panels/add?access_token=abcd_1234_abcd
+                request_id: '#rx7k05h80vus#'
+                result_source_panels:
+                  data:
+                  - success: true
+                    panel:
+                      id: ljmhvofx_1555babcd
+                      title: API Panel demo
+                      description: test by API
+                      color: '#f3a683'
+                      group_id: ungrouped_source_panels_group
+                      included_entries:
+                      - entry_type: URL
+                        site: ex
+                        url: www.testme.com
+                        exact_match: false
+                      - id: tw:234
+                        entry_type: AUTHOR
+                        site: tw
+                        name: Pascal bird 234
+  /api/v2/talkwalker/p/{project_id}/source_panels/list:
+    get:
+      tags:
+      - Source panels API
+      summary: List all panels with their members
+      description: To get a list of groups and panels with their members.
+      parameters:
+      - name: project_id
+        in: path
+        schema:
+          type: string
+        required: true
+        example: '{{project_id}}'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status_code: '0'
+                status_message: OK
+                request: GET /api/v2/talkwalker/p/a1ab1abc-a123-123a-123a-abcd12ab1a12/source_panels/list?access_token=abcd_1234_abcd
+                request_id: '#rx7jghzy19o0#'
+                result_source_panels:
+                  data:
+                  - group:
+                      id: predefined
+                      title: Predefined
+                      panels:
+                      - id: blocked
+                      - id: favourites
+                      - id: star1
+                        included_entries:
+                        - id: ex:www.example_tw_dm.com-792524346
+                          entry_type: AUTHOR
+                          site: ex
+                          name: Pascal2
+                      - id: star2
+                      - id: star3
+                  - group:
+                      id: ungrouped
+                      title: Ungrouped
+                      panels:
+                      - id: lj4dn6yb_1555abcd
+                        title: API Panel demo
+                        description: test by API
+                        color: '#596275'
+                        included_entries:
+                        - entry_type: URL
+                          site: ex
+                          url: www.testme.com
+                          exact_match: false
+                        - id: tw:234
+                          entry_type: AUTHOR
+                          site: tw
+                          name: Pascal bird 234
+                  - group:
+                      id: leiecq1a_gabcdefvhq
+                      title: API group
+                      panels:
+                      - id: lespk2f4_gq0abcdeup
+                        title: VW Twitter Authors
+                        color: '#f7d794'
+                        included_entries:
+                        - id: tw:15221598
+                          entry_type: AUTHOR
+                          site: tw
+                          name: 'James Gingerich #IndiaEnergyWeek #IoTSWC23'
+                        - id: tw:1592450289499484160
+                          entry_type: AUTHOR
+                          site: tw
+                          name: B Nimisha
+  /api/v2/talkwalker/p/{project_id}/source_panels/groups/add:
+    post:
+      tags:
+      - Source panels API
+      summary: Create a new group of panels
+      description: Create one or multiple groups of source panels. Please note that it does not include the source panels inside the group.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                groups:
+                - title: API group
+                - title: API group 2
+      parameters:
+      - name: Content-Type
+        in: header
+        schema:
+          type: string
+        example: application/json; charset=UTF-8
+      - name: project_id
+        in: path
+        schema:
+          type: string
+        required: true
+        example: '{{project_id}}'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status_code: '0'
+                status_message: OK
+                request: POST /api/v2/talkwalker/p/a1ab1abc-a123-123a-123a-abcd12ab1a12/source_panels/groups/add?access_token=abcd_1234_abcd
+                request_id: '#rx7jukacjfz4#'
+                result_source_panels:
+                  data:
+                  - success: true
+                    group:
+                      id: ljmhrdij_1555babcd
+                      title: API group
+                  - success: true
+                    group:
+                      id: ljmhrdio_1555befgh
+                      title: API group 2
+components:
+  securitySchemes:
+    apikeyAuth:
+      in: query
+      name: access_token
+      type: apiKey
+externalDocs:
+  description: Find more info here or there
+  url: https://apidocs.talkwalker.com/
