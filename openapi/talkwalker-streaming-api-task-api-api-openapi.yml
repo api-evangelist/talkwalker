@@ -1,18 +1,19 @@
 openapi: 3.2.0
 info:
-  title: Talkwalker Streaming Streaming API > Task API
-  description: Talkwalker Advanced API
-  version: 0.0.1
   contact:
     email: client-api@talkwalker.com
     name: Client-API
+  description: Talkwalker Advanced API
+  title: Talkwalker Streaming API > Task API
+  version: 0.0.1
 servers:
 - description: Production environment server
   url: https://api.talkwalker.com
 security:
 - apikeyAuth: []
 tags:
-- name: Streaming API > Task API
+- description: Asynchronous tasks that copy a selection of past data into a collector, which can then be accessed through collectors.
+  name: Streaming API > Task API
 paths:
   /api/v3/stream/export:
     post:
@@ -51,6 +52,8 @@ paths:
       summary: Create a new export task
       tags:
       - Streaming API > Task API
+      operationId: postApiV3StreamExport
+      x-operation-id-source: derived
   /api/v3/stream/p/{project_id}/export:
     post:
       parameters:
@@ -101,6 +104,8 @@ paths:
       summary: Create a new export taks on a specific project
       tags:
       - Streaming API > Task API
+      operationId: postApiV3StreamPByProjectIdExport
+      x-operation-id-source: derived
   /api/v3/stream/s/{stream_id}/export:
     post:
       parameters:
@@ -145,6 +150,8 @@ paths:
       summary: Create a new export task based on a stream definition
       tags:
       - Streaming API > Task API
+      operationId: postApiV3StreamSByStreamIdExport
+      x-operation-id-source: derived
   /api/v3/tasks/export:
     get:
       responses:
@@ -180,6 +187,8 @@ paths:
       summary: Retrieve all recent tasks status
       tags:
       - Streaming API > Task API
+      operationId: getApiV3TasksExport
+      x-operation-id-source: derived
   /api/v3/tasks/export/{task_id}:
     delete:
       parameters:
@@ -208,6 +217,8 @@ paths:
       summary: Abort a task
       tags:
       - Streaming API > Task API
+      operationId: deleteApiV3TasksExportByTaskId
+      x-operation-id-source: derived
     get:
       parameters:
       - example: 2136f070-2e0b-4888-8d1f-679fba1e95f1
@@ -241,6 +252,8 @@ paths:
       summary: Retrieve status of the task
       tags:
       - Streaming API > Task API
+      operationId: getApiV3TasksExportByTaskId
+      x-operation-id-source: derived
 components:
   securitySchemes:
     apikeyAuth:

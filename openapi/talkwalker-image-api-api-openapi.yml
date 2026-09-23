@@ -1,18 +1,19 @@
 openapi: 3.2.0
 info:
-  title: Talkwalker Image Image API
-  description: Talkwalker Advanced API
-  version: 0.0.1
   contact:
     email: client-api@talkwalker.com
     name: Client-API
+  description: Talkwalker Advanced API
+  title: Talkwalker Image API
+  version: 0.0.1
 servers:
 - description: Production environment server
   url: https://api.talkwalker.com
 security:
 - apikeyAuth: []
 tags:
-- name: Image API
+- description: Image API can be used to detect features or entities in images.
+  name: Image API
 paths:
   /api/v2/detect/images/{model}:
     get:
@@ -64,6 +65,8 @@ paths:
       summary: Process an image by URL
       tags:
       - Image API
+      operationId: getApiV2DetectImagesByModel
+      x-operation-id-source: derived
     post:
       parameters:
       - description: 'The mode of the detection.
@@ -116,6 +119,8 @@ paths:
       summary: Process an image by file
       tags:
       - Image API
+      operationId: postApiV2DetectImagesByModel
+      x-operation-id-source: derived
 components:
   securitySchemes:
     apikeyAuth:

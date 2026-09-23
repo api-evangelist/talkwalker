@@ -1,18 +1,19 @@
 openapi: 3.2.0
 info:
-  title: Talkwalker Streaming Streaming API
-  description: Talkwalker Advanced API
-  version: 0.0.1
   contact:
     email: client-api@talkwalker.com
     name: Client-API
+  description: Talkwalker Advanced API
+  title: Talkwalker Streaming API
+  version: 0.0.1
 servers:
 - description: Production environment server
   url: https://api.talkwalker.com
 security:
 - apikeyAuth: []
 tags:
-- name: Streaming API
+- description: Receive documents from Talkwalker which match rules and filters in real-time.
+  name: Streaming API
 paths:
   /api/v3/stream/info:
     get:
@@ -39,6 +40,8 @@ paths:
       summary: List of streams and collectors
       tags:
       - Streaming API
+      operationId: getApiV3StreamInfo
+      x-operation-id-source: derived
   /api/v3/stream/p/{project_id}/results:
     get:
       parameters:
@@ -93,6 +96,8 @@ paths:
       summary: Listen on a specific project
       tags:
       - Streaming API
+      operationId: getApiV3StreamPByProjectIdResults
+      x-operation-id-source: derived
     post:
       parameters:
       - example: '3'
@@ -144,6 +149,8 @@ paths:
       summary: Listen on a specific project - POST method
       tags:
       - Streaming API
+      operationId: postApiV3StreamPByProjectIdResults
+      x-operation-id-source: derived
   /api/v3/stream/s/{stream_id}:
     delete:
       parameters:
@@ -175,6 +182,8 @@ paths:
       summary: Delete a stream
       tags:
       - Streaming API
+      operationId: deleteApiV3StreamSByStreamId
+      x-operation-id-source: derived
     get:
       parameters:
       - example: stream_1
@@ -221,6 +230,8 @@ paths:
       summary: Get stream definition
       tags:
       - Streaming API
+      operationId: getApiV3StreamSByStreamId
+      x-operation-id-source: derived
     put:
       parameters:
       - example: stream_1
@@ -260,6 +271,8 @@ paths:
       summary: Create or replace a stream
       tags:
       - Streaming API
+      operationId: putApiV3StreamSByStreamId
+      x-operation-id-source: derived
   /api/v3/stream/s/{stream_id}/results:
     get:
       parameters:
@@ -294,6 +307,8 @@ paths:
       summary: Listen a stream
       tags:
       - Streaming API
+      operationId: getApiV3StreamSByStreamIdResults
+      x-operation-id-source: derived
     post:
       parameters:
       - example: '3'
@@ -325,6 +340,8 @@ paths:
       summary: Listen a stream - POST method
       tags:
       - Streaming API
+      operationId: postApiV3StreamSByStreamIdResults
+      x-operation-id-source: derived
 components:
   securitySchemes:
     apikeyAuth:

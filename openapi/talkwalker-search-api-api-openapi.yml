@@ -1,18 +1,19 @@
 openapi: 3.2.0
 info:
-  title: Talkwalker Search Search API
-  description: Talkwalker Advanced API
-  version: 0.0.1
   contact:
     email: client-api@talkwalker.com
     name: Client-API
+  description: Talkwalker Advanced API
+  title: Talkwalker Search API
+  version: 0.0.1
 servers:
 - description: Production environment server
   url: https://api.talkwalker.com
 security:
 - apikeyAuth: []
 tags:
-- name: Search API
+- description: The Talkwalker Search API allows you to retrieve sorted results (mentions, articles...).
+  name: Search API
 paths:
   /api/v1/search/info:
     get:
@@ -38,6 +39,8 @@ paths:
       summary: List of allowed projects
       tags:
       - Search API
+      operationId: getApiV1SearchInfo
+      x-operation-id-source: derived
   /api/v1/search/p/{project_id}/results:
     get:
       description: Retrieve up to 10.000 sorted results. the full history of Talkwalker projects is available in the search API, **when used in combination with a Talkwalker project**.
@@ -668,9 +671,11 @@ paths:
       summary: Retrieve documents from a Talkwalker project
       tags:
       - Search API
+      operationId: getApiV1SearchPByProjectIdResults
+      x-operation-id-source: derived
   /api/v1/search/results:
     get:
-      description: Retrieve up to 500 sorted results for a given timeframe within the last **30 days**.
+      description: Retrieve up to 500 sorted results for a given timeframe within the last **30 days**.
       parameters:
       - description: The query to search for.
         example: cats AND dogs
@@ -958,6 +963,8 @@ paths:
       summary: Retrieve documents from global index
       tags:
       - Search API
+      operationId: getApiV1SearchResults
+      x-operation-id-source: derived
 components:
   securitySchemes:
     apikeyAuth:

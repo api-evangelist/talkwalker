@@ -1,11 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Talkwalker Resources Resources API
-  description: Talkwalker Advanced API
-  version: 0.0.1
   contact:
     email: client-api@talkwalker.com
     name: Client-API
+  description: Talkwalker Advanced API
+  title: Talkwalker Resources API
+  version: 0.0.1
 servers:
 - description: Production environment server
   url: https://api.talkwalker.com
@@ -61,6 +61,8 @@ paths:
       summary: List of resources
       tags:
       - Resources API
+      operationId: getApiV2TalkwalkerPByProjectIdResources
+      x-operation-id-source: derived
   /api/v2/talkwalker/p/{project_id}/tags:
     get:
       description: List of custom tags defined in the Talkwalker project
@@ -96,6 +98,8 @@ paths:
       summary: List of custom tags
       tags:
       - Resources API
+      operationId: getApiV2TalkwalkerPByProjectIdTags
+      x-operation-id-source: derived
   /api/v2/talkwalker/p/{project_id}/views:
     get:
       description: List of dashboards, reports and alerts defined in the Talkwalker project.
@@ -142,6 +146,8 @@ paths:
       summary: List of views
       tags:
       - Resources API
+      operationId: getApiV2TalkwalkerPByProjectIdViews
+      x-operation-id-source: derived
   /api/v2/talkwalker/p/{project_id}/custom_metrics/list:
     get:
       tags:
@@ -192,6 +198,8 @@ paths:
                       update_ts: 1629473331535
                       format:
                         name: INTEGER
+      operationId: getApiV2TalkwalkerPByProjectIdCustomMetricsList
+      x-operation-id-source: derived
   /api/v2/talkwalker/p/{project_id}/custom_metrics/add:
     post:
       tags:
@@ -253,6 +261,8 @@ paths:
                       format:
                         name: TEXT
                     success: true
+      operationId: postApiV2TalkwalkerPByProjectIdCustomMetricsAdd
+      x-operation-id-source: derived
   /api/v2/talkwalker/p/{project_id}/custom_metrics/update:
     post:
       tags:
@@ -313,6 +323,8 @@ paths:
                       format:
                         name: TEXT
                     success: true
+      operationId: postApiV2TalkwalkerPByProjectIdCustomMetricsUpdate
+      x-operation-id-source: derived
   /api/v2/talkwalker/p/{project_id}/custom_metrics/m/{metric_name}:
     delete:
       tags:
@@ -349,6 +361,8 @@ paths:
                   - custom_metric:
                       name: metric1
                     success: true
+      operationId: deleteApiV2TalkwalkerPByProjectIdCustomMetricsMByMetricName
+      x-operation-id-source: derived
   /api/v2/talkwalker/p/{project_id}/custom_metrics/delete:
     post:
       tags:
@@ -391,6 +405,8 @@ paths:
                   - custom_metric:
                       name: variety_food3
                     success: true
+      operationId: postApiV2TalkwalkerPByProjectIdCustomMetricsDelete
+      x-operation-id-source: derived
 components:
   securitySchemes:
     apikeyAuth:

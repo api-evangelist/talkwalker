@@ -1,11 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Talkwalker Resources Topic API
-  description: Talkwalker Advanced API
-  version: 0.0.1
   contact:
     email: client-api@talkwalker.com
     name: Client-API
+  description: Talkwalker Advanced API
+  title: Talkwalker Topic API
+  version: 0.0.1
 servers:
 - description: Production environment server
   url: https://api.talkwalker.com
@@ -57,6 +57,8 @@ paths:
       summary: Delete a batch of topics
       tags:
       - Topic API
+      operationId: postApiV2TalkwalkerPByProjectIdTopicsDelete
+      x-operation-id-source: derived
   /api/v2/talkwalker/p/{project_id}/topics/import:
     post:
       parameters:
@@ -132,6 +134,8 @@ paths:
       summary: Create or update a batch of topics
       tags:
       - Topic API
+      operationId: postApiV2TalkwalkerPByProjectIdTopicsImport
+      x-operation-id-source: derived
   /api/v2/talkwalker/p/{project_id}/topics/list:
     get:
       tags:
@@ -218,6 +222,8 @@ paths:
                       created_ts: 1623394634338
                       updated_ts: 1623397368613
                       color: '#596CBB'
+      operationId: getApiV2TalkwalkerPByProjectIdTopicsList
+      x-operation-id-source: derived
   /api/v2/talkwalker/p/{project_id}/topics/list/{topic_id}:
     get:
       tags:
@@ -262,6 +268,8 @@ paths:
                   excluded_queries:
                   - (noisecategory:financial_news OR noisecategory:promotions)
                   type: SEARCH
+      operationId: getApiV2TalkwalkerPByProjectIdTopicsListByTopicId
+      x-operation-id-source: derived
 components:
   securitySchemes:
     apikeyAuth:

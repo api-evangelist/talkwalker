@@ -1,11 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Talkwalker Resources Source panels API
-  description: Talkwalker Advanced API
-  version: 0.0.1
   contact:
     email: client-api@talkwalker.com
     name: Client-API
+  description: Talkwalker Advanced API
+  title: Talkwalker Source panels API
+  version: 0.0.1
 servers:
 - description: Production environment server
   url: https://api.talkwalker.com
@@ -72,6 +72,8 @@ paths:
                         entry_type: AUTHOR
                         site: tw
                         name: Pascal bird 234
+      operationId: postApiV2TalkwalkerPByProjectIdSourcePanelsAdd
+      x-operation-id-source: derived
   /api/v2/talkwalker/p/{project_id}/source_panels/list:
     get:
       tags:
@@ -146,6 +148,8 @@ paths:
                           entry_type: AUTHOR
                           site: tw
                           name: B Nimisha
+      operationId: getApiV2TalkwalkerPByProjectIdSourcePanelsList
+      x-operation-id-source: derived
   /api/v2/talkwalker/p/{project_id}/source_panels/groups/add:
     post:
       tags:
@@ -195,6 +199,8 @@ paths:
                     group:
                       id: ljmhrdio_1555befgh
                       title: API group 2
+      operationId: postApiV2TalkwalkerPByProjectIdSourcePanelsGroupsAdd
+      x-operation-id-source: derived
 components:
   securitySchemes:
     apikeyAuth:

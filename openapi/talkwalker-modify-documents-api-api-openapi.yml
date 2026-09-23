@@ -1,11 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Talkwalker Documents Modify documents API
-  description: Talkwalker Advanced API
-  version: 0.0.1
   contact:
     email: client-api@talkwalker.com
     name: Client-API
+  description: Talkwalker Advanced API
+  title: Talkwalker Modify documents API
+  version: 0.0.1
 servers:
 - description: Production environment server
   url: https://api.talkwalker.com
@@ -139,6 +139,8 @@ paths:
       summary: Modify a batch of documents
       tags:
       - Modify documents API
+      operationId: postApiV2DocsPByProjectId
+      x-operation-id-source: derived
   /api/v2/docs/p/{project_id}/{action}:
     post:
       parameters:
@@ -269,6 +271,8 @@ paths:
       summary: Modify simple document
       tags:
       - Modify documents API
+      operationId: postApiV2DocsPByProjectIdByAction
+      x-operation-id-source: derived
   /api/v2/docs/p/{project_id}/d/{dataset_id}/{action}:
     post:
       tags:
@@ -405,6 +409,8 @@ paths:
                   action: upsert
                   url: https://test_ci_pcl.lu/review/1
                 request_id: '#rynwjspzxv1m#'
+      operationId: postApiV2DocsPByProjectIdDByDatasetIdByAction
+      x-operation-id-source: derived
   /api/v2/docs/p/{project_id}/d/{dataset_id}:
     post:
       tags:
@@ -545,6 +551,8 @@ paths:
                   action: create
                   url: https://test_ci_pcl.lu/review/2
                 request_id: '#rynwzrzalgto#'
+      operationId: postApiV2DocsPByProjectIdDByDatasetId
+      x-operation-id-source: derived
 components:
   securitySchemes:
     apikeyAuth:

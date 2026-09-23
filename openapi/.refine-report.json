@@ -1,0 +1,50 @@
+{
+  "provider": "talkwalker",
+  "sources": [
+    "_original/talkwalker-openapi.yaml"
+  ],
+  "outputs": [
+    "talkwalker-image-api-api-openapi.yml",
+    "talkwalker-modify-documents-api-api-openapi.yml",
+    "talkwalker-resources-api-api-openapi.yml",
+    "talkwalker-search-api-api-openapi.yml",
+    "talkwalker-search-api-histogram-api-api-openapi.yml",
+    "talkwalker-source-panels-api-api-openapi.yml",
+    "talkwalker-status-api-api-openapi.yml",
+    "talkwalker-streaming-api-api-openapi.yml",
+    "talkwalker-streaming-api-collector-api-api-openapi.yml",
+    "talkwalker-streaming-api-task-api-api-openapi.yml",
+    "talkwalker-summary-api-api-openapi.yml",
+    "talkwalker-topic-api-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "7 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "talkwalker-openapi.yaml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "_original/talkwalker-streaming-openapi.yml: archived document superseded by a larger archived document",
+    "_original/talkwalker-status-openapi.yml: archived document superseded by a larger archived document",
+    "_original/talkwalker-search-openapi.yml: archived document superseded by a larger archived document",
+    "_original/talkwalker-resources-openapi.yml: archived document superseded by a larger archived document",
+    "_original/talkwalker-image-openapi.yml: archived document superseded by a larger archived document",
+    "_original/talkwalker-histogram-openapi.yml: archived document superseded by a larger archived document",
+    "_original/talkwalker-documents-openapi.yml: archived document superseded by a larger archived document",
+    "talkwalker-image-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "talkwalker-modify-documents-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "talkwalker-resources-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "talkwalker-search-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "talkwalker-search-api-histogram-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "talkwalker-source-panels-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "talkwalker-status-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "talkwalker-streaming-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "talkwalker-streaming-api-collector-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "talkwalker-streaming-api-task-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "talkwalker-summary-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "talkwalker-topic-api-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

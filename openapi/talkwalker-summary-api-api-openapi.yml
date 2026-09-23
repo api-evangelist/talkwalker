@@ -1,18 +1,19 @@
 openapi: 3.2.0
 info:
-  title: Talkwalker Search Summary API
-  description: Talkwalker Advanced API
-  version: 0.0.1
   contact:
     email: client-api@talkwalker.com
     name: Client-API
+  description: Talkwalker Advanced API
+  title: Talkwalker Summary API
+  version: 0.0.1
 servers:
 - description: Production environment server
   url: https://api.talkwalker.com
 security:
 - apikeyAuth: []
 tags:
-- name: Summary API
+- description: Fetch only the AI summary of the matching results
+  name: Summary API
 paths:
   /api/v1/search/summary:
     get:
@@ -66,6 +67,8 @@ paths:
                 request_id: '#rxl5is2tsjc1#'
                 summary:
                   summary: The collection of online documents reveals a strong interest in pets, particularly cats and dogs, with discussions around their behavior, care, and emotional connection with humans. Animal welfare and rescue efforts are prominent themes, highlighted by news releases about organizations reuniting lost pets and investigations into animal neglect. Social media trends, including viral memes and puzzle toys for pets, demonstrate engagement with animal-related content. Furthermore, there’s a notable interest in broader geopolitical issues and personal reflections on life’s challenges.
+      operationId: getApiV1SearchSummary
+      x-operation-id-source: derived
   /api/v1/search/p/<project_id>/summary:
     get:
       tags:
@@ -142,6 +145,8 @@ paths:
                 request_id: '#rxl5is2tsjc1#'
                 summary:
                   summary: The collection of online documents reveals a strong interest in pets, particularly cats and dogs, with discussions around their behavior, care, and emotional connection with humans. Animal welfare and rescue efforts are prominent themes, highlighted by news releases about organizations reuniting lost pets and investigations into animal neglect. Social media trends, including viral memes and puzzle toys for pets, demonstrate engagement with animal-related content. Furthermore, there’s a notable interest in broader geopolitical issues and personal reflections on life’s challenges.
+      operationId: getApiV1SearchP<projectId>Summary
+      x-operation-id-source: derived
 components:
   securitySchemes:
     apikeyAuth:
