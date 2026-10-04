@@ -380,6 +380,9 @@ apis:
   - type: APIReference
     url: https://developer.talkwalker.com/api/image-api
 common:
+  - type: CapabilityMap
+    url: capabilities/talkwalker-capability-edges.yml
+    name: Talkwalker Business Capability Map
   - type: Overlay
     url: overlays/talkwalker-search-overlay.yaml
   - type: AgentSkill
