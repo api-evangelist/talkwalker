@@ -104,3 +104,28 @@ notes:
 evidence:
   - url: https://www.talkwalker.com/pricing
     status: 200
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - metered
+  units: []
+  plans:
+  - name: Core
+    access: other
+    model: metered
+    model_how: derived
+    units: []
+    periods: []
+  - name: Analyze
+    access: other
+    model: metered
+    model_how: derived
+    units: []
+    periods: []
+  - name: Business
+    access: other
+    model: metered
+    model_how: derived
+    units: []
+    periods: []
