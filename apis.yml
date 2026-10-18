@@ -129,6 +129,8 @@ apis:
   humanURL: https://developer.talkwalker.com/docs/overview/search-api/search-results-project-api
   baseURL: https://api.talkwalker.com
   tags:
+  - SERP
+  tags_raw:
   - Search API
   properties:
   - type: OpenAPI
