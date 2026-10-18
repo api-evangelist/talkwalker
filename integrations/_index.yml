@@ -52,5 +52,5 @@
     - connectors/applications/talkwalker
     vendor_link: https://www.talkwalker.com/
     builder: Fivetran
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
